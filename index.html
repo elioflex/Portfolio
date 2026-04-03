@@ -2883,6 +2883,17 @@
 
     const mobileCta = document.querySelector(".mobile-cta");
     if (mobileCta) {
+      let formInteracting = false;
+
+      const isFormField = (node) => {
+        return Boolean(node instanceof HTMLElement && node.matches("input, select, textarea"));
+      };
+
+      const hasFocusedFormField = () => {
+        if (!leadForm || !(document.activeElement instanceof HTMLElement)) return false;
+        return leadForm.contains(document.activeElement) && isFormField(document.activeElement);
+      };
+
       const updateMobileCta = () => {
         if (window.innerWidth > 760) {
           mobileCta.classList.remove("is-visible");
@@ -2892,9 +2903,30 @@
         const passedHero = window.scrollY > Math.max(360, window.innerHeight * 0.58);
         const rect = leadForm ? leadForm.getBoundingClientRect() : null;
         const formVisible = rect ? rect.top < window.innerHeight - 120 && rect.bottom > 120 : false;
+        const isTyping = formInteracting || hasFocusedFormField();
 
-        mobileCta.classList.toggle("is-visible", passedHero && !formVisible);
+        mobileCta.classList.toggle("is-visible", passedHero && !formVisible && !isTyping);
       };
+
+      if (leadForm) {
+        leadForm.addEventListener("focusin", (event) => {
+          if (!isFormField(event.target)) return;
+          formInteracting = true;
+          updateMobileCta();
+        });
+
+        leadForm.addEventListener("focusout", () => {
+          requestAnimationFrame(() => {
+            formInteracting = hasFocusedFormField();
+            updateMobileCta();
+          });
+        });
+
+        leadForm.addEventListener("submit", () => {
+          formInteracting = false;
+          updateMobileCta();
+        });
+      }
 
       updateMobileCta();
       window.addEventListener("scroll", updateMobileCta, { passive: true });
