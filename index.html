@@ -973,6 +973,60 @@
       line-height: 1.6;
     }
 
+    .fit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .fit-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+    }
+
+    .fit-card h3 {
+      margin: 0 0 10px;
+      font-family: "Sora", sans-serif;
+      font-size: 1.08rem;
+      color: #1d3652;
+    }
+
+    .fit-card--negative {
+      border-color: #e2d7c5;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(251, 245, 235, 0.94));
+    }
+
+    .contact-deliverables {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+      max-width: 62ch;
+    }
+
+    .contact-deliverables li {
+      position: relative;
+      padding-left: 18px;
+      color: #4b6580;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .contact-deliverables li::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      left: 0;
+      top: 0.5em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
     .stack__layout {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -1594,6 +1648,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .fit-grid {
+        grid-template-columns: 1fr;
+      }
+
       .stack__layout,
       .compare-grid,
       .trust-grid,
@@ -1697,7 +1755,8 @@
       .card-grid--3,
       .card-grid--2,
       .method-grid,
-      .process-grid {
+      .process-grid,
+      .fit-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1969,6 +2028,33 @@
             <span class="tool-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt="" loading="lazy" decoding="async" /> PostgreSQL</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="fit">
+      <div class="section-title">
+        <h2>Pour qui / pas pour qui</h2>
+        <p>Ce format fonctionne quand les objectifs, les donnees et la capacite de mise en oeuvre sont alignes.</p>
+      </div>
+
+      <div class="fit-grid">
+        <article class="fit-card">
+          <h3>Ideal pour vous si...</h3>
+          <ul class="bullet-list">
+            <li>Vous avez des flux repetitifs avec volume suffisant pour creer un ROI rapide.</li>
+            <li>Un decideur metier et un referent technique sont disponibles pendant le projet.</li>
+            <li>Vous voulez une mise en production pilote en quelques semaines, pas un projet a 12 mois.</li>
+          </ul>
+        </article>
+
+        <article class="fit-card fit-card--negative">
+          <h3>Pas adapte pour vous si...</h3>
+          <ul class="bullet-list">
+            <li>Vous cherchez uniquement une maquette sans deploiement en production.</li>
+            <li>Vos donnees sont totalement inaccessibles ou non exploitables a court terme.</li>
+            <li>Aucun sponsor interne ne peut valider les priorites et les changements d'usage.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
@@ -2256,6 +2342,11 @@
             Session strategique pour cadrer le ROI, le plan d'execution et les quick wins.
             Vous repartez avec une direction claire, actionnable et adaptee a votre contexte.
           </p>
+          <ul class="contact-deliverables">
+            <li>3 workflows priorises selon impact business et faisabilite technique.</li>
+            <li>Un plan d'execution sur 30 jours avec estimation des gains attendus.</li>
+            <li>Une recommandation claire: lancer maintenant, cadrer davantage, ou ne pas lancer.</li>
+          </ul>
           <div class="contact__actions">
             <a class="cta" href="#lead-form">Reserver un diagnostic</a>
             <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
@@ -2287,6 +2378,7 @@
           </label>
 
           <button class="cta" type="submit">Envoyer la demande</button>
+          <p class="contact-form__note">Sans engagement. Reponse sous 24h ouvrables.</p>
           <p class="contact-form__note">En envoyant ce formulaire, vous acceptez d'etre recontacte pour cadrer le projet.</p>
           <p class="contact-form__note" id="contact-confirmation" hidden>Votre demande a bien ete envoyee. Nous revenons vers vous sous 24h ouvrables.</p>
         </form>
