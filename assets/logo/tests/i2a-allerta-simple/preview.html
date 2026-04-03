@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I2A Allerta Simple Preview</title>
+  <style>
+    :root {
+      --bg-light: #edf3fa;
+      --bg-dark: #0e1e2f;
+      --line-light: #d3e0ee;
+      --line-dark: #2a445f;
+      --text: #16304a;
+      --muted: #5b7086;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Manrope, system-ui, sans-serif;
+      background:
+        radial-gradient(900px 450px at 12% -12%, rgba(47, 140, 255, 0.13), transparent 62%),
+        radial-gradient(900px 450px at 86% -14%, rgba(0, 167, 160, 0.13), transparent 62%),
+        var(--bg-light);
+      color: var(--text);
+      padding: 28px;
+    }
+
+    .wrap { max-width: 1160px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; }
+    p { margin: 0 0 20px; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--line-light);
+      box-shadow: 0 10px 24px rgba(28, 55, 86, 0.1);
+    }
+
+    .card.dark {
+      background: var(--bg-dark);
+      border-color: var(--line-dark);
+      color: #d6e6f5;
+    }
+
+    .label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    img {
+      width: 100%;
+      max-width: 840px;
+      display: block;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>I2A Allerta Stencil</h1>
+    <p>Version simple du logo pour Idea to Automation.</p>
+
+    <section class="grid">
+      <article class="card">
+        <h2 class="label">Light</h2>
+        <img src="i2a-allerta-primary-light.svg" alt="I2A Allerta light" />
+      </article>
+
+      <article class="card dark">
+        <h2 class="label">Dark</h2>
+        <img src="i2a-allerta-primary-dark.svg" alt="I2A Allerta dark" />
+      </article>
+    </section>
+  </main>
+</body>
+</html>
