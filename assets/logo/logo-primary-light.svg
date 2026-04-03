@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
-  <title id="title">I2A Allerta Simple Light</title>
-  <desc id="desc">Logo simple I2A en Allerta Stencil pour fond clair</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220" role="img" aria-labelledby="title desc">
+  <title id="title">I2A Allerta Light</title>
+  <desc id="desc">Logo I2A en Allerta Stencil pour fond clair</desc>
   <defs>
-    <linearGradient id="brandGrad" x1="48" y1="44" x2="660" y2="220" gradientUnits="userSpaceOnUse">
+    <linearGradient id="brandGrad" x1="40" y1="30" x2="460" y2="186" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#1f6fff"/>
       <stop offset="1" stop-color="#00a7a0"/>
     </linearGradient>
@@ -17,17 +17,8 @@
       letter-spacing: 0.08em;
       font-weight: 400;
     }
-
-    .tag {
-      font-family: 'Allerta Stencil', 'Arial Black', sans-serif;
-      font-size: 34px;
-      letter-spacing: 0.18em;
-      font-weight: 400;
-      fill: #39566f;
-    }
   </style>
 
-  <rect x="32" y="40" width="14" height="182" rx="7" fill="url(#brandGrad)"/>
-  <text x="72" y="170" class="brand" fill="url(#brandGrad)">I2A</text>
-  <text x="76" y="222" class="tag">IDEA TO AUTOMATION</text>
+  <rect x="28" y="22" width="14" height="176" rx="7" fill="url(#brandGrad)"/>
+  <text x="68" y="162" class="brand" fill="url(#brandGrad)">I2A</text>
 </svg>
