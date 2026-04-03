@@ -1228,6 +1228,91 @@
       gap: 14px;
     }
 
+    .mid-cta {
+      margin-top: 12px;
+    }
+
+    .mid-cta__box {
+      border: 1px solid #c4daf0;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(145deg, rgba(245, 251, 255, 0.96), rgba(236, 247, 255, 0.93)),
+        radial-gradient(420px 220px at 14% 16%, rgba(0, 167, 160, 0.14), transparent 60%);
+      box-shadow: var(--shadow-lg);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .mid-cta__box h2 {
+      margin: 0 0 8px;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.16;
+      color: #193450;
+      max-width: 24ch;
+    }
+
+    .mid-cta__box p {
+      margin: 0;
+      color: #4f6782;
+      font-size: 0.95rem;
+      line-height: 1.68;
+      max-width: 62ch;
+    }
+
+    .mid-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mid-cta__proof {
+      border: 1px solid #cadef2;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mid-cta__proof h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 0.9rem;
+      color: #24435f;
+    }
+
+    .mid-cta__proof ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .mid-cta__proof li {
+      position: relative;
+      padding-left: 16px;
+      color: #4b647f;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .mid-cta__proof li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
     .compare-card {
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
@@ -1852,6 +1937,7 @@
       .stack__layout,
       .compare-grid,
       .trust-grid,
+      .mid-cta__box,
       .contact__box {
         grid-template-columns: 1fr;
       }
@@ -1959,6 +2045,11 @@
       .process-grid,
       .fit-grid {
         grid-template-columns: 1fr;
+      }
+
+      .mid-cta__actions .cta,
+      .mid-cta__actions .cta-secondary {
+        width: 100%;
       }
 
       .team-card {
@@ -2349,6 +2440,27 @@
             <span>Charge support -38%</span>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="mid-cta container reveal" id="decision" data-hide-mobile-cta>
+      <div class="mid-cta__box">
+        <div>
+          <h2>Vous avez identifie 1 ou 2 process prioritaires ? Parlons-en maintenant.</h2>
+          <p>Un call de 30 minutes suffit pour valider le potentiel de ROI, les risques de deploiement et la meilleure sequence d'execution.</p>
+          <div class="mid-cta__actions">
+            <a class="cta" href="#lead-form" data-cta="mid-page-decision">Reserver un diagnostic</a>
+            <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">Poser une question rapide</a>
+          </div>
+        </div>
+        <aside class="mid-cta__proof" aria-label="Arguments de reassurance">
+          <h3>Ce que vous obtenez apres le call</h3>
+          <ul>
+            <li>Priorisation claire des 3 workflows a plus fort impact.</li>
+            <li>Feuille de route 30 jours avec niveau d'effort estime.</li>
+            <li>Decision explicite: lancer, cadrer davantage, ou reporter.</li>
+          </ul>
+        </aside>
       </div>
     </section>
 
@@ -2884,6 +2996,7 @@
     const mobileCta = document.querySelector(".mobile-cta");
     if (mobileCta) {
       let formInteracting = false;
+      const mobileCtaHideZones = document.querySelectorAll("[data-hide-mobile-cta]");
 
       const isFormField = (node) => {
         return Boolean(node instanceof HTMLElement && node.matches("input, select, textarea"));
@@ -2904,8 +3017,12 @@
         const rect = leadForm ? leadForm.getBoundingClientRect() : null;
         const formVisible = rect ? rect.top < window.innerHeight - 120 && rect.bottom > 120 : false;
         const isTyping = formInteracting || hasFocusedFormField();
+        const hideZoneVisible = Array.from(mobileCtaHideZones).some((zone) => {
+          const zoneRect = zone.getBoundingClientRect();
+          return zoneRect.top < window.innerHeight - 120 && zoneRect.bottom > 120;
+        });
 
-        mobileCta.classList.toggle("is-visible", passedHero && !formVisible && !isTyping);
+        mobileCta.classList.toggle("is-visible", passedHero && !formVisible && !isTyping && !hideZoneVisible);
       };
 
       if (leadForm) {
