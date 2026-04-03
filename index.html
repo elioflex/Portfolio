@@ -943,6 +943,8 @@
     }
 
     .tools-marquee {
+      --duration: 30s;
+      --gap: 2rem;
       margin-top: 8px;
       overflow: hidden;
       position: relative;
@@ -956,17 +958,23 @@
 
     .tools-marquee__track {
       display: flex;
+      min-width: 100%;
+      flex-shrink: 0;
+      justify-content: space-around;
+      white-space: nowrap;
       align-items: center;
       width: max-content;
-      animation: toolsTicker 20s linear infinite;
+      gap: var(--gap);
+      animation: toolsTicker var(--duration) linear infinite;
       will-change: transform;
     }
 
     .tools-marquee__group {
       display: flex;
-      gap: 2.4rem;
+      align-items: center;
+      gap: 2.8rem;
       flex-shrink: 0;
-      padding-right: 2.4rem;
+      padding-right: 0.5rem;
     }
 
     .tool-pill {
@@ -1008,6 +1016,10 @@
 
     .tool-pill:hover {
       color: #1f3f63;
+    }
+
+    .tools-marquee:hover .tools-marquee__track {
+      animation-play-state: paused;
     }
 
     .trust-grid {
@@ -1458,7 +1470,7 @@
         transform: translateX(0);
       }
       to {
-        transform: translateX(-50%);
+        transform: translateX(calc(-100% - var(--gap)));
       }
     }
 
@@ -1475,14 +1487,6 @@
         mask-image: none;
         -webkit-mask-image: none;
         overflow-x: auto;
-      }
-
-      .tools-marquee__track {
-        animation: none !important;
-      }
-
-      .tools-marquee__group[aria-hidden="true"] {
-        display: none;
       }
     }
 
@@ -1630,7 +1634,7 @@
       }
 
       .tools-marquee__track {
-        animation-duration: 16s;
+        animation-duration: 24s;
       }
 
       .logo-wall {
@@ -1826,6 +1830,20 @@
       <div class="tools-marquee" role="region" aria-label="Liste defilante des outils utilises">
         <div class="tools-marquee__track">
           <div class="tools-marquee__group">
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/n8n/ea4b71" alt="" loading="lazy" decoding="async" /> n8n</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/make/7d64ff" alt="" loading="lazy" decoding="async" /> Make</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/zapier/ff4f00" alt="" loading="lazy" decoding="async" /> Zapier</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/hubspot/ff7a59" alt="" loading="lazy" decoding="async" /> HubSpot</span>
+            <span class="tool-pill"><span class="tool-logo-fallback" aria-hidden="true">P</span> Pipedrive</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/notion/111111" alt="" loading="lazy" decoding="async" /> Notion</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/airtable/18bfff" alt="" loading="lazy" decoding="async" /> Airtable</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/google/4285f4" alt="" loading="lazy" decoding="async" /> Google Workspace</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/slack/4a154b" alt="" loading="lazy" decoding="async" /> Slack</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/whatsapp/25d366" alt="" loading="lazy" decoding="async" /> WhatsApp API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/openai/111111" alt="" loading="lazy" decoding="async" /> OpenAI API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt="" loading="lazy" decoding="async" /> PostgreSQL</span>
+          </div>
+          <div class="tools-marquee__group" aria-hidden="true">
             <span class="tool-pill"><img src="https://cdn.simpleicons.org/n8n/ea4b71" alt="" loading="lazy" decoding="async" /> n8n</span>
             <span class="tool-pill"><img src="https://cdn.simpleicons.org/make/7d64ff" alt="" loading="lazy" decoding="async" /> Make</span>
             <span class="tool-pill"><img src="https://cdn.simpleicons.org/zapier/ff4f00" alt="" loading="lazy" decoding="async" /> Zapier</span>
