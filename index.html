@@ -111,130 +111,125 @@
     }
 
     .preloader__panel {
-      width: min(460px, 88vw);
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid #c8dbef;
-      border-radius: 18px;
-      box-shadow: var(--shadow-lg);
-      padding: 30px 26px;
-      backdrop-filter: blur(6px);
+      width: min(760px, 94vw);
+      padding: min(8vh, 64px) 18px min(7vh, 54px);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      display: grid;
+      place-items: center;
+      text-align: center;
     }
 
     .preloader__panel::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, rgba(47, 140, 255, 0.14), rgba(0, 167, 160, 0.15), transparent 65%);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(47, 140, 255, 0.16), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(0, 167, 160, 0.13), transparent 46%);
       pointer-events: none;
     }
 
     .preloader__panel::after {
       content: "";
       position: absolute;
-      inset: -42%;
-      background: conic-gradient(from 0deg, rgba(47, 140, 255, 0), rgba(47, 140, 255, 0.2), rgba(0, 167, 160, 0.16), rgba(47, 140, 255, 0));
-      filter: blur(22px);
-      opacity: 0.85;
-      animation: spin 10s linear infinite;
+      inset: -26%;
+      border-radius: 50%;
+      border: 1px solid rgba(72, 131, 196, 0.2);
+      animation: spin 16s linear infinite;
       pointer-events: none;
     }
 
-    .preloader__brand {
-      margin: 0 0 14px;
+    .preloader__logo {
       position: relative;
-      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      transform: translateY(14px) scale(0.96);
+      opacity: 0;
+      animation: preloaderIntro 0.9s cubic-bezier(0.19, 0.81, 0.24, 1) forwards;
+      z-index: 2;
+    }
+
+    .preloader__mark-wrap {
+      position: relative;
+      padding: 0 16px;
+    }
+
+    .preloader__mark-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -24% -16%;
+      border-radius: 999px;
+      background: radial-gradient(ellipse at center, rgba(49, 140, 235, 0.28), rgba(49, 140, 235, 0) 70%);
+      filter: blur(14px);
+      animation: preloaderHaloPulse 2.9s ease-in-out infinite;
+    }
+
+    .preloader__mark-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -18px -12px;
+      border-radius: 24px;
+      border: 1px solid rgba(84, 145, 210, 0.28);
+      animation: preloaderHaloPulse 2.9s ease-in-out infinite reverse;
     }
 
     .preloader__mark {
       margin: 0;
-      width: fit-content;
+      position: relative;
+      z-index: 1;
       font-family: "Allerta Stencil", "Sora", sans-serif;
-      font-size: clamp(2.1rem, 5.4vw, 3.05rem);
-      letter-spacing: 0.12em;
-      line-height: 1;
-      background: linear-gradient(110deg, #1c70ff, #00a7a0 54%, #53a9ff);
+      font-size: clamp(4rem, 14vw, 8rem);
+      letter-spacing: 0.11em;
+      line-height: 0.9;
+      background: linear-gradient(108deg, #1a70ff 8%, #00a7a0 52%, #69b5ff 94%);
       background-size: 220% 220%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 10px 20px rgba(34, 114, 199, 0.25));
-      animation: preloaderMarkFlow 2.8s ease-in-out infinite;
+      filter: drop-shadow(0 14px 30px rgba(34, 114, 199, 0.28));
+      animation: preloaderMarkFlow 3.1s ease-in-out infinite;
     }
 
-    .preloader__name {
-      margin: 6px 0 0;
-      width: fit-content;
+    .preloader__text {
+      margin: 0;
       position: relative;
-      overflow: hidden;
       font-family: "Sora", sans-serif;
-      font-size: clamp(0.66rem, 1.4vw, 0.88rem);
+      font-size: clamp(0.72rem, 1.8vw, 1rem);
       font-weight: 700;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #284764;
-      padding-right: 8px;
+      white-space: nowrap;
+      padding-inline: 8px;
     }
 
-    .preloader__name::after {
+    .preloader__text-base {
+      color: rgba(39, 73, 104, 0.36);
+    }
+
+    .preloader__text-fill {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: #234f79;
+      clip-path: inset(0 100% 0 0);
+      animation: preloaderTextFill 3s cubic-bezier(0.2, 0.78, 0.2, 1) infinite;
+    }
+
+    .preloader__text::after {
       content: "";
       position: absolute;
-      top: -35%;
-      bottom: -35%;
-      width: 44%;
-      left: -50%;
-      background: linear-gradient(105deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
-      transform: skewX(-20deg);
-      animation: preloaderNameSweep 2.6s ease-in-out infinite;
+      top: -34%;
+      bottom: -34%;
+      width: 26%;
+      left: -35%;
+      background: linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0));
+      transform: skewX(-22deg);
+      animation: preloaderTextSweep 2.6s ease-in-out infinite;
+      z-index: 1;
       pointer-events: none;
-    }
-
-    .preloader__label {
-      margin: 0 0 14px;
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #5f7892;
-      position: relative;
-      z-index: 1;
-    }
-
-    .preloader__title {
-      margin: 0 0 16px;
-      font-family: "Sora", sans-serif;
-      font-size: clamp(1.35rem, 3.2vw, 2rem);
-      line-height: 1.2;
-      position: relative;
-      z-index: 1;
-    }
-
-    .preloader__bar {
-      height: 10px;
-      border-radius: 999px;
-      background: #d7e8f8;
-      overflow: hidden;
-      margin-bottom: 11px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .preloader__bar > span {
-      display: block;
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      border-radius: inherit;
-      transition: width 0.15s linear;
-    }
-
-    .preloader__count {
-      margin: 0;
-      text-align: right;
-      color: #2860a4;
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
     }
 
     .site-header {
@@ -1071,25 +1066,70 @@
       }
     }
 
+    @keyframes preloaderIntro {
+      0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.96);
+        filter: blur(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
     @keyframes preloaderMarkFlow {
       0%,
       100% {
         background-position: 0% 50%;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
       50% {
         background-position: 100% 50%;
-        transform: translateY(-2px);
+        transform: translateY(-2px) scale(1.015);
       }
     }
 
-    @keyframes preloaderNameSweep {
+    @keyframes preloaderHaloPulse {
+      0%,
+      100% {
+        opacity: 0.72;
+        transform: scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    @keyframes preloaderTextFill {
       0% {
-        transform: translateX(0) skewX(-20deg);
+        clip-path: inset(0 100% 0 0);
+      }
+      55%,
+      100% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes preloaderTextSweep {
+      0% {
+        transform: translateX(0) skewX(-22deg);
       }
       60%,
       100% {
-        transform: translateX(350%) skewX(-20deg);
+        transform: translateX(420%) skewX(-22deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .preloader,
+      .preloader::before,
+      .preloader::after,
+      .preloader * {
+        animation: none !important;
+        transition: none !important;
       }
     }
 
@@ -1178,14 +1218,15 @@
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader__panel">
-      <div class="preloader__brand" aria-hidden="true">
-        <p class="preloader__mark">I2A</p>
-        <p class="preloader__name">Idea to Automation</p>
+      <div class="preloader__logo" aria-hidden="true">
+        <div class="preloader__mark-wrap">
+          <p class="preloader__mark">I2A</p>
+        </div>
+        <p class="preloader__text">
+          <span class="preloader__text-base">Idea to Automation</span>
+          <span class="preloader__text-fill">Idea to Automation</span>
+        </p>
       </div>
-      <p class="preloader__label">Experience premium en chargement</p>
-      <h2 class="preloader__title">Preparation de votre environnement d'automatisation...</h2>
-      <div class="preloader__bar"><span id="loadBar"></span></div>
-      <p class="preloader__count" id="loadCount">0%</p>
     </div>
   </div>
 
@@ -1557,29 +1598,29 @@
     }
 
     const preloader = document.getElementById("preloader");
-    const countEl = document.getElementById("loadCount");
-    const barEl = document.getElementById("loadBar");
+    const preloaderStart = performance.now();
+    const minPreloaderDuration = 3600;
+    let preloaderDone = false;
 
-    const preloaderStart = Date.now();
-    const minPreloaderDuration = 3200;
-    let progress = 0;
-    const timer = setInterval(() => {
-      progress += Math.round(Math.random() * 7) + 2;
+    const schedulePreloaderExit = () => {
+      const elapsed = performance.now() - preloaderStart;
+      const remaining = Math.max(0, minPreloaderDuration - elapsed);
+      setTimeout(startExperience, remaining);
+    };
 
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(timer);
-        const elapsed = Date.now() - preloaderStart;
-        const remaining = Math.max(0, minPreloaderDuration - elapsed);
-        setTimeout(startExperience, remaining + 250);
-      }
+    if (document.readyState === "complete") {
+      schedulePreloaderExit();
+    } else {
+      window.addEventListener("load", schedulePreloaderExit, { once: true });
+    }
 
-      countEl.textContent = `${progress}%`;
-      barEl.style.width = `${progress}%`;
-    }, 45);
+    setTimeout(startExperience, minPreloaderDuration + 2500);
 
     function startExperience() {
+      if (preloaderDone) return;
+      preloaderDone = true;
       document.body.classList.add("is-ready");
+      if (!preloader) return;
       preloader.classList.add("preloader--exit");
       setTimeout(() => preloader.remove(), 1300);
     }
