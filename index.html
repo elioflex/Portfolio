@@ -1493,6 +1493,70 @@
       margin-top: 18px;
     }
 
+    .contact-proof {
+      margin-top: 14px;
+      border: 1px solid #c4daf0;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(244, 250, 255, 0.96), rgba(236, 247, 255, 0.92));
+      padding: 14px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      gap: 10px;
+      max-width: 66ch;
+    }
+
+    .contact-proof h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 0.98rem;
+      color: #1f3854;
+    }
+
+    .contact-proof__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .contact-proof__list li {
+      position: relative;
+      padding-left: 18px;
+      color: #4a6580;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .contact-proof__list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
+    .contact-proof__kpis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-proof__kpis span {
+      border: 1px solid #c8dbef;
+      background: #f3f8fe;
+      color: #2f577f;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
     .contact-form {
       border: 1px solid #c6dbef;
       border-radius: 18px;
@@ -2551,6 +2615,19 @@
             <li>Un plan d'execution sur 30 jours avec estimation des gains attendus.</li>
             <li>Une recommandation claire: lancer maintenant, cadrer davantage, ou ne pas lancer.</li>
           </ul>
+          <article class="contact-proof" aria-label="Reassurance avant prise de rendez-vous">
+            <h3>Ce call vous donne une decision claire, pas un pitch commercial.</h3>
+            <ul class="contact-proof__list">
+              <li>Reponse sous 24h ouvrables avec proposition de creneau.</li>
+              <li>Diagnostic focalise sur vos process critiques et vos KPI metier.</li>
+              <li>Si le potentiel ROI est faible, nous vous le disons explicitement.</li>
+            </ul>
+            <div class="contact-proof__kpis">
+              <span>18 workflows deployes</span>
+              <span>ROI observe entre 30 et 90 jours</span>
+              <span>References detaillees sur demande (NDA)</span>
+            </div>
+          </article>
           <div class="contact__actions">
             <a class="cta" href="#lead-form" data-cta="contact-principal">Reserver un diagnostic</a>
             <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
