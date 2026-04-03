@@ -1748,10 +1748,125 @@
       padding: 8px 10px;
     }
 
-    footer {
-      padding: 36px 0 54px;
-      color: #5f7388;
+    .site-footer {
+      margin-top: 26px;
+      padding-bottom: 54px;
+    }
+
+    .site-footer__box {
+      border: 1px solid #c3d8ed;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(145deg, rgba(244, 250, 255, 0.96), rgba(236, 247, 255, 0.93)),
+        radial-gradient(380px 220px at 12% 14%, rgba(0, 167, 160, 0.13), transparent 62%);
+      box-shadow: var(--shadow-lg);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.95fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .site-footer h2,
+    .site-footer h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: #1f3854;
+    }
+
+    .site-footer h2 {
+      font-size: clamp(1.22rem, 2.2vw, 1.78rem);
+      line-height: 1.18;
+      max-width: 24ch;
+    }
+
+    .site-footer h3 {
       font-size: 0.9rem;
+      letter-spacing: 0.01em;
+    }
+
+    .site-footer p {
+      margin: 0;
+      color: #4f6984;
+      font-size: 0.9rem;
+      line-height: 1.62;
+    }
+
+    .site-footer__brand {
+      display: grid;
+      gap: 10px;
+    }
+
+    .site-footer__logo {
+      width: 112px;
+      height: auto;
+      display: block;
+    }
+
+    .site-footer__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .site-footer__list li {
+      position: relative;
+      padding-left: 16px;
+      color: #4a6480;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .site-footer__list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
+    .site-footer__col {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .site-footer__links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .site-footer__links a {
+      color: #33597f;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      width: fit-content;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .site-footer__links a:hover {
+      color: #1f4770;
+      border-color: rgba(31, 71, 112, 0.35);
+    }
+
+    .site-footer__actions {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .site-footer__legal {
+      margin: 10px 2px 0;
+      color: #5f7388;
+      font-size: 0.82rem;
+      line-height: 1.58;
     }
 
     .reveal {
@@ -1937,6 +2052,7 @@
       .stack__layout,
       .compare-grid,
       .trust-grid,
+      .site-footer__box,
       .mid-cta__box,
       .contact__box {
         grid-template-columns: 1fr;
@@ -2049,6 +2165,11 @@
 
       .mid-cta__actions .cta,
       .mid-cta__actions .cta-secondary {
+        width: 100%;
+      }
+
+      .site-footer__actions .cta,
+      .site-footer__actions .cta-secondary {
         width: 100%;
       }
 
@@ -2829,8 +2950,40 @@
     </section>
   </main>
 
-  <footer class="container">
-    <span>© 2026 IdeaToAutomation - ideatoautomation.com - Site portfolio premium orientee automatisation B2B.</span>
+  <footer class="container site-footer reveal" id="footer" data-hide-mobile-cta>
+    <div class="site-footer__box">
+      <div class="site-footer__brand">
+        <img class="site-footer__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" />
+        <h2>On transforme vos process critiques en systemes fiables et mesurables.</h2>
+        <p>Diagnostic de 30 min pour prioriser vos gains, cadrer le plan d'execution et evaluer le ROI reel avant lancement.</p>
+        <ul class="site-footer__list">
+          <li>Reponse sous 24h ouvrables</li>
+          <li>Pilote possible en 2 a 6 semaines</li>
+          <li>References detaillees partagees pendant le call (NDA)</li>
+        </ul>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Navigation rapide">
+        <h3>Navigation rapide</h3>
+        <div class="site-footer__links">
+          <a href="#offres">Offres</a>
+          <a href="#cas">Cas clients</a>
+          <a href="#decision">Point decision</a>
+          <a href="#faq">FAQ</a>
+          <a href="#lead-form">Formulaire diagnostic</a>
+        </div>
+      </nav>
+
+      <div class="site-footer__col">
+        <h3>Demarrer maintenant</h3>
+        <p>Besoin d'une validation rapide sur un process precis ? Ecrivez-nous ou reservez directement un diagnostic.</p>
+        <div class="site-footer__actions">
+          <a class="cta" href="#lead-form" data-cta="footer-principal">Reserver un diagnostic</a>
+          <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__legal">© 2026 IdeaToAutomation - ideatoautomation.com - Site portfolio premium orientee automatisation B2B.</p>
   </footer>
 
   <div class="mobile-cta">
