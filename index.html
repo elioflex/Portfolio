@@ -383,10 +383,10 @@
 
     .hero h1 {
       margin: 0;
-      max-width: 16ch;
+      max-width: 17ch;
       font-family: "Sora", sans-serif;
       font-size: clamp(2.1rem, 4.9vw, 4.2rem);
-      line-height: 1.03;
+      line-height: 1.05;
       letter-spacing: -0.01em;
     }
 
@@ -468,6 +468,40 @@
     .hero__numbers span {
       font-size: 0.84rem;
       color: #607489;
+    }
+
+    .impact {
+      margin-top: 6px;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .impact-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: var(--shadow-md);
+      padding: 16px;
+    }
+
+    .impact-card strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 1.26rem;
+      color: #1f66c7;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .impact-card span {
+      display: block;
+      color: #5b7086;
+      font-size: 0.86rem;
+      line-height: 1.45;
     }
 
     .hero__visual {
@@ -648,7 +682,9 @@
     }
 
     .offers,
+    .impact,
     .cases,
+    .compare,
     .method,
     .stack,
     .trust,
@@ -872,6 +908,63 @@
       padding: 22px;
     }
 
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .compare-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .compare-card--before {
+      border-color: #e7d8bf;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(252, 246, 236, 0.94));
+    }
+
+    .compare-card--after {
+      border-color: #c5dff6;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(235, 247, 255, 0.94));
+    }
+
+    .compare-card h3 {
+      margin: 0 0 12px;
+      font-family: "Sora", sans-serif;
+      font-size: 1.16rem;
+    }
+
+    .compare-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .compare-list li {
+      position: relative;
+      padding-left: 20px;
+      color: #3f5973;
+      font-size: 0.92rem;
+      line-height: 1.52;
+    }
+
+    .compare-list li::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      left: 0;
+      top: 0.48em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
     .team-card {
       display: grid;
       grid-template-columns: 112px 1fr;
@@ -902,6 +995,36 @@
       color: #4f6a84;
       font-weight: 600;
       letter-spacing: 0.01em;
+    }
+
+    .team-card__bio {
+      margin: 8px 0 10px;
+      color: #5a7088;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .team-card__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .team-link {
+      border-radius: 999px;
+      border: 1px solid #c9daeb;
+      background: #f3f8fe;
+      color: #2d5f94;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 6px 10px;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .team-link:hover {
+      transform: translateY(-1px);
+      background: #e9f2fc;
     }
 
     .logo-wall {
@@ -1006,6 +1129,79 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 18px;
+    }
+
+    .contact-form {
+      border: 1px solid #c6dbef;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow-md);
+      padding: 18px;
+      min-width: min(420px, 100%);
+      max-width: 440px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-form h3 {
+      margin: 0 0 2px;
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
+      color: #203a56;
+    }
+
+    .contact-form p {
+      margin: 0 0 4px;
+      color: #5f7388;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 5px;
+      color: #3f5d79;
+      font-size: 0.79rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid #cadcee;
+      border-radius: 10px;
+      padding: 10px 11px;
+      font: inherit;
+      color: #1f3954;
+      background: #fbfdff;
+      resize: vertical;
+      min-height: 42px;
+    }
+
+    .contact-form textarea {
+      min-height: 94px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #87b7e6;
+      box-shadow: 0 0 0 3px rgba(83, 148, 220, 0.16);
+    }
+
+    .contact-form .cta {
+      width: 100%;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .contact-form__note {
+      margin: 0;
+      color: #6c8097;
+      font-size: 0.75rem;
+      line-height: 1.5;
     }
 
     footer {
@@ -1143,6 +1339,10 @@
         min-height: 440px;
       }
 
+      .impact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .card-grid--3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1152,6 +1352,7 @@
       }
 
       .stack__layout,
+      .compare-grid,
       .trust-grid,
       .contact__box {
         grid-template-columns: 1fr;
@@ -1180,7 +1381,16 @@
         padding-top: 56px;
       }
 
+      .hero h1 {
+        font-size: clamp(2rem, 9.5vw, 3rem);
+        line-height: 1.06;
+      }
+
       .hero__numbers {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1207,6 +1417,10 @@
       .team-card__photo {
         width: 104px;
         height: 104px;
+      }
+
+      .contact-form {
+        min-width: 100%;
       }
 
       .logo-wall {
@@ -1237,6 +1451,7 @@
 
     <nav class="nav">
       <a href="#offres">Offres</a>
+      <a href="#impact">Resultats</a>
       <a href="#cas">Cas clients</a>
       <a href="#methode">Methode</a>
       <a href="#stack">Stack</a>
@@ -1304,6 +1519,32 @@
             Mise en production rapide
           </aside>
         </div>
+      </div>
+    </section>
+
+    <section class="impact container reveal" id="impact">
+      <div class="section-title">
+        <h2>Resultats en chiffres</h2>
+        <p>Des indicateurs concrets pour valider le ROI et accelerer la prise de decision.</p>
+      </div>
+
+      <div class="impact-grid">
+        <article class="impact-card">
+          <strong>-72%</strong>
+          <span>de temps passe sur les operations repetitives apres automatisation.</span>
+        </article>
+        <article class="impact-card">
+          <strong>+3.8x</strong>
+          <span>de vitesse de delivery sur les processus internes critiques.</span>
+        </article>
+        <article class="impact-card">
+          <strong>99.2%</strong>
+          <span>de fiabilite observee sur les workflows en production.</span>
+        </article>
+        <article class="impact-card">
+          <strong>&lt; 90 jours</strong>
+          <span>pour constater les premiers gains mesurables sur vos KPI metier.</span>
+        </article>
       </div>
     </section>
 
@@ -1393,6 +1634,35 @@
             <span>NPS +17 points</span>
             <span>Charge support -38%</span>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="compare container reveal" id="avant-apres">
+      <div class="section-title">
+        <h2>Avant / apres automatisation</h2>
+        <p>Une transformation lisible pour vos equipes: moins de friction, plus de controle, meilleure execution.</p>
+      </div>
+
+      <div class="compare-grid">
+        <article class="compare-card compare-card--before">
+          <h3>Avant</h3>
+          <ul class="compare-list">
+            <li>Processus fragmentes entre plusieurs outils non synchronises.</li>
+            <li>Taches manuelles chronophages et fortes dependances humaines.</li>
+            <li>Erreurs recurrentes sur la data, la facturation et le suivi client.</li>
+            <li>Reporting tardif, decisions basees sur des informations partielles.</li>
+          </ul>
+        </article>
+
+        <article class="compare-card compare-card--after">
+          <h3>Apres</h3>
+          <ul class="compare-list">
+            <li>Flux centralises avec orchestration automatique bout-en-bout.</li>
+            <li>Equipes liberees des taches repetitives a faible valeur.</li>
+            <li>Qualite de donnees amelioree avec controles et alerting.</li>
+            <li>Pilotage KPI en temps reel pour arbitrer plus vite.</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -1515,6 +1785,11 @@
           <div>
             <h3>Amine</h3>
             <p class="team-card__role">Software Team Leader R&amp;D</p>
+            <p class="team-card__bio">Architecture logicielle, structuration R&amp;D et pilotage de la qualite technique sur les systemes critiques.</p>
+            <div class="team-card__links">
+              <a class="team-link" href="#contact">Parler projet</a>
+              <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Amine">Email direct</a>
+            </div>
           </div>
         </article>
 
@@ -1523,6 +1798,11 @@
           <div>
             <h3>Yassine</h3>
             <p class="team-card__role">Automation specialiste</p>
+            <p class="team-card__bio">Conception et industrialisation de workflows metier avec focus ROI, fiabilite operationnelle et vitesse de mise en production.</p>
+            <div class="team-card__links">
+              <a class="team-link" href="#contact">Demarrer un audit</a>
+              <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Yassine">Email direct</a>
+            </div>
           </div>
         </article>
       </div>
@@ -1571,6 +1851,29 @@
             <a class="cta-secondary" href="https://wa.me/33600000000" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </div>
         </div>
+
+        <form class="contact-form" action="mailto:contact@ideatoautomation.com" method="post" enctype="text/plain">
+          <h3>Audit flash en 30 min</h3>
+          <p>Laisse tes coordonnees et ton objectif prioritaire. Retour sous 24h.</p>
+
+          <label>
+            Nom
+            <input type="text" name="Nom" placeholder="Ton nom" required />
+          </label>
+
+          <label>
+            Email pro
+            <input type="email" name="Email" placeholder="nom@entreprise.com" required />
+          </label>
+
+          <label>
+            Objectif principal
+            <textarea name="Objectif" placeholder="Ex: automatiser la qualification des leads et reduire le temps de traitement de 60%." required></textarea>
+          </label>
+
+          <button class="cta" type="submit">Envoyer la demande</button>
+          <p class="contact-form__note">En envoyant ce formulaire, tu acceptes d'etre recontacte pour cadrer le projet.</p>
+        </form>
       </div>
     </section>
   </main>
@@ -1598,29 +1901,41 @@
     }
 
     const preloader = document.getElementById("preloader");
+    const preloaderSeenKey = "i2a_preloader_seen_v1";
+    const shouldShowPreloader = !sessionStorage.getItem(preloaderSeenKey);
     const preloaderStart = performance.now();
-    const minPreloaderDuration = 3600;
+    const minPreloaderDuration = 2200;
     let preloaderDone = false;
 
-    const schedulePreloaderExit = () => {
-      const elapsed = performance.now() - preloaderStart;
-      const remaining = Math.max(0, minPreloaderDuration - elapsed);
-      setTimeout(startExperience, remaining);
-    };
+    if (shouldShowPreloader) {
+      sessionStorage.setItem(preloaderSeenKey, "1");
 
-    if (document.readyState === "complete") {
-      schedulePreloaderExit();
+      const schedulePreloaderExit = () => {
+        const elapsed = performance.now() - preloaderStart;
+        const remaining = Math.max(0, minPreloaderDuration - elapsed);
+        setTimeout(startExperience, remaining);
+      };
+
+      if (document.readyState === "complete") {
+        schedulePreloaderExit();
+      } else {
+        window.addEventListener("load", schedulePreloaderExit, { once: true });
+      }
+
+      setTimeout(startExperience, minPreloaderDuration + 2200);
     } else {
-      window.addEventListener("load", schedulePreloaderExit, { once: true });
+      startExperience(true);
     }
 
-    setTimeout(startExperience, minPreloaderDuration + 2500);
-
-    function startExperience() {
+    function startExperience(immediate = false) {
       if (preloaderDone) return;
       preloaderDone = true;
       document.body.classList.add("is-ready");
       if (!preloader) return;
+      if (immediate) {
+        preloader.remove();
+        return;
+      }
       preloader.classList.add("preloader--exit");
       setTimeout(() => preloader.remove(), 1300);
     }
