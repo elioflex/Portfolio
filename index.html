@@ -1980,7 +1980,7 @@
     </button>
 
     <nav class="nav" id="siteNav">
-      <a class="nav__primary" href="#lead-form">Reserver un diagnostic</a>
+      <a class="nav__primary" href="#lead-form" data-cta="menu-principal">Reserver un diagnostic</a>
       <a href="#offres">Offres</a>
       <a href="#outils">Outils</a>
       <a href="#impact">Resultats</a>
@@ -1993,7 +1993,7 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="cta" href="#lead-form">Reserver un diagnostic</a>
+    <a class="cta" href="#lead-form" data-cta="header-principal">Reserver un diagnostic</a>
   </header>
 
   <main>
@@ -2008,7 +2008,7 @@
           </p>
 
           <div class="hero__actions">
-            <a class="cta" href="#lead-form">Reserver un diagnostic</a>
+            <a class="cta" href="#lead-form" data-cta="hero-principal">Reserver un diagnostic</a>
             <a class="cta-secondary" href="#cas">Voir les resultats</a>
           </div>
 
@@ -2116,7 +2116,7 @@
           </ul>
           <p class="price">A partir de 1 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form" data-offer="Audit Express">Demarrer par l'audit</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Audit Express" data-cta="offre-audit-express">Demarrer par l'audit</a>
           </div>
         </article>
 
@@ -2133,7 +2133,7 @@
           </ul>
           <p class="price">A partir de 4 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta" href="#lead-form" data-offer="Implementation">Lancer un pilote</a>
+            <a class="cta" href="#lead-form" data-offer="Implementation" data-cta="offre-implementation">Lancer un pilote</a>
           </div>
         </article>
 
@@ -2150,7 +2150,7 @@
           </ul>
           <p class="price">A partir de 1 500 EUR / mois</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form" data-offer="Accompagnement Mensuel">Planifier un cadrage</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Accompagnement Mensuel" data-cta="offre-accompagnement-mensuel">Planifier un cadrage</a>
           </div>
         </article>
       </div>
@@ -2436,7 +2436,7 @@
             <p class="team-card__role">Software Team Leader R&amp;D</p>
             <p class="team-card__bio">Architecture logicielle, structuration R&amp;D et pilotage de la qualite technique sur les systemes critiques.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#lead-form">Reserver un diagnostic</a>
+              <a class="team-link" href="#lead-form" data-cta="equipe-amine">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Amine">Email direct</a>
             </div>
           </div>
@@ -2449,7 +2449,7 @@
             <p class="team-card__role">Automation specialiste</p>
             <p class="team-card__bio">Conception et industrialisation de workflows metier avec focus ROI, fiabilite operationnelle et vitesse de mise en production.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#lead-form">Reserver un diagnostic</a>
+              <a class="team-link" href="#lead-form" data-cta="equipe-yassine">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Yassine">Email direct</a>
             </div>
           </div>
@@ -2499,7 +2499,7 @@
         <h3>Encore un doute avant de lancer ?</h3>
         <p>Reservez un diagnostic de 30 minutes. Vous repartez avec une recommandation explicite: lancer, cadrer davantage, ou ne pas lancer.</p>
         <div class="faq-cta__actions">
-          <a class="cta" href="#lead-form">Reserver un diagnostic</a>
+          <a class="cta" href="#lead-form" data-cta="faq-cta">Reserver un diagnostic</a>
           <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">Poser une question par email</a>
         </div>
       </article>
@@ -2548,7 +2548,7 @@
             <li>Une recommandation claire: lancer maintenant, cadrer davantage, ou ne pas lancer.</li>
           </ul>
           <div class="contact__actions">
-            <a class="cta" href="#lead-form">Reserver un diagnostic</a>
+            <a class="cta" href="#lead-form" data-cta="contact-principal">Reserver un diagnostic</a>
             <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
           </div>
         </div>
@@ -2564,6 +2564,14 @@
           <input type="hidden" name="_next" value="https://ideatoautomation.com/#contact-confirmation" />
           <input type="hidden" name="_autoresponse" value="Merci pour votre demande. Nous revenons vers vous sous 24h ouvrables avec une proposition de creneau pour le diagnostic." />
           <input type="hidden" name="Offre cible" id="offer-field" value="" />
+          <input type="hidden" name="utm_source" id="utm-source" value="" />
+          <input type="hidden" name="utm_medium" id="utm-medium" value="" />
+          <input type="hidden" name="utm_campaign" id="utm-campaign" value="" />
+          <input type="hidden" name="utm_term" id="utm-term" value="" />
+          <input type="hidden" name="utm_content" id="utm-content" value="" />
+          <input type="hidden" name="referrer" id="referrer-field" value="" />
+          <input type="hidden" name="page_path" id="page-path-field" value="" />
+          <input type="hidden" name="cta_origin" id="cta-origin-field" value="" />
 
           <label>
             Nom
@@ -2620,7 +2628,7 @@
   </footer>
 
   <div class="mobile-cta">
-    <a href="#lead-form">Reserver un diagnostic</a>
+    <a href="#lead-form" data-cta="mobile-sticky">Reserver un diagnostic</a>
   </div>
 
   <script>
@@ -2683,6 +2691,76 @@
       contactConfirmation.hidden = false;
     }
 
+    const leadForm = document.getElementById("lead-form");
+    const utmSourceField = document.getElementById("utm-source");
+    const utmMediumField = document.getElementById("utm-medium");
+    const utmCampaignField = document.getElementById("utm-campaign");
+    const utmTermField = document.getElementById("utm-term");
+    const utmContentField = document.getElementById("utm-content");
+    const referrerField = document.getElementById("referrer-field");
+    const pagePathField = document.getElementById("page-path-field");
+    const ctaOriginField = document.getElementById("cta-origin-field");
+
+    const readSession = (key) => {
+      try {
+        return sessionStorage.getItem(key) || "";
+      } catch {
+        return "";
+      }
+    };
+
+    const writeSession = (key, value) => {
+      try {
+        sessionStorage.setItem(key, value);
+      } catch {
+        // Ignore storage failures (private mode or disabled storage).
+      }
+    };
+
+    const queryParams = new URLSearchParams(window.location.search);
+    const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+    utmKeys.forEach((key) => {
+      const value = queryParams.get(key);
+      if (value) writeSession(`i2a_${key}`, value);
+    });
+
+    if (!readSession("i2a_referrer")) {
+      writeSession("i2a_referrer", document.referrer || "(direct)");
+    }
+
+    const fillTrackingFields = () => {
+      if (utmSourceField) utmSourceField.value = readSession("i2a_utm_source");
+      if (utmMediumField) utmMediumField.value = readSession("i2a_utm_medium");
+      if (utmCampaignField) utmCampaignField.value = readSession("i2a_utm_campaign");
+      if (utmTermField) utmTermField.value = readSession("i2a_utm_term");
+      if (utmContentField) utmContentField.value = readSession("i2a_utm_content");
+      if (referrerField) referrerField.value = readSession("i2a_referrer") || "(direct)";
+      if (pagePathField) pagePathField.value = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+      const ctaOrigin = readSession("i2a_cta_origin")
+        || (window.location.hash === "#lead-form" ? "direct-anchor" : "direct-visit");
+      if (ctaOriginField) ctaOriginField.value = ctaOrigin;
+    };
+
+    const leadFormCtas = document.querySelectorAll('a[href="#lead-form"]');
+    leadFormCtas.forEach((cta) => {
+      cta.addEventListener("click", () => {
+        const sectionId = cta.closest("section[id]")?.id;
+        const fallbackOrigin = sectionId
+          ? `section-${sectionId}`
+          : (cta.closest("header") ? "header" : "site");
+        const ctaOrigin = (cta.dataset.cta || fallbackOrigin).trim();
+
+        writeSession("i2a_cta_origin", ctaOrigin);
+        if (ctaOriginField) ctaOriginField.value = ctaOrigin;
+      });
+    });
+
+    fillTrackingFields();
+    if (leadForm) {
+      leadForm.addEventListener("submit", fillTrackingFields);
+    }
+
     const offerField = document.getElementById("offer-field");
     const offerContext = document.getElementById("offer-context");
     const offerCtas = document.querySelectorAll("[data-offer]");
@@ -2710,7 +2788,6 @@
     }
 
     const mobileCta = document.querySelector(".mobile-cta");
-    const leadForm = document.getElementById("lead-form");
     if (mobileCta) {
       const updateMobileCta = () => {
         if (window.innerWidth > 760) {
