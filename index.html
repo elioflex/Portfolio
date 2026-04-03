@@ -910,8 +910,63 @@
       margin-top: 8px;
     }
 
+    .case {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .case__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .case__tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #c7dbef;
+      background: #f2f8fe;
+      color: #2e5f93;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .case__summary {
+      margin: 0;
+      color: #1f4f87;
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .case__line {
+      margin: 0;
+      color: #4e6782;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .case__line strong {
+      color: #274562;
+      font-family: "Sora", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
     .case__meta {
       margin-top: 11px;
+      padding-top: 10px;
+      border-top: 1px dashed #c8daed;
       font-size: 0.82rem;
       color: #4b6681;
       line-height: 1.55;
@@ -2522,14 +2577,18 @@
     <section class="cases container reveal" id="cas">
       <div class="section-title">
         <h2>Cas clients et resultats mesurables</h2>
-        <p>Chaque mission est pilotee par des indicateurs concrets: temps gagne, erreurs reduites, revenus accelerees.</p>
+        <p>Chaque mission est pilotee par des indicateurs concrets: temps gagne, erreurs reduites, revenus acceleres.</p>
       </div>
 
       <div class="card-grid card-grid--3">
         <article class="card case">
-          <h3>Scaleup SaaS B2B</h3>
-          <p>Contexte: leads qualifies trop lentement et pipeline commercial instable.</p>
-          <p>Intervention en 6 semaines: scoring IA, qualification automatique, relances synchronisees avec le CRM et dashboard RevOps.</p>
+          <div class="case__head">
+            <span class="case__tag">SaaS B2B</span>
+            <p class="case__summary">+41% SQL en 6 semaines</p>
+          </div>
+          <h3>Qualification commerciale automatisee</h3>
+          <p class="case__line"><strong>Contexte</strong> Leads qualifies trop lentement et pipeline commercial instable.</p>
+          <p class="case__line"><strong>Intervention</strong> Scoring IA, qualification automatique, relances CRM et dashboard RevOps.</p>
           <p class="case__meta">Equipe: Head of Revenue + 6 SDR | Duree: 6 semaines | Flux: lead-to-SQL</p>
           <div class="kpis">
             <span>+41% SQL</span>
@@ -2539,9 +2598,13 @@
         </article>
 
         <article class="card case">
-          <h3>Groupe industriel multi-sites</h3>
-          <p>Contexte: retards de facturation et erreurs de saisie entre sites et ERP.</p>
-          <p>Intervention en 8 semaines: automatisation commandes-achats-facturation avec OCR, controles d'anomalies et alerting finance.</p>
+          <div class="case__head">
+            <span class="case__tag">Industrie multi-sites</span>
+            <p class="case__summary">Erreurs facture -87%</p>
+          </div>
+          <h3>Order-to-cash fiabilise de bout en bout</h3>
+          <p class="case__line"><strong>Contexte</strong> Retards de facturation et erreurs de saisie entre sites et ERP.</p>
+          <p class="case__line"><strong>Intervention</strong> Automatisation commandes-achats-facturation avec OCR et controles d'anomalies.</p>
           <p class="case__meta">Equipe: Direction Finance + Operations | Duree: 8 semaines | Flux: order-to-cash</p>
           <div class="kpis">
             <span>2 400 taches/mois</span>
@@ -2551,9 +2614,13 @@
         </article>
 
         <article class="card case">
-          <h3>Reseau de services B2C</h3>
-          <p>Contexte: support fragmente, delais de reponse trop longs et reporting manuel.</p>
-          <p>Intervention en 5 semaines: unification support, planning et reporting avec routage automatique et suivi SLA en temps reel.</p>
+          <div class="case__head">
+            <span class="case__tag">Services B2C</span>
+            <p class="case__summary">Temps de reponse -53%</p>
+          </div>
+          <h3>Support client unifie et pilote par SLA</h3>
+          <p class="case__line"><strong>Contexte</strong> Support fragmente, delais de reponse trop longs et reporting manuel.</p>
+          <p class="case__line"><strong>Intervention</strong> Routage automatique, orchestration support-planning et suivi SLA en temps reel.</p>
           <p class="case__meta">Equipe: Responsable Service Client + Ops | Duree: 5 semaines | Flux: support-to-resolution</p>
           <div class="kpis">
             <span>Temps de reponse -53%</span>
