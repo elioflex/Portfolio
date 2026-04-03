@@ -731,6 +731,7 @@
     .cases,
     .compare,
     .method,
+    .process,
     .stack,
     .trust,
     .team,
@@ -792,6 +793,7 @@
     .offer__head h3,
     .case h3,
     .step h3,
+    .process-step h3,
     .trust-card h3 {
       margin: 0;
       font-family: "Sora", sans-serif;
@@ -900,6 +902,38 @@
       font-size: 0.72rem;
       color: #4f6f8f;
       font-family: "Sora", sans-serif;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .process-step {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.88);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .process-step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+
+    .process-step p + p {
+      margin-top: 8px;
+    }
+
+    .process-note {
+      margin: 14px 0 0;
+      color: #4f6580;
+      font-size: 0.86rem;
+      line-height: 1.6;
     }
 
     .stack__layout {
@@ -1194,6 +1228,13 @@
       color: #35597b;
       font-size: 0.84rem;
       letter-spacing: 0.01em;
+    }
+
+    .trust-note {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: #4f6580;
+      line-height: 1.6;
     }
 
     .faq-list {
@@ -1512,6 +1553,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .stack__layout,
       .compare-grid,
       .trust-grid,
@@ -1610,7 +1655,8 @@
 
       .card-grid--3,
       .card-grid--2,
-      .method-grid {
+      .method-grid,
+      .process-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1668,19 +1714,20 @@
     </button>
 
     <nav class="nav" id="siteNav">
-      <a class="nav__primary" href="#contact">Prendre rendez-vous</a>
+      <a class="nav__primary" href="#contact">Reserver un diagnostic</a>
       <a href="#offres">Offres</a>
       <a href="#outils">Outils</a>
       <a href="#impact">Resultats</a>
       <a href="#cas">Cas clients</a>
       <a href="#methode">Methode</a>
+      <a href="#process">Process</a>
       <a href="#stack">Stack</a>
       <a href="#team">Equipe</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="cta" href="#contact">Prendre rendez-vous</a>
+    <a class="cta" href="#contact">Reserver un diagnostic</a>
   </header>
 
   <main>
@@ -1695,7 +1742,7 @@
           </p>
 
           <div class="hero__actions">
-            <a class="cta" href="#contact">Demarrer un audit flash</a>
+            <a class="cta" href="#contact">Reserver un diagnostic</a>
             <a class="cta-secondary" href="#cas">Voir les resultats</a>
           </div>
 
@@ -2050,6 +2097,7 @@
             "La roadmap etait claire, l'execution rapide, et nous avons obtenu des resultats mesurables des le premier mois."
             <br /><strong>Directeur des operations, groupe industriel</strong>
           </p>
+          <p class="trust-note">References detaillees et cas complets partages pendant le call de cadrage (selon NDA).</p>
         </article>
       </div>
     </section>
@@ -2068,7 +2116,7 @@
             <p class="team-card__role">Software Team Leader R&amp;D</p>
             <p class="team-card__bio">Architecture logicielle, structuration R&amp;D et pilotage de la qualite technique sur les systemes critiques.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#contact">Parler projet</a>
+              <a class="team-link" href="#contact">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Amine">Email direct</a>
             </div>
           </div>
@@ -2081,7 +2129,7 @@
             <p class="team-card__role">Automation specialiste</p>
             <p class="team-card__bio">Conception et industrialisation de workflows metier avec focus ROI, fiabilite operationnelle et vitesse de mise en production.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#contact">Demarrer un audit</a>
+              <a class="team-link" href="#contact">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Yassine">Email direct</a>
             </div>
           </div>
@@ -2118,6 +2166,35 @@
       </div>
     </section>
 
+    <section class="process container reveal" id="process">
+      <div class="section-title">
+        <h2>Process de collaboration en 3 etapes</h2>
+        <p>Un cadre simple et previsible pour lancer vite sans perdre de temps.</p>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-step">
+          <span class="step__num">Etape 01</span>
+          <h3>Call de diagnostic (30 min)</h3>
+          <p>Nous clarifions vos priorites, vos contraintes techniques et les KPI a ameliorer en premier.</p>
+        </article>
+
+        <article class="process-step">
+          <span class="step__num">Etape 02</span>
+          <h3>Audit et plan d'execution (72h)</h3>
+          <p>Vous recevez un plan actionnable: quick wins, risques, architecture cible et estimation d'impact.</p>
+        </article>
+
+        <article class="process-step">
+          <span class="step__num">Etape 03</span>
+          <h3>Mise en production pilote</h3>
+          <p>Nous deployons un premier workflow critique, instrumente avec suivi KPI et plan d'optimisation.</p>
+        </article>
+      </div>
+
+      <p class="process-note">Objectif: generer des gains visibles rapidement, puis scaler sur les autres flux prioritaires.</p>
+    </section>
+
     <section class="contact container reveal" id="contact">
       <div class="contact__box">
         <div>
@@ -2127,7 +2204,7 @@
             Vous repartez avec une direction claire, actionnable et adaptee a votre contexte.
           </p>
           <div class="contact__actions">
-            <a class="cta" href="#lead-form">Demarrer le diagnostic</a>
+            <a class="cta" href="#lead-form">Reserver un diagnostic</a>
             <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
           </div>
         </div>
