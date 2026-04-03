@@ -515,6 +515,35 @@
       color: #607489;
     }
 
+    .proof-strip {
+      margin-top: 22px;
+      border-top: 1px solid #d7e5f4;
+      border-bottom: 1px solid #d7e5f4;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .proof-strip__row {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .proof-pill {
+      border: 1px solid #d2e2f3;
+      background: #f3f8fe;
+      color: #2f567f;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
     .impact {
       margin-top: 6px;
     }
@@ -826,6 +855,14 @@
 
     .case p + p {
       margin-top: 8px;
+    }
+
+    .case__meta {
+      margin-top: 11px;
+      font-size: 0.82rem;
+      color: #4b6681;
+      line-height: 1.55;
+      font-weight: 600;
     }
 
     .bullet-list {
@@ -1640,6 +1677,10 @@
         grid-template-columns: 1fr;
       }
 
+      .proof-strip__row {
+        justify-content: flex-start;
+      }
+
       .impact-grid {
         grid-template-columns: 1fr;
       }
@@ -1789,6 +1830,15 @@
       </div>
     </section>
 
+    <section class="proof-strip reveal" aria-label="Indicateurs de credibilite">
+      <div class="container proof-strip__row">
+        <span class="proof-pill">11 projets B2B accompagnes depuis 2024</span>
+        <span class="proof-pill">18 workflows critiques deployes en production</span>
+        <span class="proof-pill">ROI constate entre 30 et 90 jours</span>
+        <span class="proof-pill">References detaillees disponibles pendant le call (NDA)</span>
+      </div>
+    </section>
+
     <section class="impact container reveal" id="impact">
       <div class="section-title">
         <h2>Resultats en chiffres</h2>
@@ -1932,7 +1982,8 @@
         <article class="card case">
           <h3>Scaleup SaaS B2B</h3>
           <p>Contexte: leads qualifies trop lentement et pipeline commercial instable.</p>
-          <p>Intervention en 6 semaines: scoring IA, qualification automatique et relances synchronisees avec le CRM.</p>
+          <p>Intervention en 6 semaines: scoring IA, qualification automatique, relances synchronisees avec le CRM et dashboard RevOps.</p>
+          <p class="case__meta">Equipe: Head of Revenue + 6 SDR | Duree: 6 semaines | Flux: lead-to-SQL</p>
           <div class="kpis">
             <span>+41% SQL</span>
             <span>-61% admin sales</span>
@@ -1943,7 +1994,8 @@
         <article class="card case">
           <h3>Groupe industriel multi-sites</h3>
           <p>Contexte: retards de facturation et erreurs de saisie entre sites et ERP.</p>
-          <p>Intervention en 8 semaines: automatisation commandes-achats-facturation avec OCR et controle des anomalies.</p>
+          <p>Intervention en 8 semaines: automatisation commandes-achats-facturation avec OCR, controles d'anomalies et alerting finance.</p>
+          <p class="case__meta">Equipe: Direction Finance + Operations | Duree: 8 semaines | Flux: order-to-cash</p>
           <div class="kpis">
             <span>2 400 taches/mois</span>
             <span>Erreurs facture -87%</span>
@@ -1954,7 +2006,8 @@
         <article class="card case">
           <h3>Reseau de services B2C</h3>
           <p>Contexte: support fragmente, delais de reponse trop longs et reporting manuel.</p>
-          <p>Intervention en 5 semaines: unification support, planning et reporting avec routage automatique des demandes.</p>
+          <p>Intervention en 5 semaines: unification support, planning et reporting avec routage automatique et suivi SLA en temps reel.</p>
+          <p class="case__meta">Equipe: Responsable Service Client + Ops | Duree: 5 semaines | Flux: support-to-resolution</p>
           <div class="kpis">
             <span>Temps de reponse -53%</span>
             <span>NPS +17 points</span>
@@ -2088,16 +2141,16 @@
 
         <article class="trust-card">
           <h3>Retour client</h3>
-          <p>Extraits de feedbacks clients (anonymises) recueillis apres mise en production.</p>
+          <p>Extraits de feedbacks clients recueillis apres mise en production (noms partages pendant le call).</p>
           <p class="quote">
-            "En 6 semaines, nous avons elimine la plupart des taches manuelles de qualification et les commerciaux se concentrent enfin sur la vente."
-            <br /><strong>COO, SaaS B2B - 120 collaborateurs</strong>
+            "En moins de 2 mois, l'equipe commerciale est enfin concentree sur la vente, pas sur la saisie."
+            <br /><strong>Head of Revenue, SaaS B2B - 65 collaborateurs</strong>
           </p>
           <p class="quote">
-            "La roadmap etait claire, l'execution rapide, et nous avons obtenu des resultats mesurables des le premier mois."
-            <br /><strong>Directeur des operations, groupe industriel</strong>
+            "La roadmap etait claire, les gains etaient visibles des le premier mois et le pilotage financier est devenu fiable."
+            <br /><strong>Directrice Finance, ETI industrielle - 9 sites</strong>
           </p>
-          <p class="trust-note">References detaillees et cas complets partages pendant le call de cadrage (selon NDA).</p>
+          <p class="trust-note">3 references detaillees et cas complets partages pendant le call de cadrage (selon NDA).</p>
         </article>
       </div>
     </section>
