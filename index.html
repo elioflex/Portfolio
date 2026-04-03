@@ -1376,6 +1376,38 @@
       margin-top: 9px;
     }
 
+    .faq-cta {
+      margin-top: 14px;
+      border: 1px solid #c4daf0;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(244, 250, 255, 0.96), rgba(237, 247, 255, 0.9));
+      box-shadow: var(--shadow-md);
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-cta h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 1.02rem;
+      color: #1f3753;
+    }
+
+    .faq-cta p {
+      margin: 0;
+      color: #4b6580;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .faq-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
     .contact__box {
       border: 1px solid var(--line-strong);
       border-radius: var(--radius-xl);
@@ -2342,24 +2374,43 @@
       <div class="faq-list">
         <details>
           <summary>Quel budget faut-il prevoir pour commencer ?</summary>
-          <p>La plupart des projets commencent par un audit express. Ensuite, le budget depend du nombre de workflows critiques et des integrations a mettre en place.</p>
+          <p>Le point d'entree est un diagnostic court pour prioriser vos workflows. Ensuite, l'enveloppe depend du nombre d'integrations, du volume mensuel et du niveau de fiabilite attendu.</p>
         </details>
 
         <details>
-          <summary>En combien de temps peut-on voir des resultats ?</summary>
-          <p>Un premier gain est souvent visible entre 2 et 6 semaines avec des quick wins sur les process repetitifs a fort volume.</p>
+          <summary>En combien de temps voit-on un premier resultat concret ?</summary>
+          <p>Dans la plupart des cas, un premier workflow pilote est livre en 2 a 6 semaines, avec des KPI instrumentes des le demarrage.</p>
         </details>
 
         <details>
-          <summary>Comment est geree la securite des donnees ?</summary>
-          <p>Chaque architecture inclut une gestion des acces, des journaux d'execution, des controles de permissions et des mecanismes de reprise sur incident.</p>
+          <summary>Comment gerez-vous la securite et la confidentialite ?</summary>
+          <p>Chaque setup inclut controle d'acces, journalisation, gestion des droits et plan de reprise. Les references detaillees sont partagees pendant le call selon NDA.</p>
         </details>
 
         <details>
           <summary>Est-ce compatible avec nos outils existants ?</summary>
-          <p>Oui. L'approche privilegie l'integration progressive avec vos outils actuels pour minimiser le risque et accelerer l'adoption par les equipes.</p>
+          <p>Oui. Nous integrons en priorite votre stack actuelle pour eviter les ruptures d'usage et reduire le risque de deploiement.</p>
+        </details>
+
+        <details>
+          <summary>Que se passe-t-il si le potentiel de ROI est faible ?</summary>
+          <p>Le diagnostic est aussi un filtre: si le contexte n'est pas favorable, vous recevez une recommandation claire de ne pas lancer maintenant.</p>
+        </details>
+
+        <details>
+          <summary>Quel niveau d'implication est attendu cote equipe interne ?</summary>
+          <p>Un decideur metier et un referent technique suffisent generalement. Nous privilegions des rituels courts pour limiter la charge equipe.</p>
         </details>
       </div>
+
+      <article class="faq-cta">
+        <h3>Encore un doute avant de lancer ?</h3>
+        <p>Reservez un diagnostic de 30 minutes. Vous repartez avec une recommandation explicite: lancer, cadrer davantage, ou ne pas lancer.</p>
+        <div class="faq-cta__actions">
+          <a class="cta" href="#lead-form">Reserver un diagnostic</a>
+          <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">Poser une question par email</a>
+        </div>
+      </article>
     </section>
 
     <section class="process container reveal" id="process">
@@ -2418,6 +2469,7 @@
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_next" value="https://ideatoautomation.com/#contact-confirmation" />
+          <input type="hidden" name="_autoresponse" value="Merci pour votre demande. Nous revenons vers vous sous 24h ouvrables avec une proposition de creneau pour le diagnostic." />
 
           <label>
             Nom
