@@ -1519,6 +1519,25 @@
       line-height: 1.5;
     }
 
+    .contact-form__context {
+      margin: 2px 0 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #215f99;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .contact-form__context::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
     .contact-form label {
       display: grid;
       gap: 5px;
@@ -2097,7 +2116,7 @@
           </ul>
           <p class="price">A partir de 1 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form">Demarrer par l'audit</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Audit Express">Demarrer par l'audit</a>
           </div>
         </article>
 
@@ -2114,7 +2133,7 @@
           </ul>
           <p class="price">A partir de 4 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta" href="#lead-form">Lancer un pilote</a>
+            <a class="cta" href="#lead-form" data-offer="Implementation">Lancer un pilote</a>
           </div>
         </article>
 
@@ -2131,7 +2150,7 @@
           </ul>
           <p class="price">A partir de 1 500 EUR / mois</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form">Planifier un cadrage</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Accompagnement Mensuel">Planifier un cadrage</a>
           </div>
         </article>
       </div>
@@ -2537,12 +2556,14 @@
         <form class="contact-form" id="lead-form" action="https://formsubmit.co/contact@ideatoautomation.com" method="post">
           <h3>Audit flash en 30 min</h3>
           <p>Laissez vos coordonnees et votre objectif prioritaire. Retour sous 24h ouvrables.</p>
+          <p class="contact-form__context" id="offer-context" hidden></p>
 
           <input type="hidden" name="_subject" value="Nouvelle demande - Audit flash IdeaToAutomation" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_next" value="https://ideatoautomation.com/#contact-confirmation" />
           <input type="hidden" name="_autoresponse" value="Merci pour votre demande. Nous revenons vers vous sous 24h ouvrables avec une proposition de creneau pour le diagnostic." />
+          <input type="hidden" name="Offre cible" id="offer-field" value="" />
 
           <label>
             Nom
@@ -2660,6 +2681,32 @@
     const contactConfirmation = document.getElementById("contact-confirmation");
     if (contactConfirmation && window.location.hash === "#contact-confirmation") {
       contactConfirmation.hidden = false;
+    }
+
+    const offerField = document.getElementById("offer-field");
+    const offerContext = document.getElementById("offer-context");
+    const offerCtas = document.querySelectorAll("[data-offer]");
+    if (offerField && offerContext && offerCtas.length) {
+      const setOfferTarget = (offerName) => {
+        const value = (offerName || "").trim();
+        offerField.value = value;
+        if (!value) {
+          offerContext.hidden = true;
+          offerContext.textContent = "";
+          return;
+        }
+        offerContext.hidden = false;
+        offerContext.textContent = `Offre selectionnee: ${value}`;
+      };
+
+      offerCtas.forEach((cta) => {
+        cta.addEventListener("click", () => {
+          setOfferTarget(cta.dataset.offer || "");
+        });
+      });
+
+      const offerFromUrl = new URLSearchParams(window.location.search).get("offer");
+      if (offerFromUrl) setOfferTarget(offerFromUrl);
     }
 
     const mobileCta = document.querySelector(".mobile-cta");
