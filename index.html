@@ -367,6 +367,10 @@
       background: #e6f0fb;
     }
 
+    .mobile-cta {
+      display: none;
+    }
+
     main {
       padding-bottom: 110px;
     }
@@ -1627,6 +1631,10 @@
         filter: none !important;
       }
 
+      .mobile-cta {
+        transition: none !important;
+      }
+
       .tools-marquee {
         mask-image: none;
         -webkit-mask-image: none;
@@ -1673,6 +1681,10 @@
     }
 
     @media (max-width: 760px) {
+      body {
+        padding-bottom: 86px;
+      }
+
       .site-header {
         border-radius: 16px;
         padding: 10px 12px;
@@ -1797,6 +1809,39 @@
 
       .logo-wall {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mobile-cta {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        z-index: 170;
+        padding: 0 14px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(120%);
+        transition: transform 0.24s ease, opacity 0.24s ease;
+      }
+
+      .mobile-cta.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .mobile-cta a {
+        pointer-events: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 52px;
+        border-radius: 999px;
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        color: #ffffff;
+        background: linear-gradient(120deg, #169e99, #257eee 68%);
+        box-shadow: 0 14px 30px rgba(31, 120, 222, 0.32);
       }
     }
   </style>
@@ -2428,6 +2473,10 @@
     <span>© 2026 IdeaToAutomation - ideatoautomation.com - Site portfolio premium orientee automatisation B2B.</span>
   </footer>
 
+  <div class="mobile-cta">
+    <a href="#lead-form">Reserver un diagnostic</a>
+  </div>
+
   <script>
     const splitTarget = document.querySelector("[data-split='words']");
     if (splitTarget) {
@@ -2486,6 +2535,27 @@
     const contactConfirmation = document.getElementById("contact-confirmation");
     if (contactConfirmation && window.location.hash === "#contact-confirmation") {
       contactConfirmation.hidden = false;
+    }
+
+    const mobileCta = document.querySelector(".mobile-cta");
+    const leadForm = document.getElementById("lead-form");
+    if (mobileCta) {
+      const updateMobileCta = () => {
+        if (window.innerWidth > 760) {
+          mobileCta.classList.remove("is-visible");
+          return;
+        }
+
+        const passedHero = window.scrollY > Math.max(360, window.innerHeight * 0.58);
+        const rect = leadForm ? leadForm.getBoundingClientRect() : null;
+        const formVisible = rect ? rect.top < window.innerHeight - 120 && rect.bottom > 120 : false;
+
+        mobileCta.classList.toggle("is-visible", passedHero && !formVisible);
+      };
+
+      updateMobileCta();
+      window.addEventListener("scroll", updateMobileCta, { passive: true });
+      window.addEventListener("resize", updateMobileCta);
     }
 
     const revealNodes = document.querySelectorAll(".reveal");
