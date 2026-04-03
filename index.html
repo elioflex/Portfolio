@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://ideatoautomation.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
@@ -127,6 +127,66 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(120deg, rgba(47, 140, 255, 0.14), rgba(0, 167, 160, 0.15), transparent 65%);
+      pointer-events: none;
+    }
+
+    .preloader__panel::after {
+      content: "";
+      position: absolute;
+      inset: -42%;
+      background: conic-gradient(from 0deg, rgba(47, 140, 255, 0), rgba(47, 140, 255, 0.2), rgba(0, 167, 160, 0.16), rgba(47, 140, 255, 0));
+      filter: blur(22px);
+      opacity: 0.85;
+      animation: spin 10s linear infinite;
+      pointer-events: none;
+    }
+
+    .preloader__brand {
+      margin: 0 0 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .preloader__mark {
+      margin: 0;
+      width: fit-content;
+      font-family: "Allerta Stencil", "Sora", sans-serif;
+      font-size: clamp(2.1rem, 5.4vw, 3.05rem);
+      letter-spacing: 0.12em;
+      line-height: 1;
+      background: linear-gradient(110deg, #1c70ff, #00a7a0 54%, #53a9ff);
+      background-size: 220% 220%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 10px 20px rgba(34, 114, 199, 0.25));
+      animation: preloaderMarkFlow 2.8s ease-in-out infinite;
+    }
+
+    .preloader__name {
+      margin: 6px 0 0;
+      width: fit-content;
+      position: relative;
+      overflow: hidden;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(0.66rem, 1.4vw, 0.88rem);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #284764;
+      padding-right: 8px;
+    }
+
+    .preloader__name::after {
+      content: "";
+      position: absolute;
+      top: -35%;
+      bottom: -35%;
+      width: 44%;
+      left: -50%;
+      background: linear-gradient(105deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+      transform: skewX(-20deg);
+      animation: preloaderNameSweep 2.6s ease-in-out infinite;
       pointer-events: none;
     }
 
@@ -328,23 +388,23 @@
 
     .hero h1 {
       margin: 0;
-      max-width: 14ch;
+      max-width: 16ch;
       font-family: "Sora", sans-serif;
       font-size: clamp(2.1rem, 4.9vw, 4.2rem);
       line-height: 1.03;
       letter-spacing: -0.01em;
     }
 
-    .hero h1 .char {
+    .hero h1 .word {
       display: inline-block;
       opacity: 0;
       transform: translateY(85%) scale(0.98);
       filter: blur(5px);
     }
 
-    body.is-ready .hero h1 .char {
-      animation: heroCharIn 0.72s cubic-bezier(0.18, 0.84, 0.24, 1) forwards;
-      animation-delay: calc(var(--i) * 0.028s + 0.45s);
+    body.is-ready .hero h1 .word {
+      animation: heroWordIn 0.7s cubic-bezier(0.18, 0.84, 0.24, 1) forwards;
+      animation-delay: calc(var(--i) * 0.09s + 0.45s);
     }
 
     .hero__lead {
@@ -937,7 +997,7 @@
       transform: translateY(0);
     }
 
-    @keyframes heroCharIn {
+    @keyframes heroWordIn {
       0% {
         opacity: 0;
         transform: translateY(85%) scale(0.98);
@@ -975,6 +1035,28 @@
       }
       50% {
         transform: translate(0, -9px);
+      }
+    }
+
+    @keyframes preloaderMarkFlow {
+      0%,
+      100% {
+        background-position: 0% 50%;
+        transform: translateY(0);
+      }
+      50% {
+        background-position: 100% 50%;
+        transform: translateY(-2px);
+      }
+    }
+
+    @keyframes preloaderNameSweep {
+      0% {
+        transform: translateX(0) skewX(-20deg);
+      }
+      60%,
+      100% {
+        transform: translateX(350%) skewX(-20deg);
       }
     }
 
@@ -1053,7 +1135,11 @@
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader__panel">
-      <p class="preloader__label">Option 1 · Intro premium</p>
+      <div class="preloader__brand" aria-hidden="true">
+        <p class="preloader__mark">I2A</p>
+        <p class="preloader__name">Idea to Automation</p>
+      </div>
+      <p class="preloader__label">Experience premium en chargement</p>
       <h2 class="preloader__title">Preparation de votre environnement d'automatisation...</h2>
       <div class="preloader__bar"><span id="loadBar"></span></div>
       <p class="preloader__count" id="loadCount">0%</p>
@@ -1082,7 +1168,7 @@
       <div class="hero__grid">
         <div>
           <p class="eyebrow">Expert automatisation & IA operationnelle</p>
-          <h1 data-split="chars">Automatisez vos operations critiques sans ralentir vos equipes.</h1>
+          <h1 data-split="words">Automatisez vos operations critiques sans ralentir vos equipes.</h1>
           <p class="hero__lead">
             J'aide les entreprises a transformer leurs process manuels en systemes fiables, rapides et mesurables.
             De la qualification commerciale a la facturation en passant par le support et la data, chaque flux est pense pour le ROI.
@@ -1384,17 +1470,20 @@
   </footer>
 
   <script>
-    const splitTarget = document.querySelector("[data-split='chars']");
+    const splitTarget = document.querySelector("[data-split='words']");
     if (splitTarget) {
-      const text = splitTarget.textContent;
+      const words = splitTarget.textContent.trim().split(/\s+/);
       splitTarget.textContent = "";
 
-      [...text].forEach((char, i) => {
+      words.forEach((word, i) => {
         const span = document.createElement("span");
-        span.className = "char";
+        span.className = "word";
         span.style.setProperty("--i", i);
-        span.textContent = char === " " ? "\u00A0" : char;
+        span.textContent = word;
         splitTarget.appendChild(span);
+        if (i < words.length - 1) {
+          splitTarget.append(" ");
+        }
       });
     }
 
@@ -1402,6 +1491,8 @@
     const countEl = document.getElementById("loadCount");
     const barEl = document.getElementById("loadBar");
 
+    const preloaderStart = Date.now();
+    const minPreloaderDuration = 3200;
     let progress = 0;
     const timer = setInterval(() => {
       progress += Math.round(Math.random() * 7) + 2;
@@ -1409,7 +1500,9 @@
       if (progress >= 100) {
         progress = 100;
         clearInterval(timer);
-        setTimeout(startExperience, 250);
+        const elapsed = Date.now() - preloaderStart;
+        const remaining = Math.max(0, minPreloaderDuration - elapsed);
+        setTimeout(startExperience, remaining + 250);
       }
 
       countEl.textContent = `${progress}%`;
