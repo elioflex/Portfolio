@@ -13,11 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
-  <link rel="manifest" href="assets/favicon/site.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo/logo-primary-light.svg" />
   <style>
     :root {
       --bg: #f4f8fc;
@@ -46,6 +42,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 118px;
     }
 
     body {
@@ -61,12 +58,20 @@
     }
 
     body:not(.is-ready) {
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(47, 140, 255, 0.42);
+      outline-offset: 2px;
     }
 
     .container {
@@ -78,7 +83,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      display: grid;
+      display: none;
       place-items: center;
       background:
         radial-gradient(circle at 14% 18%, rgba(47, 140, 255, 0.25), transparent 55%),
@@ -278,6 +283,10 @@
       font-size: 0.93rem;
     }
 
+    .nav__primary {
+      display: none;
+    }
+
     .nav a {
       color: var(--muted);
       padding: 7px 11px;
@@ -288,6 +297,38 @@
     .nav a:hover {
       color: var(--text);
       background: #edf5fe;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid #c9daec;
+      background: #f3f8fe;
+      color: #2e567f;
+      padding: 9px 14px;
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      background: #e8f2fd;
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle::before {
+      content: "";
+      width: 14px;
+      height: 10px;
+      border-top: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      display: inline-block;
     }
 
     .cta,
@@ -332,6 +373,10 @@
 
     section {
       padding-top: 88px;
+    }
+
+    section[id] {
+      scroll-margin-top: 118px;
     }
 
     .hero {
@@ -777,6 +822,10 @@
       font-size: 0.95rem;
     }
 
+    .case p + p {
+      margin-top: 8px;
+    }
+
     .bullet-list {
       margin: 14px 0 0;
       padding: 0;
@@ -1058,6 +1107,15 @@
       font-size: 0.93rem;
     }
 
+    .quote strong {
+      display: inline-block;
+      margin-top: 8px;
+      font-style: normal;
+      color: #35597b;
+      font-size: 0.84rem;
+      letter-spacing: 0.01em;
+    }
+
     .faq-list {
       display: grid;
       gap: 10px;
@@ -1204,6 +1262,14 @@
       line-height: 1.5;
     }
 
+    #contact-confirmation {
+      color: #0f6d66;
+      background: #e7f8f4;
+      border: 1px solid #bce6de;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+
     footer {
       padding: 36px 0 54px;
       color: #5f7388;
@@ -1211,9 +1277,9 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.45s ease, transform 0.45s ease;
     }
 
     .reveal.in {
@@ -1362,15 +1428,59 @@
     @media (max-width: 760px) {
       .site-header {
         border-radius: 16px;
-        padding: 10px;
+        padding: 10px 12px;
+        top: 8px;
+        gap: 10px;
       }
 
       .brand__logo {
         height: 30px;
       }
 
+      .site-header .cta {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
       .nav {
         display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .site-header.is-open .nav {
+        display: flex;
+      }
+
+      .nav a {
+        padding: 10px 12px;
+      }
+
+      .nav__primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        background: linear-gradient(120deg, #169e99, #257eee 68%);
+        box-shadow: 0 12px 28px rgba(37, 126, 238, 0.24);
+      }
+
+      .nav__primary:hover {
+        color: #ffffff;
+        background: linear-gradient(120deg, #169e99, #257eee 68%);
       }
 
       .hero::before {
@@ -1444,12 +1554,17 @@
     </div>
   </div>
 
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <a href="#accueil" class="brand" aria-label="Retour accueil IdeaToAutomation">
       <img class="brand__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" />
     </a>
 
-    <nav class="nav">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
+      Menu
+    </button>
+
+    <nav class="nav" id="siteNav">
+      <a class="nav__primary" href="#contact">Prendre rendez-vous</a>
       <a href="#offres">Offres</a>
       <a href="#impact">Resultats</a>
       <a href="#cas">Cas clients</a>
@@ -1467,11 +1582,11 @@
     <section class="hero" id="accueil">
       <div class="hero__grid">
         <div>
-          <p class="eyebrow">Expert automatisation & IA operationnelle</p>
+          <p class="eyebrow">Automatisation IA pour PME B2B</p>
           <h1 data-split="words">Automatisez vos operations critiques sans ralentir vos equipes.</h1>
           <p class="hero__lead">
-            J'aide les entreprises a transformer leurs process manuels en systemes fiables, rapides et mesurables.
-            De la qualification commerciale a la facturation en passant par le support et la data, chaque flux est pense pour le ROI.
+            Nous accompagnons les PME B2B pour transformer les process manuels en systemes fiables, rapides et mesurables.
+            De la qualification commerciale a la facturation, chaque workflow est concu pour produire un ROI visible en moins de 90 jours.
           </p>
 
           <div class="hero__actions">
@@ -1608,7 +1723,8 @@
       <div class="card-grid card-grid--3">
         <article class="card case">
           <h3>Scaleup SaaS B2B</h3>
-          <p>Refonte du flux lead-to-cash avec scoring IA, qualification auto, sequences de relance et passage au CRM commercial.</p>
+          <p>Contexte: leads qualifies trop lentement et pipeline commercial instable.</p>
+          <p>Intervention en 6 semaines: scoring IA, qualification automatique et relances synchronisees avec le CRM.</p>
           <div class="kpis">
             <span>+41% SQL</span>
             <span>-61% admin sales</span>
@@ -1618,7 +1734,8 @@
 
         <article class="card case">
           <h3>Groupe industriel multi-sites</h3>
-          <p>Automatisation commandes, achats et facturation entre ERP, OCR et banque avec verification automatique des anomalies.</p>
+          <p>Contexte: retards de facturation et erreurs de saisie entre sites et ERP.</p>
+          <p>Intervention en 8 semaines: automatisation commandes-achats-facturation avec OCR et controle des anomalies.</p>
           <div class="kpis">
             <span>2 400 taches/mois</span>
             <span>Erreurs facture -87%</span>
@@ -1628,7 +1745,8 @@
 
         <article class="card case">
           <h3>Reseau de services B2C</h3>
-          <p>Unification support client, planning et reporting pour centraliser les demandes et declencher des actions automatiques.</p>
+          <p>Contexte: support fragmente, delais de reponse trop longs et reporting manuel.</p>
+          <p>Intervention en 5 semaines: unification support, planning et reporting avec routage automatique des demandes.</p>
           <div class="kpis">
             <span>Temps de reponse -53%</span>
             <span>NPS +17 points</span>
@@ -1762,12 +1880,14 @@
 
         <article class="trust-card">
           <h3>Retour client</h3>
-          <p>Extrait type de feedback apres deployment d'automatisations.</p>
+          <p>Extraits de feedbacks clients (anonymises) recueillis apres mise en production.</p>
           <p class="quote">
-            "Nous avons enfin un systeme qui tourne sans intervention manuelle permanente. Les equipes ont recupere du temps et nos KPI sont suivis en continu."
+            "En 6 semaines, nous avons elimine la plupart des taches manuelles de qualification et les commerciaux se concentrent enfin sur la vente."
+            <br /><strong>COO, SaaS B2B - 120 collaborateurs</strong>
           </p>
           <p class="quote">
-            "La roadmap etait claire, l'execution rapide, et la qualite technique au rendez-vous."
+            "La roadmap etait claire, l'execution rapide, et nous avons obtenu des resultats mesurables des le premier mois."
+            <br /><strong>Directeur des operations, groupe industriel</strong>
           </p>
         </article>
       </div>
@@ -1846,19 +1966,23 @@
             Vous repartez avec une direction claire, actionnable et adaptee a votre contexte.
           </p>
           <div class="contact__actions">
-            <a class="cta" href="https://calendly.com/" target="_blank" rel="noopener noreferrer">Reserver sur Calendly</a>
+            <a class="cta" href="#lead-form">Demarrer le diagnostic</a>
             <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
-            <a class="cta-secondary" href="https://wa.me/33600000000" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </div>
         </div>
 
-        <form class="contact-form" action="mailto:contact@ideatoautomation.com" method="post" enctype="text/plain">
+        <form class="contact-form" id="lead-form" action="https://formsubmit.co/contact@ideatoautomation.com" method="post">
           <h3>Audit flash en 30 min</h3>
-          <p>Laisse tes coordonnees et ton objectif prioritaire. Retour sous 24h.</p>
+          <p>Laissez vos coordonnees et votre objectif prioritaire. Retour sous 24h ouvrables.</p>
+
+          <input type="hidden" name="_subject" value="Nouvelle demande - Audit flash IdeaToAutomation" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://ideatoautomation.com/#contact-confirmation" />
 
           <label>
             Nom
-            <input type="text" name="Nom" placeholder="Ton nom" required />
+            <input type="text" name="Nom" placeholder="Votre nom" required />
           </label>
 
           <label>
@@ -1872,7 +1996,8 @@
           </label>
 
           <button class="cta" type="submit">Envoyer la demande</button>
-          <p class="contact-form__note">En envoyant ce formulaire, tu acceptes d'etre recontacte pour cadrer le projet.</p>
+          <p class="contact-form__note">En envoyant ce formulaire, vous acceptez d'etre recontacte pour cadrer le projet.</p>
+          <p class="contact-form__note" id="contact-confirmation" hidden>Votre demande a bien ete envoyee. Nous revenons vers vous sous 24h ouvrables.</p>
         </form>
       </div>
     </section>
@@ -1900,56 +2025,62 @@
       });
     }
 
+    document.body.classList.add("is-ready");
     const preloader = document.getElementById("preloader");
-    const preloaderSeenKey = "i2a_preloader_seen_v1";
-    const shouldShowPreloader = !sessionStorage.getItem(preloaderSeenKey);
-    const preloaderStart = performance.now();
-    const minPreloaderDuration = 2200;
-    let preloaderDone = false;
+    if (preloader) preloader.remove();
 
-    if (shouldShowPreloader) {
-      sessionStorage.setItem(preloaderSeenKey, "1");
-
-      const schedulePreloaderExit = () => {
-        const elapsed = performance.now() - preloaderStart;
-        const remaining = Math.max(0, minPreloaderDuration - elapsed);
-        setTimeout(startExperience, remaining);
+    const siteHeader = document.getElementById("siteHeader");
+    const menuToggle = document.getElementById("menuToggle");
+    const siteNav = document.getElementById("siteNav");
+    if (siteHeader && menuToggle && siteNav) {
+      const closeMenu = () => {
+        siteHeader.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
       };
 
-      if (document.readyState === "complete") {
-        schedulePreloaderExit();
-      } else {
-        window.addEventListener("load", schedulePreloaderExit, { once: true });
-      }
+      menuToggle.addEventListener("click", () => {
+        const isOpen = siteHeader.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
 
-      setTimeout(startExperience, minPreloaderDuration + 2200);
-    } else {
-      startExperience(true);
+      siteNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 760) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (window.innerWidth > 760 || !siteHeader.classList.contains("is-open")) return;
+        if (siteHeader.contains(event.target)) return;
+        closeMenu();
+      });
     }
 
-    function startExperience(immediate = false) {
-      if (preloaderDone) return;
-      preloaderDone = true;
-      document.body.classList.add("is-ready");
-      if (!preloader) return;
-      if (immediate) {
-        preloader.remove();
-        return;
-      }
-      preloader.classList.add("preloader--exit");
-      setTimeout(() => preloader.remove(), 1300);
+    const contactConfirmation = document.getElementById("contact-confirmation");
+    if (contactConfirmation && window.location.hash === "#contact-confirmation") {
+      contactConfirmation.hidden = false;
     }
 
     const revealNodes = document.querySelectorAll(".reveal");
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("in");
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.16 });
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          revealObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.16 });
 
-    revealNodes.forEach((node) => revealObserver.observe(node));
+      revealNodes.forEach((node) => revealObserver.observe(node));
+    } else {
+      revealNodes.forEach((node) => node.classList.add("in"));
+    }
 
     const heroVisual = document.getElementById("heroVisual");
     const commandCard = document.getElementById("commandCard");
