@@ -822,6 +822,24 @@
       margin-bottom: 10px;
     }
 
+    .offer {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .offer--featured {
+      border-color: #9ac3ea;
+      box-shadow: 0 18px 36px rgba(44, 109, 186, 0.2);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(239, 248, 255, 0.94));
+    }
+
+    .badge--accent {
+      border-color: #95c9f0;
+      background: linear-gradient(120deg, rgba(21, 157, 153, 0.12), rgba(37, 126, 238, 0.14));
+      color: #1e5f9c;
+    }
+
     .offer__head h3,
     .case h3,
     .step h3,
@@ -901,6 +919,13 @@
       font-family: "Sora", sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
+    }
+
+    .offer__actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .kpis {
@@ -2032,12 +2057,15 @@
             <li>Roadmap 90 jours exploitable</li>
           </ul>
           <p class="price">A partir de 1 900 EUR</p>
+          <div class="offer__actions">
+            <a class="cta-secondary" href="#lead-form">Demarrer par l'audit</a>
+          </div>
         </article>
 
-        <article class="card offer">
+        <article class="card offer offer--featured">
           <div class="offer__head">
             <h3>Implementation</h3>
-            <span class="badge">Sprint 4-8 sem.</span>
+            <span class="badge badge--accent">Recommandee</span>
           </div>
           <p>Conception, build et mise en production de workflows metier connectes a votre ecosysteme.</p>
           <ul class="bullet-list">
@@ -2046,6 +2074,9 @@
             <li>Tests + observabilite + documentation</li>
           </ul>
           <p class="price">A partir de 4 900 EUR</p>
+          <div class="offer__actions">
+            <a class="cta" href="#lead-form">Lancer un pilote</a>
+          </div>
         </article>
 
         <article class="card offer">
@@ -2060,6 +2091,9 @@
             <li>Comite de pilotage mensuel</li>
           </ul>
           <p class="price">A partir de 1 500 EUR / mois</p>
+          <div class="offer__actions">
+            <a class="cta-secondary" href="#lead-form">Planifier un cadrage</a>
+          </div>
         </article>
       </div>
     </section>
