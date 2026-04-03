@@ -657,6 +657,7 @@
     .method,
     .stack,
     .trust,
+    .team,
     .faq,
     .contact {
       position: relative;
@@ -874,6 +875,38 @@
       background: rgba(255, 255, 255, 0.9);
       box-shadow: var(--shadow-md);
       padding: 22px;
+    }
+
+    .team-card {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .team-card__photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid #c8dbef;
+      box-shadow: 0 10px 24px rgba(34, 80, 128, 0.18);
+      background: #eaf3fc;
+    }
+
+    .team-card h3 {
+      margin: 0 0 6px;
+      font-family: "Sora", sans-serif;
+      font-size: 1.18rem;
+      color: #1a314a;
+    }
+
+    .team-card__role {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #4f6a84;
+      font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
     .logo-wall {
@@ -1126,6 +1159,16 @@
         grid-template-columns: 1fr;
       }
 
+      .team-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .team-card__photo {
+        width: 104px;
+        height: 104px;
+      }
+
       .logo-wall {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1156,6 +1199,7 @@
       <a href="#cas">Cas clients</a>
       <a href="#methode">Methode</a>
       <a href="#stack">Stack</a>
+      <a href="#team">Equipe</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -1414,6 +1458,31 @@
           <p class="quote">
             "La roadmap etait claire, l'execution rapide, et la qualite technique au rendez-vous."
           </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="team container reveal" id="team">
+      <div class="section-title">
+        <h2>Les cofounders</h2>
+        <p>Deux profils complementaires pour accelerer vos projets: leadership technique R&amp;D et expertise automatisation.</p>
+      </div>
+
+      <div class="card-grid card-grid--2">
+        <article class="card team-card">
+          <img class="team-card__photo" src="assets/team/amine.jpeg" alt="Amine, Software Team Leader R&amp;D" loading="lazy" decoding="async" />
+          <div>
+            <h3>Amine</h3>
+            <p class="team-card__role">Software Team Leader R&amp;D</p>
+          </div>
+        </article>
+
+        <article class="card team-card">
+          <img class="team-card__photo" src="assets/team/yassine.png" alt="Yassine, Automation specialiste" loading="lazy" decoding="async" />
+          <div>
+            <h3>Yassine</h3>
+            <p class="team-card__role">Automation specialiste</p>
+          </div>
         </article>
       </div>
     </section>
