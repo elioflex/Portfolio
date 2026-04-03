@@ -1533,6 +1533,37 @@
       gap: 10px;
     }
 
+    .faq-quick {
+      margin: 2px 0 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .faq-quick__item {
+      border: 1px solid #c8dcef;
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(245, 251, 255, 0.95), rgba(237, 247, 255, 0.9));
+      padding: 12px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .faq-quick__item strong {
+      font-family: "Sora", sans-serif;
+      font-size: 0.9rem;
+      color: #1f3b57;
+      line-height: 1.35;
+    }
+
+    .faq-quick__item span {
+      color: #4d6681;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
     .faq details {
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -2214,6 +2245,7 @@
       .card-grid--2,
       .method-grid,
       .process-grid,
+      .faq-quick,
       .fit-grid {
         grid-template-columns: 1fr;
       }
@@ -2831,10 +2863,25 @@
         <p>Les questions les plus frequentes avant de lancer un projet d'automatisation.</p>
       </div>
 
+      <div class="faq-quick" aria-label="Reponses cles rapides">
+        <article class="faq-quick__item">
+          <strong>ROI faible ?</strong>
+          <span>Nous recommandons de ne pas lancer si le potentiel n'est pas assez solide.</span>
+        </article>
+        <article class="faq-quick__item">
+          <strong>Delai moyen</strong>
+          <span>Premier workflow pilote livre en 2 a 6 semaines dans la plupart des cas.</span>
+        </article>
+        <article class="faq-quick__item">
+          <strong>Charge interne</strong>
+          <span>Un decideur metier et un referent technique suffisent generalement.</span>
+        </article>
+      </div>
+
       <div class="faq-list">
-        <details>
-          <summary>Quel budget faut-il prevoir pour commencer ?</summary>
-          <p>Le point d'entree est un diagnostic court pour prioriser vos workflows. Ensuite, l'enveloppe depend du nombre d'integrations, du volume mensuel et du niveau de fiabilite attendu.</p>
+        <details open>
+          <summary>Que se passe-t-il si le potentiel de ROI est faible ?</summary>
+          <p>Le diagnostic est aussi un filtre: si le contexte n'est pas favorable, vous recevez une recommandation claire de ne pas lancer maintenant.</p>
         </details>
 
         <details>
@@ -2843,8 +2890,13 @@
         </details>
 
         <details>
-          <summary>Comment gerez-vous la securite et la confidentialite ?</summary>
-          <p>Chaque setup inclut controle d'acces, journalisation, gestion des droits et plan de reprise. Les references detaillees sont partagees pendant le call selon NDA.</p>
+          <summary>Quel budget faut-il prevoir pour commencer ?</summary>
+          <p>Le point d'entree est un diagnostic court pour prioriser vos workflows. Ensuite, l'enveloppe depend du nombre d'integrations, du volume mensuel et du niveau de fiabilite attendu.</p>
+        </details>
+
+        <details>
+          <summary>Quel niveau d'implication est attendu cote equipe interne ?</summary>
+          <p>Un decideur metier et un referent technique suffisent generalement. Nous privilegions des rituels courts pour limiter la charge equipe.</p>
         </details>
 
         <details>
@@ -2853,13 +2905,8 @@
         </details>
 
         <details>
-          <summary>Que se passe-t-il si le potentiel de ROI est faible ?</summary>
-          <p>Le diagnostic est aussi un filtre: si le contexte n'est pas favorable, vous recevez une recommandation claire de ne pas lancer maintenant.</p>
-        </details>
-
-        <details>
-          <summary>Quel niveau d'implication est attendu cote equipe interne ?</summary>
-          <p>Un decideur metier et un referent technique suffisent generalement. Nous privilegions des rituels courts pour limiter la charge equipe.</p>
+          <summary>Comment gerez-vous la securite et la confidentialite ?</summary>
+          <p>Chaque setup inclut controle d'acces, journalisation, gestion des droits et plan de reprise. Les references detaillees sont partagees pendant le call selon NDA.</p>
         </details>
       </div>
 
