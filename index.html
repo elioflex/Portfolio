@@ -383,6 +383,10 @@
       scroll-margin-top: 118px;
     }
 
+    #lead-form {
+      scroll-margin-top: 128px;
+    }
+
     .hero {
       min-height: 92vh;
       display: grid;
@@ -482,6 +486,34 @@
       transition-delay: 0.28s;
     }
 
+    .hero__trust {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.58s ease, transform 0.58s ease;
+    }
+
+    body.is-ready .hero__trust {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.32s;
+    }
+
+    .hero__trust span {
+      border: 1px solid #cfe0f1;
+      background: #f4f9ff;
+      color: #3d607f;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
     .hero__numbers {
       margin-top: 28px;
       display: grid;
@@ -496,7 +528,7 @@
     body.is-ready .hero__numbers {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0.34s;
+      transition-delay: 0.4s;
     }
 
     .hero__numbers article {
@@ -1680,6 +1712,7 @@
       .hero h1 .word,
       .hero__lead,
       .hero__actions,
+      .hero__trust,
       .hero__numbers {
         animation: none !important;
         transition: none !important;
@@ -1928,7 +1961,7 @@
     </button>
 
     <nav class="nav" id="siteNav">
-      <a class="nav__primary" href="#contact">Reserver un diagnostic</a>
+      <a class="nav__primary" href="#lead-form">Reserver un diagnostic</a>
       <a href="#offres">Offres</a>
       <a href="#outils">Outils</a>
       <a href="#impact">Resultats</a>
@@ -1941,7 +1974,7 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="cta" href="#contact">Reserver un diagnostic</a>
+    <a class="cta" href="#lead-form">Reserver un diagnostic</a>
   </header>
 
   <main>
@@ -1949,15 +1982,21 @@
       <div class="hero__grid">
         <div>
           <p class="eyebrow">Automatisation IA pour PME B2B</p>
-          <h1 data-split="words">Automatisez vos operations critiques sans ralentir vos equipes.</h1>
+          <h1 data-split="words">Automatisez vos operations critiques et liberez vos equipes en moins de 90 jours.</h1>
           <p class="hero__lead">
-            Nous accompagnons les PME B2B pour transformer les process manuels en systemes fiables, rapides et mesurables.
-            De la qualification commerciale a la facturation, chaque workflow est concu pour produire un ROI visible en moins de 90 jours.
+            Nous accompagnons les PME B2B pour transformer les process manuels en workflows fiables, rapides et mesurables.
+            De la qualification commerciale a la facturation, chaque automatisation est concue pour generer un ROI observable et reduire la charge operationnelle.
           </p>
 
           <div class="hero__actions">
-            <a class="cta" href="#contact">Reserver un diagnostic</a>
+            <a class="cta" href="#lead-form">Reserver un diagnostic</a>
             <a class="cta-secondary" href="#cas">Voir les resultats</a>
+          </div>
+
+          <div class="hero__trust">
+            <span>Diagnostic 30 min sans engagement</span>
+            <span>Plan d'action priorise en 72h</span>
+            <span>Pilote lance en 2 a 6 semaines</span>
           </div>
 
           <div class="hero__numbers">
@@ -2378,7 +2417,7 @@
             <p class="team-card__role">Software Team Leader R&amp;D</p>
             <p class="team-card__bio">Architecture logicielle, structuration R&amp;D et pilotage de la qualite technique sur les systemes critiques.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#contact">Reserver un diagnostic</a>
+              <a class="team-link" href="#lead-form">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Amine">Email direct</a>
             </div>
           </div>
@@ -2391,7 +2430,7 @@
             <p class="team-card__role">Automation specialiste</p>
             <p class="team-card__bio">Conception et industrialisation de workflows metier avec focus ROI, fiabilite operationnelle et vitesse de mise en production.</p>
             <div class="team-card__links">
-              <a class="team-link" href="#contact">Reserver un diagnostic</a>
+              <a class="team-link" href="#lead-form">Reserver un diagnostic</a>
               <a class="team-link" href="mailto:contact@ideatoautomation.com?subject=Contact%20Yassine">Email direct</a>
             </div>
           </div>
