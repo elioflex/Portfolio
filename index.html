@@ -943,9 +943,13 @@
     }
 
     .tools-marquee {
-      margin-top: 10px;
+      margin-top: 8px;
       overflow: hidden;
       position: relative;
+      border-top: 1px solid #d1e1f2;
+      border-bottom: 1px solid #d1e1f2;
+      padding: 14px 0;
+      background: rgba(255, 255, 255, 0.74);
       mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
     }
@@ -954,26 +958,56 @@
       display: flex;
       align-items: center;
       width: max-content;
-      animation: toolsTicker 24s linear infinite;
+      animation: toolsTicker 20s linear infinite;
       will-change: transform;
     }
 
     .tools-marquee__group {
       display: flex;
-      gap: 8px;
+      gap: 2.4rem;
       flex-shrink: 0;
-      padding-right: 8px;
+      padding-right: 2.4rem;
     }
 
     .tool-pill {
-      border: 1px solid #d4e3f3;
-      background: #f5f9fe;
-      color: #355e86;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #3f5e7f;
+      font-size: 0.9rem;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
       white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .tool-pill img {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .tool-logo-fallback {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid #b9cde2;
+      background: #e9f1fa;
+      color: #2f5277;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .tool-pill:hover {
+      color: #1f3f63;
     }
 
     .trust-grid {
@@ -1596,7 +1630,7 @@
       }
 
       .tools-marquee__track {
-        animation-duration: 20s;
+        animation-duration: 16s;
       }
 
       .logo-wall {
@@ -1632,6 +1666,7 @@
     <nav class="nav" id="siteNav">
       <a class="nav__primary" href="#contact">Prendre rendez-vous</a>
       <a href="#offres">Offres</a>
+      <a href="#outils">Outils</a>
       <a href="#impact">Resultats</a>
       <a href="#cas">Cas clients</a>
       <a href="#methode">Methode</a>
@@ -1780,6 +1815,48 @@
       </div>
     </section>
 
+    <section class="reveal" id="outils">
+      <div class="container">
+        <div class="section-title">
+          <h2>Outils utilises au quotidien</h2>
+          <p>Une stack operationnelle pour livrer vite et maintenir des workflows stables en production.</p>
+        </div>
+      </div>
+
+      <div class="tools-marquee" role="region" aria-label="Liste defilante des outils utilises">
+        <div class="tools-marquee__track">
+          <div class="tools-marquee__group">
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/n8n/ea4b71" alt="" loading="lazy" decoding="async" /> n8n</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/make/7d64ff" alt="" loading="lazy" decoding="async" /> Make</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/zapier/ff4f00" alt="" loading="lazy" decoding="async" /> Zapier</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/hubspot/ff7a59" alt="" loading="lazy" decoding="async" /> HubSpot</span>
+            <span class="tool-pill"><span class="tool-logo-fallback" aria-hidden="true">P</span> Pipedrive</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/notion/111111" alt="" loading="lazy" decoding="async" /> Notion</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/airtable/18bfff" alt="" loading="lazy" decoding="async" /> Airtable</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/google/4285f4" alt="" loading="lazy" decoding="async" /> Google Workspace</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/slack/4a154b" alt="" loading="lazy" decoding="async" /> Slack</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/whatsapp/25d366" alt="" loading="lazy" decoding="async" /> WhatsApp API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/openai/111111" alt="" loading="lazy" decoding="async" /> OpenAI API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt="" loading="lazy" decoding="async" /> PostgreSQL</span>
+          </div>
+          <div class="tools-marquee__group" aria-hidden="true">
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/n8n/ea4b71" alt="" loading="lazy" decoding="async" /> n8n</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/make/7d64ff" alt="" loading="lazy" decoding="async" /> Make</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/zapier/ff4f00" alt="" loading="lazy" decoding="async" /> Zapier</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/hubspot/ff7a59" alt="" loading="lazy" decoding="async" /> HubSpot</span>
+            <span class="tool-pill"><span class="tool-logo-fallback" aria-hidden="true">P</span> Pipedrive</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/notion/111111" alt="" loading="lazy" decoding="async" /> Notion</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/airtable/18bfff" alt="" loading="lazy" decoding="async" /> Airtable</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/google/4285f4" alt="" loading="lazy" decoding="async" /> Google Workspace</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/slack/4a154b" alt="" loading="lazy" decoding="async" /> Slack</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/whatsapp/25d366" alt="" loading="lazy" decoding="async" /> WhatsApp API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/openai/111111" alt="" loading="lazy" decoding="async" /> OpenAI API</span>
+            <span class="tool-pill"><img src="https://cdn.simpleicons.org/postgresql/4169e1" alt="" loading="lazy" decoding="async" /> PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cases container reveal" id="cas">
       <div class="section-title">
         <h2>Cas clients et resultats mesurables</h2>
@@ -1906,37 +1983,19 @@
 
         <article class="stack__tools">
           <h3>Outils maitrises</h3>
-          <div class="tools-marquee" role="region" aria-label="Defilement des outils maitrises">
-            <div class="tools-marquee__track">
-              <div class="tools-marquee__group">
-                <span class="tool-pill">n8n</span>
-                <span class="tool-pill">Make</span>
-                <span class="tool-pill">Zapier</span>
-                <span class="tool-pill">HubSpot</span>
-                <span class="tool-pill">Pipedrive</span>
-                <span class="tool-pill">Notion</span>
-                <span class="tool-pill">Airtable</span>
-                <span class="tool-pill">Google Workspace</span>
-                <span class="tool-pill">Slack</span>
-                <span class="tool-pill">WhatsApp API</span>
-                <span class="tool-pill">OpenAI API</span>
-                <span class="tool-pill">OCR / ETL / BI</span>
-              </div>
-              <div class="tools-marquee__group" aria-hidden="true">
-                <span class="tool-pill">n8n</span>
-                <span class="tool-pill">Make</span>
-                <span class="tool-pill">Zapier</span>
-                <span class="tool-pill">HubSpot</span>
-                <span class="tool-pill">Pipedrive</span>
-                <span class="tool-pill">Notion</span>
-                <span class="tool-pill">Airtable</span>
-                <span class="tool-pill">Google Workspace</span>
-                <span class="tool-pill">Slack</span>
-                <span class="tool-pill">WhatsApp API</span>
-                <span class="tool-pill">OpenAI API</span>
-                <span class="tool-pill">OCR / ETL / BI</span>
-              </div>
-            </div>
+          <div class="chips">
+            <span>n8n</span>
+            <span>Make</span>
+            <span>Zapier</span>
+            <span>HubSpot</span>
+            <span>Pipedrive</span>
+            <span>Notion</span>
+            <span>Airtable</span>
+            <span>Google Workspace</span>
+            <span>Slack</span>
+            <span>WhatsApp API</span>
+            <span>OpenAI API</span>
+            <span>OCR / ETL / BI</span>
           </div>
         </article>
       </div>
