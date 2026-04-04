@@ -2056,6 +2056,27 @@
       white-space: nowrap;
     }
 
+    .contact-commitments {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-commitments span {
+      border: 1px solid #c8dbef;
+      background: #f3f8fe;
+      color: #315a82;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .contact-form {
       border: 1px solid #c6dbef;
       border-radius: 18px;
@@ -2279,6 +2300,73 @@
       opacity: 0.85;
       transform: none;
       box-shadow: 0 10px 24px rgba(37, 126, 238, 0.2);
+    }
+
+    .contact-form__next {
+      border: 1px solid #cddff1;
+      border-radius: 12px;
+      background: #f6fbff;
+      padding: 10px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .contact-form__next strong {
+      color: #275683;
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .contact-form__next ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: next-step;
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-form__next li {
+      counter-increment: next-step;
+      position: relative;
+      padding-left: 22px;
+      color: #4e6985;
+      font-size: 0.77rem;
+      line-height: 1.45;
+    }
+
+    .contact-form__next li::before {
+      content: counter(next-step);
+      position: absolute;
+      left: 0;
+      top: 0.06em;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #b8d3ed;
+      background: #ffffff;
+      color: #2b5b8c;
+      font-size: 0.67rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .contact-form__alt {
+      margin: 0;
+      color: #5e7590;
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .contact-form__alt a {
+      color: #275e99;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .contact-form__note {
@@ -2794,6 +2882,11 @@
 
       .contact-form {
         min-width: 100%;
+      }
+
+      .contact-commitments span {
+        width: 100%;
+        justify-content: flex-start;
       }
 
       .form-steps__list {
@@ -3641,6 +3734,11 @@
             Session stratégique pour cadrer le ROI, le plan d'exécution et les quick wins.
             Vous repartez avec une direction claire, actionnable et adaptée à votre contexte.
           </p>
+          <div class="contact-commitments" aria-label="Garanties de prise de contact">
+            <span>Réponse sous 24h ouvrables</span>
+            <span>NDA possible dès le cadrage</span>
+            <span>Pas de relance commerciale agressive</span>
+          </div>
           <ul class="contact-deliverables">
             <li>3 workflows priorisés selon impact business et faisabilité technique.</li>
             <li>Un plan d'exécution sur 30 jours avec estimation des gains attendus.</li>
@@ -3765,6 +3863,16 @@
               </label>
             </div>
           </details>
+
+          <div class="contact-form__next" aria-label="Etapes après envoi">
+            <strong>Après envoi, voici la suite</strong>
+            <ol>
+              <li>Accusé de réception immédiat par email.</li>
+              <li>Proposition de créneau en moins de 24h ouvrables.</li>
+              <li>Diagnostic de 30 min avec plan d'action priorisé.</li>
+            </ol>
+          </div>
+          <p class="contact-form__alt">Vous préférez un échange direct ? <a href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a></p>
 
           <button class="cta" type="submit">Envoyer la demande</button>
           <p class="contact-form__note contact-form__note--pending" id="contact-pending" hidden>Envoi en cours... Vous allez être redirigé vers la confirmation.</p>
