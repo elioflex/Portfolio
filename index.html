@@ -1822,11 +1822,41 @@
       margin-top: 2px;
     }
 
+    .contact-form .cta:disabled {
+      cursor: wait;
+      opacity: 0.85;
+      transform: none;
+      box-shadow: 0 10px 24px rgba(37, 126, 238, 0.2);
+    }
+
     .contact-form__note {
       margin: 0;
       color: #6c8097;
       font-size: 0.75rem;
       line-height: 1.5;
+    }
+
+    .contact-form__note--pending {
+      color: #2d5f94;
+      background: #eef5fe;
+      border: 1px solid #c7dbef;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+
+    .contact-form__note--fallback {
+      color: #6a4d14;
+      background: #fff8e7;
+      border: 1px solid #f0ddae;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+
+    .contact-form__note--fallback a {
+      color: #845f16;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     #contact-confirmation {
@@ -3055,10 +3085,12 @@
 
           <label>
             Objectif principal
-            <textarea name="Objectif" placeholder="Ex: automatiser la qualification des leads et reduire le temps de traitement de 60%." required></textarea>
+            <textarea id="objectif-field" name="Objectif" placeholder="Ex: automatiser la qualification des leads et reduire le temps de traitement de 60%." required></textarea>
           </label>
 
           <button class="cta" type="submit">Envoyer la demande</button>
+          <p class="contact-form__note contact-form__note--pending" id="contact-pending" hidden>Envoi en cours... Vous allez etre redirige vers la confirmation.</p>
+          <p class="contact-form__note contact-form__note--fallback" id="contact-fallback" hidden>Si la redirection prend trop de temps, ecrivez-nous directement a <a href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>.</p>
           <p class="contact-form__note">Sans engagement. Reponse sous 24h ouvrables.</p>
           <p class="contact-form__note">En envoyant ce formulaire, vous acceptez d'etre recontacte pour cadrer le projet.</p>
           <p class="contact-form__note" id="contact-confirmation" hidden>Votre demande a bien ete envoyee. Nous revenons vers vous sous 24h ouvrables.</p>
@@ -3163,6 +3195,8 @@
     }
 
     const contactConfirmation = document.getElementById("contact-confirmation");
+    const contactPending = document.getElementById("contact-pending");
+    const contactFallback = document.getElementById("contact-fallback");
     if (contactConfirmation && window.location.hash === "#contact-confirmation") {
       contactConfirmation.hidden = false;
     }
@@ -3176,6 +3210,10 @@
     const referrerField = document.getElementById("referrer-field");
     const pagePathField = document.getElementById("page-path-field");
     const ctaOriginField = document.getElementById("cta-origin-field");
+    const objectifField = document.getElementById("objectif-field");
+    const leadSubmitButton = leadForm ? leadForm.querySelector("button[type='submit']") : null;
+    const leadSubmitDefaultLabel = leadSubmitButton ? leadSubmitButton.textContent : "";
+    let leadSubmitFallbackTimer = null;
 
     const readSession = (key) => {
       try {
@@ -3218,6 +3256,40 @@
       if (ctaOriginField) ctaOriginField.value = ctaOrigin;
     };
 
+    const objectiveTemplates = {
+      "offre-audit-express": "Nous voulons prioriser les workflows les plus rentables et construire une roadmap d'automatisation sur 30 jours.",
+      "offre-implementation": "Nous voulons lancer un pilote d'automatisation en production rapidement sur un process critique.",
+      "offre-accompagnement-mensuel": "Nous voulons optimiser et scaler des workflows existants avec suivi KPI mensuel.",
+      "mid-page-decision": "Nous avons identifie 1 ou 2 process prioritaires et voulons valider le ROI et le plan d'execution.",
+      "faq-cta": "Nous avons encore quelques points a clarifier avant lancement et voulons une recommandation explicite.",
+      "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos operations.",
+      "equipe-yassine": "Nous cherchons une mise en oeuvre operationnelle rapide avec gains visibles sur nos KPI."
+    };
+
+    const getObjectiveTemplate = (ctaOrigin, offerName) => {
+      if (objectiveTemplates[ctaOrigin]) return objectiveTemplates[ctaOrigin];
+      if (offerName === "Audit Express") return objectiveTemplates["offre-audit-express"];
+      if (offerName === "Implementation") return objectiveTemplates["offre-implementation"];
+      if (offerName === "Accompagnement Mensuel") return objectiveTemplates["offre-accompagnement-mensuel"];
+      return "Nous voulons identifier les automatisations prioritaires pour reduire le temps passe sur les operations repetitives.";
+    };
+
+    const applyObjectivePrefill = (ctaOrigin, offerName = "") => {
+      if (!objectifField) return;
+      const currentValue = objectifField.value.trim();
+      const canAutofill = !currentValue || objectifField.dataset.autofilled === "true";
+      if (!canAutofill) return;
+
+      objectifField.value = getObjectiveTemplate(ctaOrigin, offerName);
+      objectifField.dataset.autofilled = "true";
+    };
+
+    if (objectifField) {
+      objectifField.addEventListener("input", () => {
+        objectifField.dataset.autofilled = "false";
+      });
+    }
+
     const leadFormCtas = document.querySelectorAll('a[href="#lead-form"]');
     leadFormCtas.forEach((cta) => {
       cta.addEventListener("click", () => {
@@ -3226,15 +3298,39 @@
           ? `section-${sectionId}`
           : (cta.closest("header") ? "header" : "site");
         const ctaOrigin = (cta.dataset.cta || fallbackOrigin).trim();
+        const offerName = (cta.dataset.offer || "").trim();
 
         writeSession("i2a_cta_origin", ctaOrigin);
         if (ctaOriginField) ctaOriginField.value = ctaOrigin;
+        applyObjectivePrefill(ctaOrigin, offerName);
       });
     });
 
     fillTrackingFields();
     if (leadForm) {
-      leadForm.addEventListener("submit", fillTrackingFields);
+      leadForm.addEventListener("submit", () => {
+        fillTrackingFields();
+
+        if (contactConfirmation) contactConfirmation.hidden = true;
+        if (contactFallback) contactFallback.hidden = true;
+        if (contactPending) contactPending.hidden = false;
+
+        if (leadSubmitFallbackTimer) window.clearTimeout(leadSubmitFallbackTimer);
+        if (leadSubmitButton) {
+          leadSubmitButton.disabled = true;
+          leadSubmitButton.textContent = "Envoi en cours...";
+        }
+
+        leadSubmitFallbackTimer = window.setTimeout(() => {
+          if (window.location.hash === "#contact-confirmation") return;
+          if (contactPending) contactPending.hidden = true;
+          if (contactFallback) contactFallback.hidden = false;
+          if (leadSubmitButton) {
+            leadSubmitButton.disabled = false;
+            leadSubmitButton.textContent = leadSubmitDefaultLabel || "Envoyer la demande";
+          }
+        }, 5500);
+      });
     }
 
     const offerField = document.getElementById("offer-field");
@@ -3260,7 +3356,10 @@
       });
 
       const offerFromUrl = new URLSearchParams(window.location.search).get("offer");
-      if (offerFromUrl) setOfferTarget(offerFromUrl);
+      if (offerFromUrl) {
+        setOfferTarget(offerFromUrl);
+        applyObjectivePrefill("offer-from-url", offerFromUrl);
+      }
     }
 
     const mobileCta = document.querySelector(".mobile-cta");
