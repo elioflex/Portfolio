@@ -554,32 +554,119 @@
     }
 
     .proof-strip {
-      margin-top: 22px;
-      border-top: 1px solid #d7e5f4;
-      border-bottom: 1px solid #d7e5f4;
-      background: rgba(255, 255, 255, 0.7);
+      margin-top: 24px;
+      border-top: 1px solid #d0e1f1;
+      border-bottom: 1px solid #d0e1f1;
+      background:
+        radial-gradient(760px 220px at 8% -10%, rgba(22, 158, 153, 0.11), transparent 72%),
+        radial-gradient(760px 220px at 92% 110%, rgba(37, 126, 238, 0.1), transparent 70%),
+        rgba(255, 255, 255, 0.75);
     }
 
-    .proof-strip__row {
-      min-height: 62px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .proof-strip__shell {
+      display: grid;
+      gap: 14px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .proof-strip__metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
-      flex-wrap: wrap;
-      padding: 10px 0;
     }
 
-    .proof-pill {
-      border: 1px solid #d2e2f3;
-      background: #f3f8fe;
-      color: #2f567f;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.8rem;
+    .proof-metric {
+      border: 1px solid #c8dbef;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 24px rgba(24, 64, 108, 0.08);
+      padding: 14px;
+    }
+
+    .proof-metric strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 1.2rem;
+      color: #1f66c7;
+      line-height: 1.1;
+    }
+
+    .proof-metric span {
+      display: block;
+      margin-top: 4px;
+      color: #4f6782;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .proof-strip__content {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 10px;
+    }
+
+    .proof-panel {
+      border: 1px solid #c8dbef;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 24px rgba(24, 64, 108, 0.08);
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .proof-panel__eyebrow {
+      margin: 0;
+      font-size: 0.72rem;
+      font-family: "Sora", sans-serif;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: #4e6782;
       font-weight: 700;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
+    }
+
+    .proof-quote {
+      margin: 0;
+      color: #35597b;
+      font-size: 0.93rem;
+      line-height: 1.62;
+      font-style: italic;
+      border-left: 3px solid #8bc5f5;
+      padding-left: 12px;
+    }
+
+    .proof-quote__meta {
+      margin: 0;
+      color: #506884;
+      font-size: 0.81rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .proof-logo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .proof-logo-wall span {
+      border: 1px dashed #bfd5ea;
+      background: #f6fafe;
+      color: #4f7092;
+      border-radius: 10px;
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .proof-panel__cta {
+      justify-self: start;
     }
 
     .impact {
@@ -2152,6 +2239,14 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .proof-strip__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .proof-strip__content {
+        grid-template-columns: 1fr;
+      }
+
       .card-grid--3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2257,8 +2352,17 @@
         grid-template-columns: 1fr;
       }
 
-      .proof-strip__row {
-        justify-content: flex-start;
+      .proof-strip__metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-logo-wall {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .proof-panel__cta {
+        width: 100%;
+        justify-content: center;
       }
 
       .impact-grid {
@@ -2461,12 +2565,45 @@
       </div>
     </section>
 
-    <section class="proof-strip reveal" aria-label="Indicateurs de credibilite">
-      <div class="container proof-strip__row">
-        <span class="proof-pill">11 projets B2B accompagnes depuis 2024</span>
-        <span class="proof-pill">18 workflows critiques deployes en production</span>
-        <span class="proof-pill">ROI constate entre 30 et 90 jours</span>
-        <span class="proof-pill">References detaillees disponibles pendant le call (NDA)</span>
+    <section class="proof-strip reveal" aria-label="Preuves de credibilite">
+      <div class="container proof-strip__shell">
+        <div class="proof-strip__metrics">
+          <article class="proof-metric">
+            <strong>11 projets</strong>
+            <span>PME B2B accompagnees sur des automatisations metier depuis 2024.</span>
+          </article>
+          <article class="proof-metric">
+            <strong>18 workflows</strong>
+            <span>Process critiques deployes en production avec monitoring actif.</span>
+          </article>
+          <article class="proof-metric">
+            <strong>30-90 jours</strong>
+            <span>Delai constate pour observer un ROI mesurable sur les KPI operationnels.</span>
+          </article>
+        </div>
+
+        <div class="proof-strip__content">
+          <article class="proof-panel">
+            <p class="proof-panel__eyebrow">Retour client</p>
+            <p class="proof-quote">
+              "En 6 semaines, nous avons supprime la double saisie sur tout le flux commercial. Les commerciaux se concentrent enfin sur la conversion et plus sur l'administratif."
+            </p>
+            <p class="proof-quote__meta">Head of Revenue, SaaS B2B - 65 collaborateurs</p>
+          </article>
+
+          <article class="proof-panel">
+            <p class="proof-panel__eyebrow">Outils utilises en production</p>
+            <div class="proof-logo-wall" aria-label="Stack de reference">
+              <span>n8n</span>
+              <span>Make</span>
+              <span>OpenAI API</span>
+              <span>HubSpot</span>
+              <span>Airtable</span>
+              <span>Notion</span>
+            </div>
+            <a class="cta-secondary proof-panel__cta" href="#lead-form" data-cta="preuves-hero-diagnostic">Reserver un diagnostic</a>
+          </article>
+        </div>
       </div>
     </section>
 
