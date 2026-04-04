@@ -669,40 +669,6 @@
       justify-self: start;
     }
 
-    .impact {
-      margin-top: 6px;
-    }
-
-    .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .impact-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.88);
-      box-shadow: var(--shadow-md);
-      padding: 16px;
-    }
-
-    .impact-card strong {
-      display: block;
-      font-family: "Sora", sans-serif;
-      font-size: 1.26rem;
-      color: #1f66c7;
-      margin-bottom: 4px;
-      line-height: 1.1;
-    }
-
-    .impact-card span {
-      display: block;
-      color: #5b7086;
-      font-size: 0.86rem;
-      line-height: 1.45;
-    }
-
     .hero__visual {
       min-height: 520px;
       display: grid;
@@ -881,10 +847,8 @@
     }
 
     .offers,
-    .impact,
     .cases,
     .compare,
-    .method,
     .process,
     .stack,
     .trust,
@@ -964,7 +928,6 @@
 
     .offer__head h3,
     .case h3,
-    .step h3,
     .process-step h3,
     .trust-card h3 {
       margin: 0;
@@ -985,7 +948,6 @@
 
     .offer p,
     .case p,
-    .step p,
     .stack__intro p,
     .trust-card p,
     .faq p,
@@ -1120,20 +1082,6 @@
       padding: 6px 10px;
       font-size: 0.78rem;
       font-weight: 600;
-    }
-
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.86);
-      padding: 18px;
-      box-shadow: var(--shadow-md);
     }
 
     .step__num {
@@ -1888,6 +1836,49 @@
       text-transform: uppercase;
     }
 
+    .contact-form__optional {
+      margin: 2px 0;
+      border: 1px solid #ccdeef;
+      border-radius: 12px;
+      background: #f6fbff;
+      padding: 10px 12px;
+    }
+
+    .contact-form__optional summary {
+      cursor: pointer;
+      list-style: none;
+      font-family: "Sora", sans-serif;
+      font-size: 0.81rem;
+      color: #2a537c;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .contact-form__optional summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .contact-form__optional summary::after {
+      content: "+";
+      font-size: 1.1rem;
+      color: #3d6da1;
+      line-height: 1;
+    }
+
+    .contact-form__optional[open] summary::after {
+      content: "-";
+    }
+
+    .contact-form__optional-body {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
     .contact-form input,
     .contact-form select,
     .contact-form textarea {
@@ -2246,10 +2237,6 @@
         min-height: 440px;
       }
 
-      .impact-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       .proof-strip__metrics {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2259,10 +2246,6 @@
       }
 
       .card-grid--3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .method-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -2286,7 +2269,7 @@
 
     @media (max-width: 760px) {
       body {
-        padding-bottom: 86px;
+        padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
       }
 
       .site-header {
@@ -2381,10 +2364,6 @@
         justify-content: center;
       }
 
-      .impact-grid {
-        grid-template-columns: 1fr;
-      }
-
       .micro {
         display: none;
       }
@@ -2396,7 +2375,6 @@
 
       .card-grid--3,
       .card-grid--2,
-      .method-grid,
       .process-grid,
       .faq-quick,
       .fit-grid {
@@ -2441,7 +2419,7 @@
         position: fixed;
         left: 0;
         right: 0;
-        bottom: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
         z-index: 170;
         padding: 0 14px;
         pointer-events: none;
@@ -2499,12 +2477,8 @@
       <a class="nav__primary" href="#lead-form" data-cta="menu-principal">Reserver un diagnostic</a>
       <a href="#offres">Offres</a>
       <a href="#outils">Outils</a>
-      <a href="#impact">Resultats</a>
       <a href="#cas">Cas clients</a>
-      <a href="#methode">Methode</a>
-      <a href="#process">Process</a>
-      <a href="#stack">Stack</a>
-      <a href="#team">Equipe</a>
+      <a href="#process">Methode</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -2577,7 +2551,7 @@
       </div>
     </section>
 
-    <section class="proof-strip reveal" aria-label="Preuves de credibilite">
+    <section class="proof-strip reveal" id="impact" aria-label="Preuves de credibilite">
       <div class="container proof-strip__shell">
         <div class="proof-strip__metrics">
           <article class="proof-metric">
@@ -2619,33 +2593,7 @@
       </div>
     </section>
 
-    <section class="impact container reveal" id="impact">
-      <div class="section-title">
-        <h2>Resultats en chiffres</h2>
-        <p>Des indicateurs concrets pour valider le ROI et accelerer la prise de decision.</p>
-      </div>
-
-      <div class="impact-grid">
-        <article class="impact-card">
-          <strong>-72%</strong>
-          <span>de temps passe sur les operations repetitives apres automatisation.</span>
-        </article>
-        <article class="impact-card">
-          <strong>+3.8x</strong>
-          <span>de vitesse de delivery sur les processus internes critiques.</span>
-        </article>
-        <article class="impact-card">
-          <strong>99.2%</strong>
-          <span>de fiabilite observee sur les workflows en production.</span>
-        </article>
-        <article class="impact-card">
-          <strong>&lt; 90 jours</strong>
-          <span>pour constater les premiers gains mesurables sur vos KPI metier.</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="offers container reveal" id="offres">
+    <section class="offers container reveal" id="offres" data-hide-mobile-cta>
       <div class="section-title">
         <h2>Offres claires pour passer a l'action</h2>
         <p>Trois niveaux d'accompagnement selon votre maturite, vos objectifs et votre vitesse d'execution.</p>
@@ -2895,39 +2843,6 @@
       </div>
     </section>
 
-    <section class="method container reveal" id="methode">
-      <div class="section-title">
-        <h2>Methode d'execution en 4 etapes</h2>
-        <p>Une approche pragmatique orientee resultat pour livrer vite sans fragiliser votre architecture.</p>
-      </div>
-
-      <div class="method-grid">
-        <article class="step">
-          <span class="step__num">Etape 01</span>
-          <h3>Diagnostic</h3>
-          <p>Identification des frictions humaines, des taches repetitives et des points de perte de valeur.</p>
-        </article>
-
-        <article class="step">
-          <span class="step__num">Etape 02</span>
-          <h3>Architecture cible</h3>
-          <p>Design des flux, choix des outils, definitions des regles de gouvernance et securisation des donnees.</p>
-        </article>
-
-        <article class="step">
-          <span class="step__num">Etape 03</span>
-          <h3>Build & mise en production</h3>
-          <p>Implementation incremental avec tests, documentation et transfert de competences aux equipes.</p>
-        </article>
-
-        <article class="step">
-          <span class="step__num">Etape 04</span>
-          <h3>Pilotage KPI</h3>
-          <p>Suivi des gains, monitoring des incidents et optimisation continue des workflows en production.</p>
-        </article>
-      </div>
-    </section>
-
     <section class="stack container reveal" id="stack">
       <div class="section-title">
         <h2>Stack et expertise operationnelle</h2>
@@ -3039,7 +2954,7 @@
       </div>
     </section>
 
-    <section class="faq container reveal" id="faq">
+    <section class="faq container reveal" id="faq" data-hide-mobile-cta>
       <div class="section-title">
         <h2>FAQ decisionnelle</h2>
         <p>Les questions les plus frequentes avant de lancer un projet d'automatisation.</p>
@@ -3131,7 +3046,7 @@
       <p class="process-note">Objectif: generer des gains visibles rapidement, puis scaler sur les autres flux prioritaires.</p>
     </section>
 
-    <section class="contact container reveal" id="contact">
+    <section class="contact container reveal" id="contact" data-hide-mobile-cta>
       <div class="contact__box">
         <div>
           <h2>On identifie vos 3 automatisations prioritaires en 30 minutes.</h2>
@@ -3166,7 +3081,7 @@
         <form class="contact-form" id="lead-form" action="https://formsubmit.co/contact@ideatoautomation.com" method="post">
           <h3>Audit flash en 30 min</h3>
           <p>Laissez vos coordonnees et votre objectif prioritaire. Retour sous 24h ouvrables.</p>
-          <p class="contact-form__note">3 champs obligatoires. Le reste est optionnel pour preparer un diagnostic plus precis.</p>
+          <p class="contact-form__note">3 champs obligatoires (nom, email pro, objectif). Le reste est optionnel.</p>
           <p class="contact-form__context" id="offer-context" hidden></p>
 
           <input type="hidden" name="_subject" value="Nouvelle demande - Audit flash IdeaToAutomation" />
@@ -3198,47 +3113,52 @@
           </label>
 
           <label>
-            Entreprise (optionnel)
-            <input type="text" name="Entreprise" placeholder="Nom de votre entreprise" autocomplete="organization" />
-          </label>
-
-          <label>
-            Priorite delai (optionnel)
-            <select name="Priorite">
-              <option value="" selected>Selectionner un delai</option>
-              <option value="Urgent - moins de 30 jours">Urgent - moins de 30 jours</option>
-              <option value="1 a 3 mois">1 a 3 mois</option>
-              <option value="3 mois et +">3 mois et +</option>
-            </select>
-          </label>
-
-          <label>
-            Budget estimatif (optionnel)
-            <select name="Budget estimatif">
-              <option value="" selected>Selectionner une plage</option>
-              <option value="Moins de 3 000 EUR">Moins de 3 000 EUR</option>
-              <option value="3 000 a 10 000 EUR">3 000 a 10 000 EUR</option>
-              <option value="10 000 a 25 000 EUR">10 000 a 25 000 EUR</option>
-              <option value="25 000 EUR et +">25 000 EUR et +</option>
-              <option value="A definir">A definir</option>
-            </select>
-          </label>
-
-          <label>
-            Taille equipe concernee (optionnel)
-            <select name="Taille equipe concernee">
-              <option value="" selected>Selectionner une plage</option>
-              <option value="1 a 5 personnes">1 a 5 personnes</option>
-              <option value="6 a 20 personnes">6 a 20 personnes</option>
-              <option value="21 a 100 personnes">21 a 100 personnes</option>
-              <option value="Plus de 100 personnes">Plus de 100 personnes</option>
-            </select>
-          </label>
-
-          <label>
             Objectif principal
             <textarea id="objectif-field" name="Objectif" placeholder="Ex: automatiser la qualification des leads et reduire le temps de traitement de 60%." required></textarea>
           </label>
+
+          <details class="contact-form__optional">
+            <summary>Ajouter des informations optionnelles</summary>
+            <div class="contact-form__optional-body">
+              <label>
+                Entreprise (optionnel)
+                <input type="text" name="Entreprise" placeholder="Nom de votre entreprise" autocomplete="organization" />
+              </label>
+
+              <label>
+                Priorite delai (optionnel)
+                <select name="Priorite">
+                  <option value="" selected>Selectionner un delai</option>
+                  <option value="Urgent - moins de 30 jours">Urgent - moins de 30 jours</option>
+                  <option value="1 a 3 mois">1 a 3 mois</option>
+                  <option value="3 mois et +">3 mois et +</option>
+                </select>
+              </label>
+
+              <label>
+                Budget estimatif (optionnel)
+                <select name="Budget estimatif">
+                  <option value="" selected>Selectionner une plage</option>
+                  <option value="Moins de 3 000 EUR">Moins de 3 000 EUR</option>
+                  <option value="3 000 a 10 000 EUR">3 000 a 10 000 EUR</option>
+                  <option value="10 000 a 25 000 EUR">10 000 a 25 000 EUR</option>
+                  <option value="25 000 EUR et +">25 000 EUR et +</option>
+                  <option value="A definir">A definir</option>
+                </select>
+              </label>
+
+              <label>
+                Taille equipe concernee (optionnel)
+                <select name="Taille equipe concernee">
+                  <option value="" selected>Selectionner une plage</option>
+                  <option value="1 a 5 personnes">1 a 5 personnes</option>
+                  <option value="6 a 20 personnes">6 a 20 personnes</option>
+                  <option value="21 a 100 personnes">21 a 100 personnes</option>
+                  <option value="Plus de 100 personnes">Plus de 100 personnes</option>
+                </select>
+              </label>
+            </div>
+          </details>
 
           <button class="cta" type="submit">Envoyer la demande</button>
           <p class="contact-form__note contact-form__note--pending" id="contact-pending" hidden>Envoi en cours... Vous allez etre redirige vers la confirmation.</p>
@@ -3552,6 +3472,8 @@
     if (mobileCta) {
       let formInteracting = false;
       const mobileCtaHideZones = document.querySelectorAll("[data-hide-mobile-cta]");
+      const inlinePrimaryCtas = Array.from(document.querySelectorAll("a.cta, button.cta"))
+        .filter((node) => !mobileCta.contains(node));
 
       const isFormField = (node) => {
         return Boolean(node instanceof HTMLElement && node.matches("input, select, textarea"));
@@ -3568,16 +3490,20 @@
           return;
         }
 
-        const passedHero = window.scrollY > Math.max(360, window.innerHeight * 0.58);
+        const passedHero = window.scrollY > Math.max(520, window.innerHeight * 0.9);
         const rect = leadForm ? leadForm.getBoundingClientRect() : null;
         const formVisible = rect ? rect.top < window.innerHeight - 120 && rect.bottom > 120 : false;
         const isTyping = formInteracting || hasFocusedFormField();
+        const inlineCtaVisible = inlinePrimaryCtas.some((node) => {
+          const ctaRect = node.getBoundingClientRect();
+          return ctaRect.top < window.innerHeight - 90 && ctaRect.bottom > 90;
+        });
         const hideZoneVisible = Array.from(mobileCtaHideZones).some((zone) => {
           const zoneRect = zone.getBoundingClientRect();
           return zoneRect.top < window.innerHeight - 120 && zoneRect.bottom > 120;
         });
 
-        mobileCta.classList.toggle("is-visible", passedHero && !formVisible && !isTyping && !hideZoneVisible);
+        mobileCta.classList.toggle("is-visible", passedHero && !formVisible && !isTyping && !inlineCtaVisible && !hideZoneVisible);
       };
 
       if (leadForm) {
