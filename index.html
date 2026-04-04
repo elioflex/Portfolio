@@ -1949,6 +1949,90 @@
       line-height: 1.5;
     }
 
+    .form-steps {
+      margin: 4px 0 2px;
+      border: 1px solid #ccdeef;
+      border-radius: 12px;
+      background: #f7fbff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-steps__progress {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #deebf8;
+      overflow: hidden;
+    }
+
+    .form-steps__progress span {
+      display: block;
+      height: 100%;
+      width: 16%;
+      border-radius: 999px;
+      background: linear-gradient(120deg, #159d99, #257eee 68%);
+      transition: width 0.25s ease;
+    }
+
+    .form-steps__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .form-steps__list li {
+      border: 1px solid #d4e4f5;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.86);
+      padding: 8px 8px 7px;
+      display: grid;
+      gap: 3px;
+      justify-items: start;
+      align-content: start;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .form-steps__list span {
+      font-family: "Sora", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #496986;
+      font-weight: 700;
+    }
+
+    .form-steps__list small {
+      font-size: 0.74rem;
+      color: #5b748f;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .form-steps__list li.is-active {
+      border-color: #a6cbef;
+      background: #eef6ff;
+    }
+
+    .form-steps__list li.is-active span,
+    .form-steps__list li.is-active small {
+      color: #285a8d;
+    }
+
+    .form-steps__list li.is-done {
+      border-color: #9fd2c9;
+      background: #ecfaf7;
+    }
+
+    .form-steps__list li.is-done span,
+    .form-steps__list li.is-done small {
+      color: #1f6a62;
+    }
+
     .contact-form__context {
       margin: 2px 0 6px;
       display: inline-flex;
@@ -2558,6 +2642,10 @@
 
       .contact-form {
         min-width: 100%;
+      }
+
+      .form-steps__list {
+        grid-template-columns: 1fr;
       }
 
       .tools-marquee {
@@ -3348,6 +3436,25 @@
           <h3>Audit flash en 30 min</h3>
           <p>Laissez vos coordonnées et votre objectif prioritaire. Retour sous 24h ouvrables.</p>
           <p class="contact-form__note">3 champs obligatoires (nom, email pro, objectif). Le reste est optionnel.</p>
+          <div class="form-steps" aria-label="Progression du formulaire">
+            <div class="form-steps__progress" aria-hidden="true">
+              <span id="form-steps-progress"></span>
+            </div>
+            <ol class="form-steps__list" id="form-steps-list">
+              <li class="is-active" data-step-item="1">
+                <span>Etape 1</span>
+                <small>Coordonnees</small>
+              </li>
+              <li data-step-item="2">
+                <span>Etape 2</span>
+                <small>Objectif</small>
+              </li>
+              <li data-step-item="3">
+                <span>Etape 3</span>
+                <small>Options</small>
+              </li>
+            </ol>
+          </div>
           <p class="contact-form__context" id="offer-context" hidden></p>
 
           <input type="hidden" name="_subject" value="Nouvelle demande - Audit flash IdeaToAutomation" />
@@ -3552,6 +3659,16 @@
     const scrollDepthField = document.getElementById("scroll-depth-field");
     const deviceTypeField = document.getElementById("device-type-field");
     const objectifField = document.getElementById("objectif-field");
+    const formStepsProgress = document.getElementById("form-steps-progress");
+    const formStepItems = leadForm
+      ? Array.from(leadForm.querySelectorAll("[data-step-item]"))
+      : [];
+    const nameField = leadForm ? leadForm.querySelector('input[name="Nom"]') : null;
+    const emailField = leadForm ? leadForm.querySelector('input[name="Email"]') : null;
+    const optionalDetails = leadForm ? leadForm.querySelector(".contact-form__optional") : null;
+    const optionalFields = optionalDetails
+      ? Array.from(optionalDetails.querySelectorAll("input, select, textarea"))
+      : [];
     const leadSubmitButton = leadForm ? leadForm.querySelector("button[type='submit']") : null;
     const leadSubmitDefaultLabel = leadSubmitButton ? leadSubmitButton.textContent : "";
     let leadSubmitFallbackTimer = null;
@@ -3643,6 +3760,43 @@
       return "Nous voulons identifier les automatisations prioritaires pour réduire le temps passé sur les opérations répétitives.";
     };
 
+    const hasInputValue = (field) => {
+      if (!field) return false;
+      return field.value.trim().length > 0;
+    };
+
+    const hasOptionalValues = () => {
+      return optionalFields.some((field) => hasInputValue(field));
+    };
+
+    const updateFormSteps = () => {
+      if (!formStepItems.length || !formStepsProgress) return;
+
+      const stepOneDone = hasInputValue(nameField) && hasInputValue(emailField);
+      const stepTwoDone = hasInputValue(objectifField);
+      const stepThreeDone = Boolean(optionalDetails?.open) || hasOptionalValues();
+
+      let activeStep = 1;
+      if (stepOneDone && !stepTwoDone) activeStep = 2;
+      if (stepOneDone && stepTwoDone) activeStep = 3;
+
+      formStepItems.forEach((item, index) => {
+        const stepNumber = index + 1;
+        const isDone = (stepNumber === 1 && stepOneDone)
+          || (stepNumber === 2 && stepTwoDone)
+          || (stepNumber === 3 && stepThreeDone);
+
+        item.classList.toggle("is-done", isDone);
+        item.classList.toggle("is-active", !isDone && stepNumber === activeStep);
+      });
+
+      let progressWidth = 16;
+      if (stepOneDone) progressWidth += 40;
+      if (stepTwoDone) progressWidth += 30;
+      if (stepThreeDone) progressWidth += 14;
+      formStepsProgress.style.width = `${Math.min(100, progressWidth)}%`;
+    };
+
     const applyObjectivePrefill = (ctaOrigin, offerName = "") => {
       if (!objectifField) return;
       const currentValue = objectifField.value.trim();
@@ -3651,12 +3805,29 @@
 
       objectifField.value = getObjectiveTemplate(ctaOrigin, offerName);
       objectifField.dataset.autofilled = "true";
+      updateFormSteps();
     };
 
     if (objectifField) {
       objectifField.addEventListener("input", () => {
         objectifField.dataset.autofilled = "false";
+        updateFormSteps();
       });
+    }
+
+    [nameField, emailField].forEach((field) => {
+      if (!field) return;
+      field.addEventListener("input", updateFormSteps);
+      field.addEventListener("blur", updateFormSteps);
+    });
+
+    optionalFields.forEach((field) => {
+      field.addEventListener("input", updateFormSteps);
+      field.addEventListener("change", updateFormSteps);
+    });
+
+    if (optionalDetails) {
+      optionalDetails.addEventListener("toggle", updateFormSteps);
     }
 
     const leadFormCtas = document.querySelectorAll('a[href="#lead-form"]');
@@ -3677,6 +3848,7 @@
 
     fillTrackingFields();
     fillEngagementFields();
+    updateFormSteps();
     window.addEventListener("scroll", fillEngagementFields, { passive: true });
     window.addEventListener("resize", fillEngagementFields);
 
