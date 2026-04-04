@@ -1367,6 +1367,64 @@
       padding: 22px;
     }
 
+    .trust-list {
+      margin: 4px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .trust-list li {
+      position: relative;
+      padding-left: 18px;
+      color: #3f5973;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .trust-list li::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      left: 0;
+      top: 0.48em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
+    .trust-kpis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .trust-kpis span {
+      border-radius: 999px;
+      border: 1px solid #d2e2f3;
+      background: #f3f8fe;
+      color: #33597f;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .trust-card__meta {
+      margin: 0;
+      color: #4f6782;
+      font-size: 0.83rem;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .trust-card__cta {
+      justify-self: start;
+      margin-top: 2px;
+    }
+
     .compare-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1569,53 +1627,6 @@
     .team-link:hover {
       transform: translateY(-1px);
       background: #e9f2fc;
-    }
-
-    .logo-wall {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 9px;
-      margin-top: 15px;
-    }
-
-    .logo-wall span {
-      border: 1px dashed #bfd5ea;
-      background: #f6fafe;
-      color: #4f7092;
-      border-radius: 10px;
-      min-height: 44px;
-      display: grid;
-      place-items: center;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-align: center;
-      padding: 6px;
-    }
-
-    .quote {
-      margin-top: 14px;
-      border-left: 3px solid #8bc5f5;
-      padding-left: 12px;
-      color: #46607c;
-      font-style: italic;
-      line-height: 1.65;
-      font-size: 0.93rem;
-    }
-
-    .quote strong {
-      display: inline-block;
-      margin-top: 8px;
-      font-style: normal;
-      color: #35597b;
-      font-size: 0.84rem;
-      letter-spacing: 0.01em;
-    }
-
-    .trust-note {
-      margin-top: 12px;
-      font-size: 0.82rem;
-      color: #4f6580;
-      line-height: 1.6;
     }
 
     .faq-list {
@@ -2365,6 +2376,11 @@
         justify-content: center;
       }
 
+      .trust-card__cta {
+        width: 100%;
+        justify-content: center;
+      }
+
       .impact-grid {
         grid-template-columns: 1fr;
       }
@@ -2418,10 +2434,6 @@
 
       .tools-marquee__track {
         animation-duration: 24s;
-      }
-
-      .logo-wall {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .mobile-cta {
@@ -2958,36 +2970,36 @@
 
     <section class="trust container reveal" id="preuves">
       <div class="section-title">
-        <h2>Preuves de confiance</h2>
-        <p>La decision se fait sur la credibilite, la rigueur d'execution et les resultats observables.</p>
+        <h2>Garanties d'execution</h2>
+        <p>Au-dela des chiffres, vous avez un cadre clair pour piloter les risques, la qualite et la vitesse de delivery.</p>
       </div>
 
       <div class="trust-grid">
         <article class="trust-card">
-          <h3>Secteurs accompagnes</h3>
-          <p>Exemples de verticales ou les automatisations sont deployees avec forte valeur business.</p>
-          <div class="logo-wall">
-            <span>SaaS B2B</span>
-            <span>Industrie</span>
-            <span>E-commerce</span>
-            <span>Services</span>
-            <span>Immobilier</span>
-            <span>Education</span>
+          <h3>Pilotage hebdomadaire et transparence</h3>
+          <p>Chaque projet est suivi avec un rythme fixe et des indicateurs visibles par votre equipe metier.</p>
+          <ul class="trust-list">
+            <li>Backlog priorise avec arbitrages impact / effort.</li>
+            <li>Point hebdo de 30 min sur avancement, risques et decisions.</li>
+            <li>Demos intermediaires pour valider avant mise en production.</li>
+          </ul>
+          <div class="trust-kpis" aria-label="Indicateurs de pilotage">
+            <span>Roadmap 30-90 jours</span>
+            <span>KPI business + techniques</span>
+            <span>Reporting partage</span>
           </div>
         </article>
 
         <article class="trust-card">
-          <h3>Retour client</h3>
-          <p>Extraits de feedbacks clients recueillis apres mise en production (noms partages pendant le call).</p>
-          <p class="quote">
-            "En moins de 2 mois, l'equipe commerciale est enfin concentree sur la vente, pas sur la saisie."
-            <br /><strong>Head of Revenue, SaaS B2B - 65 collaborateurs</strong>
-          </p>
-          <p class="quote">
-            "La roadmap etait claire, les gains etaient visibles des le premier mois et le pilotage financier est devenu fiable."
-            <br /><strong>Directrice Finance, ETI industrielle - 9 sites</strong>
-          </p>
-          <p class="trust-note">3 references detaillees et cas complets partages pendant le call de cadrage (selon NDA).</p>
+          <h3>Engagements de delivery</h3>
+          <p>Vous savez exactement ce qui est livre, quand, et sous quelles conditions de qualite.</p>
+          <ul class="trust-list">
+            <li>Standards de fiabilite: tests, alerting et documentation operationnelle.</li>
+            <li>Transfert de competences pour rendre vos equipes autonomes.</li>
+            <li>NDA possible et references detaillees partagees pendant le call.</li>
+          </ul>
+          <p class="trust-card__meta">Support post-lancement structure pour stabiliser les workflows critiques.</p>
+          <a class="cta-secondary trust-card__cta" href="#lead-form" data-cta="garanties-delivery-diagnostic">Valider votre roadmap en 30 min</a>
         </article>
       </div>
     </section>
