@@ -1466,6 +1466,59 @@
       margin-top: 2px;
     }
 
+    .institutional {
+      margin-top: 10px;
+    }
+
+    .institutional__box {
+      border: 1px solid #c6dbef;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(145deg, rgba(245, 251, 255, 0.95), rgba(237, 247, 255, 0.92)),
+        radial-gradient(520px 220px at 88% 12%, rgba(37, 126, 238, 0.12), transparent 62%);
+      box-shadow: var(--shadow-lg);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: 14px;
+    }
+
+    .institutional__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .institutional__item {
+      border: 1px solid #cfe0f1;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.84);
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .institutional__item h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 0.95rem;
+      color: #1e3a57;
+      line-height: 1.35;
+    }
+
+    .institutional__item p {
+      margin: 0;
+      color: #4f6782;
+      font-size: 0.83rem;
+      line-height: 1.55;
+    }
+
+    .institutional__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .compare-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2357,6 +2410,7 @@
       .stack__layout,
       .compare-grid,
       .trust-grid,
+      .institutional__grid,
       .site-footer__box,
       .mid-cta__box,
       .contact__box {
@@ -2481,7 +2535,9 @@
       .mid-cta__actions .cta,
       .mid-cta__actions .cta-secondary,
       .studies-actions .cta,
-      .studies-actions .cta-secondary {
+      .studies-actions .cta-secondary,
+      .institutional__actions .cta,
+      .institutional__actions .cta-secondary {
         width: 100%;
       }
 
@@ -2589,10 +2645,10 @@
     <section class="hero" id="accueil">
       <div class="hero__grid">
         <div>
-          <p class="eyebrow">Automatisation IA pour PME B2B exigeantes</p>
+          <p class="eyebrow">Idea To Automation</p>
           <h1 data-split="words">Automatisez vos opérations critiques et libérez vos équipes en moins de 90 jours.</h1>
           <p class="hero__lead">
-            Nous accompagnons les PME B2B qui veulent réduire la charge opérationnelle sans ralentir leur croissance.
+            Nous accompagnons les PME qui veulent réduire la charge opérationnelle sans ralentir leur croissance.
             De la qualification commerciale à la facturation, nous déployons des workflows fiables, mesurables et maintenables.
           </p>
 
@@ -3223,6 +3279,39 @@
       <p class="process-note">Objectif: générer des gains visibles rapidement, puis étendre sur les autres flux prioritaires.</p>
     </section>
 
+    <section class="institutional container reveal" id="standards" data-hide-mobile-cta>
+      <div class="section-title">
+        <h2>Confiance institutionnelle</h2>
+        <p>Un cadre d'exécution conçu pour des directions métier qui exigent maîtrise du risque, traçabilité et continuité.</p>
+      </div>
+
+      <div class="institutional__box">
+        <div class="institutional__grid">
+          <article class="institutional__item">
+            <h3>Confidentialité & NDA</h3>
+            <p>NDA bilatéral possible dès la phase de cadrage. Données sensibles isolées et principe de moindre privilège.</p>
+          </article>
+          <article class="institutional__item">
+            <h3>Sécurité opérationnelle</h3>
+            <p>Gestion des accès, journalisation, alerting, plans de reprise et points de contrôle avant mise en production.</p>
+          </article>
+          <article class="institutional__item">
+            <h3>Gouvernance projet</h3>
+            <p>Rituels hebdomadaires, backlog priorisé, arbitrages tracés et validation explicite à chaque jalon.</p>
+          </article>
+          <article class="institutional__item">
+            <h3>Réversibilité</h3>
+            <p>Documentation d'exploitation, transfert de compétences et architecture pensée pour rester maîtrisable par vos équipes.</p>
+          </article>
+        </div>
+
+        <div class="institutional__actions">
+          <a class="cta" href="#lead-form" data-cta="standards-diagnostic">Valider votre cadre projet</a>
+          <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="standards-calendly">Prendre un créneau</a>
+        </div>
+      </div>
+    </section>
+
     <section class="contact container reveal" id="contact" data-hide-mobile-cta>
       <div class="contact__box">
         <div>
@@ -3381,7 +3470,7 @@
         </div>
       </div>
     </div>
-    <p class="site-footer__legal">© 2026 IdeaToAutomation - ideatoautomation.com - Site portfolio premium orientee automatisation B2B.</p>
+    <p class="site-footer__legal">© 2026 IdeaToAutomation - ideatoautomation.com</p>
   </footer>
 
   <div class="mobile-cta">
@@ -3542,7 +3631,8 @@
       "faq-cta": "Nous avons encore quelques points à clarifier avant lancement et voulons une recommandation explicite.",
       "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos opérations.",
       "equipe-yassine": "Nous cherchons une mise en œuvre opérationnelle rapide avec des gains visibles sur nos KPI.",
-      "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable."
+      "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable.",
+      "standards-diagnostic": "Nous voulons valider le cadre projet, les exigences sécurité et la gouvernance avant de lancer le pilote."
     };
 
     const getObjectiveTemplate = (ctaOrigin, offerName) => {
