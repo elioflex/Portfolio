@@ -12,6 +12,9 @@
   <meta property="og:url" content="https://ideatoautomation.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin />
+  <link rel="dns-prefetch" href="//cdn.simpleicons.org" />
+  <link rel="preconnect" href="https://formsubmit.co" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="assets/logo/logo-primary-light.svg" />
   <style>
@@ -2339,7 +2342,7 @@
 
   <header class="site-header" id="siteHeader">
     <a href="#accueil" class="brand" aria-label="Retour accueil IdeaToAutomation">
-      <img class="brand__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" />
+      <img class="brand__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" fetchpriority="high" decoding="async" />
     </a>
 
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
@@ -3067,7 +3070,7 @@
   <footer class="container site-footer reveal" id="footer" data-hide-mobile-cta>
     <div class="site-footer__box">
       <div class="site-footer__brand">
-        <img class="site-footer__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" />
+        <img class="site-footer__logo" src="assets/logo/logo-primary-light.svg" alt="IdeaToAutomation" loading="lazy" decoding="async" />
         <h2>On transforme vos process critiques en systemes fiables et mesurables.</h2>
         <p>Diagnostic de 30 min pour prioriser vos gains, cadrer le plan d'execution et evaluer le ROI reel avant lancement.</p>
         <ul class="site-footer__list">
@@ -3315,6 +3318,15 @@
       updateMobileCta();
       window.addEventListener("scroll", updateMobileCta, { passive: true });
       window.addEventListener("resize", updateMobileCta);
+    }
+
+    const toolsMarqueeTrack = document.querySelector(".tools-marquee__track");
+    if (toolsMarqueeTrack) {
+      const syncMarqueeVisibility = () => {
+        toolsMarqueeTrack.style.animationPlayState = document.hidden ? "paused" : "running";
+      };
+      syncMarqueeVisibility();
+      document.addEventListener("visibilitychange", syncMarqueeVisibility);
     }
 
     const revealNodes = document.querySelectorAll(".reveal");
