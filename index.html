@@ -848,6 +848,7 @@
 
     .offers,
     .cases,
+    .studies,
     .compare,
     .process,
     .stack,
@@ -1082,6 +1083,98 @@
       padding: 6px 10px;
       font-size: 0.78rem;
       font-weight: 600;
+    }
+
+    .studies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .study-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+      padding: 22px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .study-card__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .study-card h3 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      font-size: 1.13rem;
+      color: #1b3551;
+      line-height: 1.35;
+    }
+
+    .study-card p {
+      margin: 0;
+      color: #4f6782;
+      font-size: 0.9rem;
+      line-height: 1.62;
+    }
+
+    .study-card__meta {
+      color: #3b5c7e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .study-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .study-kpi {
+      border: 1px solid #cddff1;
+      border-radius: 12px;
+      background: #f6fbff;
+      padding: 10px;
+      display: grid;
+      gap: 3px;
+      align-content: start;
+    }
+
+    .study-kpi span {
+      color: #537092;
+      font-size: 0.73rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .study-kpi strong {
+      color: #1d66c6;
+      font-family: "Sora", sans-serif;
+      font-size: 1.03rem;
+      line-height: 1.15;
+    }
+
+    .study-kpi small {
+      color: #5a728b;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .studies-actions {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .step__num {
@@ -2257,6 +2350,10 @@
         grid-template-columns: 1fr;
       }
 
+      .studies-grid {
+        grid-template-columns: 1fr;
+      }
+
       .stack__layout,
       .compare-grid,
       .trust-grid,
@@ -2382,7 +2479,9 @@
       }
 
       .mid-cta__actions .cta,
-      .mid-cta__actions .cta-secondary {
+      .mid-cta__actions .cta-secondary,
+      .studies-actions .cta,
+      .studies-actions .cta-secondary {
         width: 100%;
       }
 
@@ -2499,7 +2598,7 @@
 
           <div class="hero__actions">
             <a class="cta" href="#lead-form" data-cta="hero-principal">Réserver un diagnostic</a>
-            <a class="cta-secondary" href="#cas">Voir les cas clients</a>
+            <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="hero-calendly">Prendre un créneau</a>
           </div>
 
           <div class="hero__trust">
@@ -2793,6 +2892,84 @@
       </div>
     </section>
 
+    <section class="studies container reveal" id="etudes" data-hide-mobile-cta>
+      <div class="section-title">
+        <h2>Études de cas détaillées</h2>
+        <p>Deux exemples documentés avec contexte, stack, délai et KPI avant/après. Les références détaillées sont partagées pendant le call (NDA).</p>
+      </div>
+
+      <div class="studies-grid">
+        <article class="study-card">
+          <div class="study-card__head">
+            <span class="case__tag">SaaS B2B</span>
+            <span class="badge">6 semaines</span>
+          </div>
+          <h3>Qualification commerciale automatisée pour une équipe RevOps</h3>
+          <p>Stack déployée: HubSpot, n8n, OpenAI API, scoring IA, séquences de relance et dashboard d'arbitrage commercial.</p>
+          <p class="study-card__meta">Périmètre: lead-to-SQL | Équipe: Head of Revenue + 6 SDR</p>
+          <div class="study-kpi-grid" aria-label="KPI avant après SaaS B2B">
+            <article class="study-kpi">
+              <span>Avant</span>
+              <strong>36h</strong>
+              <small>Délai moyen de qualification lead</small>
+            </article>
+            <article class="study-kpi">
+              <span>Après</span>
+              <strong>8 min</strong>
+              <small>Qualification initiale automatisée</small>
+            </article>
+            <article class="study-kpi">
+              <span>Avant</span>
+              <strong>9.8%</strong>
+              <small>Taux de conversion lead-to-SQL</small>
+            </article>
+            <article class="study-kpi">
+              <span>Après</span>
+              <strong>13.8%</strong>
+              <small>+41% de SQL en 6 semaines</small>
+            </article>
+          </div>
+        </article>
+
+        <article class="study-card">
+          <div class="study-card__head">
+            <span class="case__tag">Industrie multi-sites</span>
+            <span class="badge">8 semaines</span>
+          </div>
+          <h3>Order-to-cash fiabilisé avec contrôles de données en continu</h3>
+          <p>Stack déployée: ERP, OCR, Airtable, automatisations n8n, alerting Slack, tableau de bord finance et conformité des flux.</p>
+          <p class="study-card__meta">Périmètre: order-to-cash | Équipe: Direction Finance + Operations</p>
+          <div class="study-kpi-grid" aria-label="KPI avant après Industrie">
+            <article class="study-kpi">
+              <span>Avant</span>
+              <strong>12.4%</strong>
+              <small>Taux d'erreur de facturation</small>
+            </article>
+            <article class="study-kpi">
+              <span>Après</span>
+              <strong>1.6%</strong>
+              <small>-87% d'erreurs facture</small>
+            </article>
+            <article class="study-kpi">
+              <span>Avant</span>
+              <strong>5 j</strong>
+              <small>Délai moyen de consolidation</small>
+            </article>
+            <article class="study-kpi">
+              <span>Après</span>
+              <strong>&lt; 24h</strong>
+              <small>Données fiabilisées en quasi temps réel</small>
+            </article>
+          </div>
+        </article>
+      </div>
+
+      <div class="studies-actions">
+        <a class="cta" href="#lead-form" data-cta="etudes-diagnostic">Recevoir une analyse similaire</a>
+        <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="etudes-calendly">Prendre un créneau</a>
+      </div>
+    </section>
+
     <section class="mid-cta container reveal" id="decision" data-hide-mobile-cta>
       <div class="mid-cta__box">
         <div>
@@ -2800,7 +2977,7 @@
           <p>Un call de 30 minutes suffit pour valider le potentiel de ROI, les risques de déploiement et la meilleure séquence d'exécution.</p>
           <div class="mid-cta__actions">
             <a class="cta" href="#lead-form" data-cta="mid-page-decision">Réserver un diagnostic</a>
-            <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">Poser une question rapide</a>
+            <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="mid-page-calendly">Prendre un créneau</a>
           </div>
         </div>
         <aside class="mid-cta__proof" aria-label="Arguments de reassurance">
@@ -3074,7 +3251,7 @@
           </article>
           <div class="contact__actions">
             <a class="cta" href="#lead-form" data-cta="contact-principal">Réserver un diagnostic</a>
-            <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
+            <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="contact-calendly">Prendre un créneau</a>
           </div>
         </div>
 
@@ -3197,10 +3374,10 @@
 
       <div class="site-footer__col">
         <h3>Démarrer maintenant</h3>
-        <p>Besoin d'une validation rapide sur un process précis ? Écrivez-nous ou réservez directement un diagnostic.</p>
+        <p>Besoin d'une validation rapide sur un process précis ? Réservez un créneau ou démarrez avec le formulaire.</p>
         <div class="site-footer__actions">
           <a class="cta" href="#lead-form" data-cta="footer-principal">Réserver un diagnostic</a>
-          <a class="cta-secondary" href="mailto:contact@ideatoautomation.com">contact@ideatoautomation.com</a>
+          <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="footer-calendly">Prendre un créneau</a>
         </div>
       </div>
     </div>
@@ -3359,12 +3536,13 @@
 
     const objectiveTemplates = {
       "offre-audit-express": "Nous voulons prioriser les workflows les plus rentables et construire une roadmap d'automatisation sur 30 jours.",
-      "offre-implementation": "Nous voulons lancer un pilote d'automatisation en production rapidement sur un process critique.",
-      "offre-accompagnement-mensuel": "Nous voulons optimiser et scaler des workflows existants avec suivi KPI mensuel.",
-      "mid-page-decision": "Nous avons identifie 1 ou 2 process prioritaires et voulons valider le ROI et le plan d'execution.",
-      "faq-cta": "Nous avons encore quelques points a clarifier avant lancement et voulons une recommandation explicite.",
-      "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos operations.",
-      "equipe-yassine": "Nous cherchons une mise en oeuvre operationnelle rapide avec gains visibles sur nos KPI."
+      "offre-implementation": "Nous voulons lancer un pilote d'automatisation en production rapidement sur un processus critique.",
+      "offre-accompagnement-mensuel": "Nous voulons optimiser et faire évoluer des workflows existants avec un suivi KPI mensuel.",
+      "mid-page-decision": "Nous avons identifié 1 ou 2 processus prioritaires et voulons valider le ROI et le plan d'exécution.",
+      "faq-cta": "Nous avons encore quelques points à clarifier avant lancement et voulons une recommandation explicite.",
+      "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos opérations.",
+      "equipe-yassine": "Nous cherchons une mise en œuvre opérationnelle rapide avec des gains visibles sur nos KPI.",
+      "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable."
     };
 
     const getObjectiveTemplate = (ctaOrigin, offerName) => {
@@ -3372,7 +3550,7 @@
       if (offerName === "Audit Express") return objectiveTemplates["offre-audit-express"];
       if (offerName === "Implementation") return objectiveTemplates["offre-implementation"];
       if (offerName === "Accompagnement Mensuel") return objectiveTemplates["offre-accompagnement-mensuel"];
-      return "Nous voulons identifier les automatisations prioritaires pour reduire le temps passe sur les operations repetitives.";
+      return "Nous voulons identifier les automatisations prioritaires pour réduire le temps passé sur les opérations répétitives.";
     };
 
     const applyObjectivePrefill = (ctaOrigin, offerName = "") => {
