@@ -1238,6 +1238,71 @@
       line-height: 1.45;
     }
 
+    .studies-proof {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .studies-proof__item {
+      border: 1px solid #cddff1;
+      border-radius: 12px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(241, 248, 255, 0.92));
+      padding: 10px 12px;
+      display: grid;
+      gap: 3px;
+      align-content: start;
+    }
+
+    .studies-proof__item strong {
+      color: #27578d;
+      font-family: "Sora", sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .studies-proof__item span {
+      color: #54718f;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .study-card__framework {
+      margin: 2px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .study-card__framework li {
+      position: relative;
+      padding-left: 16px;
+      color: #4a6684;
+      font-size: 0.83rem;
+      line-height: 1.52;
+    }
+
+    .study-card__framework li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.47em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
+    .study-card__actions {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .studies-actions {
       margin-top: 14px;
       display: flex;
@@ -2563,6 +2628,10 @@
         grid-template-columns: 1fr;
       }
 
+      .studies-proof {
+        grid-template-columns: 1fr;
+      }
+
       .stack__layout,
       .compare-grid,
       .trust-grid,
@@ -2701,6 +2770,8 @@
       .mid-cta__actions .cta-secondary,
       .studies-actions .cta,
       .studies-actions .cta-secondary,
+      .study-card__actions .cta,
+      .study-card__actions .cta-secondary,
       .institutional__actions .cta,
       .institutional__actions .cta-secondary {
         width: 100%;
@@ -3172,6 +3243,20 @@
       <div class="section-title">
         <h2>Études de cas détaillées</h2>
         <p>Deux exemples documentés avec contexte, stack, délai et KPI avant/après. Les références détaillées sont partagées pendant le call (NDA).</p>
+        <div class="studies-proof" aria-label="Niveau de preuve des études de cas">
+          <article class="studies-proof__item">
+            <strong>Contexte + stack + KPI</strong>
+            <span>Chaque étude documente la chaîne complète, pas seulement un résultat marketing.</span>
+          </article>
+          <article class="studies-proof__item">
+            <strong>Mesures avant / après</strong>
+            <span>Indicateurs chiffrés sur les mêmes périmètres pour une lecture décisionnelle.</span>
+          </article>
+          <article class="studies-proof__item">
+            <strong>Feuille de route activable</strong>
+            <span>Le diagnostic transforme ces apprentissages en plan d'exécution adapté à votre contexte.</span>
+          </article>
+        </div>
       </div>
 
       <div class="studies-grid">
@@ -3183,6 +3268,11 @@
           <h3>Qualification commerciale automatisée pour une équipe RevOps</h3>
           <p>Stack déployée: HubSpot, n8n, OpenAI API, scoring IA, séquences de relance et dashboard d'arbitrage commercial.</p>
           <p class="study-card__meta">Périmètre: lead-to-SQL | Équipe: Head of Revenue + 6 SDR</p>
+          <ul class="study-card__framework">
+            <li>Point de départ: qualification irrégulière et dépendance forte au traitement manuel.</li>
+            <li>Levier activé: scoring + routage + relance orchestrés avec garde-fous RevOps.</li>
+            <li>Résultat: rythme commercial stabilisé et meilleure capacité d'arbitrage pipeline.</li>
+          </ul>
           <div class="study-kpi-grid" aria-label="KPI avant après SaaS B2B">
             <article class="study-kpi">
               <span>Avant</span>
@@ -3205,6 +3295,9 @@
               <small>+41% de SQL en 6 semaines</small>
             </article>
           </div>
+          <div class="study-card__actions">
+            <a class="cta-secondary" href="#lead-form" data-cta="etude-saas-diagnostic">Reproduire ce playbook</a>
+          </div>
         </article>
 
         <article class="study-card">
@@ -3215,6 +3308,11 @@
           <h3>Order-to-cash fiabilisé avec contrôles de données en continu</h3>
           <p>Stack déployée: ERP, OCR, Airtable, automatisations n8n, alerting Slack, tableau de bord finance et conformité des flux.</p>
           <p class="study-card__meta">Périmètre: order-to-cash | Équipe: Direction Finance + Operations</p>
+          <ul class="study-card__framework">
+            <li>Point de départ: écarts de données inter-sites et facturation instable.</li>
+            <li>Levier activé: OCR + contrôles automatiques + alerting + traçabilité finance.</li>
+            <li>Résultat: réduction massive des erreurs et pilotage beaucoup plus rapide.</li>
+          </ul>
           <div class="study-kpi-grid" aria-label="KPI avant après Industrie">
             <article class="study-kpi">
               <span>Avant</span>
@@ -3236,6 +3334,9 @@
               <strong>&lt; 24h</strong>
               <small>Données fiabilisées en quasi temps réel</small>
             </article>
+          </div>
+          <div class="study-card__actions">
+            <a class="cta-secondary" href="#lead-form" data-cta="etude-industrie-diagnostic">Reproduire ce playbook</a>
           </div>
         </article>
       </div>
@@ -3881,6 +3982,8 @@
       "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos opérations.",
       "equipe-yassine": "Nous cherchons une mise en œuvre opérationnelle rapide avec des gains visibles sur nos KPI.",
       "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable.",
+      "etude-saas-diagnostic": "Nous voulons reproduire un playbook lead-to-SQL avec scoring, routage et relances automatisées pour accélérer notre pipeline.",
+      "etude-industrie-diagnostic": "Nous voulons reproduire un playbook order-to-cash avec contrôles automatiques pour réduire les erreurs et sécuriser la facturation.",
       "case-saas-diagnostic": "Nous voulons industrialiser notre flux lead-to-SQL avec un scoring fiable, des relances automatiques et un suivi RevOps.",
       "case-otc-diagnostic": "Nous voulons fiabiliser notre process order-to-cash et réduire les erreurs de facturation entre équipes et outils.",
       "case-support-diagnostic": "Nous voulons structurer notre support client avec un routage unifié, un pilotage SLA et moins de charge opérationnelle.",
