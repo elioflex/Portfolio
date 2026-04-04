@@ -1026,6 +1026,74 @@
       font-weight: 600;
     }
 
+    .cases-proof {
+      margin: 14px 0 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .cases-proof__item {
+      border: 1px solid #cbddef;
+      border-radius: 12px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(239, 248, 255, 0.86));
+      padding: 11px 12px 10px;
+      display: grid;
+      gap: 4px;
+      align-content: start;
+    }
+
+    .cases-proof__item strong {
+      color: #214f84;
+      font-family: "Sora", sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+
+    .cases-proof__item span {
+      color: #527191;
+      font-size: 0.79rem;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .case__delta {
+      margin-top: 2px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .case__delta-item {
+      border: 1px solid #d2e2f3;
+      border-radius: 10px;
+      background: #f6fafe;
+      padding: 8px;
+      display: grid;
+      gap: 2px;
+      align-content: start;
+    }
+
+    .case__delta-item span {
+      color: #5d7893;
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .case__delta-item strong {
+      color: #1d67c6;
+      font-family: "Sora", sans-serif;
+      font-size: 0.94rem;
+      line-height: 1.25;
+    }
+
+    .case__cta {
+      margin-top: 4px;
+      justify-self: start;
+    }
+
     .bullet-list {
       margin: 14px 0 0;
       padding: 0;
@@ -2479,6 +2547,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .cases-proof {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .process-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2585,6 +2657,10 @@
         grid-template-columns: 1fr;
       }
 
+      .cases-proof {
+        grid-template-columns: 1fr;
+      }
+
       .proof-logo-wall {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2595,6 +2671,11 @@
       }
 
       .trust-card__cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .case__cta {
         width: 100%;
         justify-content: center;
       }
@@ -2983,6 +3064,24 @@
       <div class="section-title">
         <h2>Cas clients et résultats mesurables</h2>
         <p>Chaque mission est pilotée par des indicateurs concrets: temps gagné, erreurs réduites, revenus accélérés.</p>
+        <div class="cases-proof" aria-label="Repères de performance observés">
+          <article class="cases-proof__item">
+            <strong>3 flux critiques</strong>
+            <span>RevOps, order-to-cash et support client déjà industrialisés.</span>
+          </article>
+          <article class="cases-proof__item">
+            <strong>5 à 8 semaines</strong>
+            <span>Fenêtre de déploiement typique pour un premier pilote en production.</span>
+          </article>
+          <article class="cases-proof__item">
+            <strong>ROI &lt; 90 jours</strong>
+            <span>Résultats suivis sur les KPI business décidés en amont avec l'équipe.</span>
+          </article>
+          <article class="cases-proof__item">
+            <strong>Validation sous NDA</strong>
+            <span>Chiffres détaillés et contexte complet partagés pendant le diagnostic.</span>
+          </article>
+        </div>
       </div>
 
       <div class="card-grid card-grid--3">
@@ -2995,11 +3094,22 @@
           <p class="case__line"><strong>Contexte</strong> Leads qualifiés trop lentement et pipeline commercial instable.</p>
           <p class="case__line"><strong>Intervention</strong> Scoring IA, qualification automatique, relances CRM et dashboard RevOps.</p>
           <p class="case__meta">Équipe: Head of Revenue + 6 SDR | Durée: 6 semaines | Flux: lead-to-SQL</p>
+          <div class="case__delta" aria-label="Avant après SaaS B2B">
+            <article class="case__delta-item">
+              <span>Avant</span>
+              <strong>36h pour qualifier un lead</strong>
+            </article>
+            <article class="case__delta-item">
+              <span>Après</span>
+              <strong>8 min pour qualification initiale</strong>
+            </article>
+          </div>
           <div class="kpis">
             <span>+41% SQL</span>
             <span>-61% admin sales</span>
             <span>Cycle -18 jours</span>
           </div>
+          <a class="cta-secondary case__cta" href="#lead-form" data-cta="case-saas-diagnostic">Analyser un cas similaire</a>
         </article>
 
         <article class="card case">
@@ -3011,11 +3121,22 @@
           <p class="case__line"><strong>Contexte</strong> Retards de facturation et erreurs de saisie entre sites et ERP.</p>
           <p class="case__line"><strong>Intervention</strong> Automatisation commandes-achats-facturation avec OCR et contrôles d'anomalies.</p>
           <p class="case__meta">Équipe: Direction Finance + Operations | Durée: 8 semaines | Flux: order-to-cash</p>
+          <div class="case__delta" aria-label="Avant après industrie">
+            <article class="case__delta-item">
+              <span>Avant</span>
+              <strong>12.4% d'erreurs de facturation</strong>
+            </article>
+            <article class="case__delta-item">
+              <span>Après</span>
+              <strong>1.6% d'erreurs en production</strong>
+            </article>
+          </div>
           <div class="kpis">
             <span>2 400 taches/mois</span>
             <span>Erreurs facture -87%</span>
             <span>DSO ameliore</span>
           </div>
+          <a class="cta-secondary case__cta" href="#lead-form" data-cta="case-otc-diagnostic">Analyser un cas similaire</a>
         </article>
 
         <article class="card case">
@@ -3027,11 +3148,22 @@
           <p class="case__line"><strong>Contexte</strong> Support fragmenté, délais de réponse trop longs et reporting manuel.</p>
           <p class="case__line"><strong>Intervention</strong> Routage automatique, orchestration support-planning et suivi SLA en temps réel.</p>
           <p class="case__meta">Équipe: Responsable Service Client + Ops | Durée: 5 semaines | Flux: support-to-resolution</p>
+          <div class="case__delta" aria-label="Avant après support">
+            <article class="case__delta-item">
+              <span>Avant</span>
+              <strong>Canaux fragmentes et reporting manuel</strong>
+            </article>
+            <article class="case__delta-item">
+              <span>Après</span>
+              <strong>Routage unifie avec pilotage SLA</strong>
+            </article>
+          </div>
           <div class="kpis">
             <span>Temps de réponse -53%</span>
             <span>NPS +17 points</span>
             <span>Charge support -38%</span>
           </div>
+          <a class="cta-secondary case__cta" href="#lead-form" data-cta="case-support-diagnostic">Analyser un cas similaire</a>
         </article>
       </div>
     </section>
@@ -3749,6 +3881,9 @@
       "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos opérations.",
       "equipe-yassine": "Nous cherchons une mise en œuvre opérationnelle rapide avec des gains visibles sur nos KPI.",
       "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable.",
+      "case-saas-diagnostic": "Nous voulons industrialiser notre flux lead-to-SQL avec un scoring fiable, des relances automatiques et un suivi RevOps.",
+      "case-otc-diagnostic": "Nous voulons fiabiliser notre process order-to-cash et réduire les erreurs de facturation entre équipes et outils.",
+      "case-support-diagnostic": "Nous voulons structurer notre support client avec un routage unifié, un pilotage SLA et moins de charge opérationnelle.",
       "standards-diagnostic": "Nous voulons valider le cadre projet, les exigences sécurité et la gouvernance avant de lancer le pilote."
     };
 
