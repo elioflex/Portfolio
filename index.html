@@ -3034,6 +3034,9 @@
           <input type="hidden" name="referrer" id="referrer-field" value="" />
           <input type="hidden" name="page_path" id="page-path-field" value="" />
           <input type="hidden" name="cta_origin" id="cta-origin-field" value="" />
+          <input type="hidden" name="time_on_page_seconds" id="time-on-page-field" value="" />
+          <input type="hidden" name="scroll_depth_percent" id="scroll-depth-field" value="" />
+          <input type="hidden" name="device_type" id="device-type-field" value="" />
 
           <label>
             Nom
@@ -3210,10 +3213,15 @@
     const referrerField = document.getElementById("referrer-field");
     const pagePathField = document.getElementById("page-path-field");
     const ctaOriginField = document.getElementById("cta-origin-field");
+    const timeOnPageField = document.getElementById("time-on-page-field");
+    const scrollDepthField = document.getElementById("scroll-depth-field");
+    const deviceTypeField = document.getElementById("device-type-field");
     const objectifField = document.getElementById("objectif-field");
     const leadSubmitButton = leadForm ? leadForm.querySelector("button[type='submit']") : null;
     const leadSubmitDefaultLabel = leadSubmitButton ? leadSubmitButton.textContent : "";
     let leadSubmitFallbackTimer = null;
+    const sessionStartTime = Date.now();
+    let maxScrollDepth = 0;
 
     const readSession = (key) => {
       try {
@@ -3254,6 +3262,30 @@
       const ctaOrigin = readSession("i2a_cta_origin")
         || (window.location.hash === "#lead-form" ? "direct-anchor" : "direct-visit");
       if (ctaOriginField) ctaOriginField.value = ctaOrigin;
+    };
+
+    const detectDeviceType = () => {
+      if (window.innerWidth < 760) return "mobile";
+      if (window.innerWidth < 1040) return "tablet";
+      return "desktop";
+    };
+
+    const getScrollDepthPercent = () => {
+      const doc = document.documentElement;
+      const scrollableHeight = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const currentDepth = (window.scrollY / scrollableHeight) * 100;
+      return Math.max(0, Math.min(100, currentDepth));
+    };
+
+    const fillEngagementFields = () => {
+      maxScrollDepth = Math.max(maxScrollDepth, getScrollDepthPercent());
+
+      if (timeOnPageField) {
+        const seconds = Math.max(0, Math.round((Date.now() - sessionStartTime) / 1000));
+        timeOnPageField.value = String(seconds);
+      }
+      if (scrollDepthField) scrollDepthField.value = String(Math.round(maxScrollDepth));
+      if (deviceTypeField) deviceTypeField.value = detectDeviceType();
     };
 
     const objectiveTemplates = {
@@ -3307,9 +3339,14 @@
     });
 
     fillTrackingFields();
+    fillEngagementFields();
+    window.addEventListener("scroll", fillEngagementFields, { passive: true });
+    window.addEventListener("resize", fillEngagementFields);
+
     if (leadForm) {
       leadForm.addEventListener("submit", () => {
         fillTrackingFields();
+        fillEngagementFields();
 
         if (contactConfirmation) contactConfirmation.hidden = true;
         if (contactFallback) contactFallback.hidden = true;
