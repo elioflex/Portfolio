@@ -914,7 +914,6 @@
 
     .offers,
     .cases,
-    .studies,
     .compare,
     .process,
     .stack,
@@ -1186,105 +1185,6 @@
       padding: 6px 10px;
       font-size: 0.78rem;
       font-weight: 600;
-    }
-
-    .studies-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .study-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: var(--shadow-md);
-      padding: 22px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .study-card__head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .study-card h3 {
-      margin: 0;
-      font-family: "Sora", sans-serif;
-      font-size: 1.13rem;
-      color: #1b3551;
-      line-height: 1.35;
-    }
-
-    .study-card p {
-      margin: 0;
-      color: #4f6782;
-      font-size: 0.9rem;
-      line-height: 1.62;
-    }
-
-    .study-card__meta {
-      color: #3b5c7e;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .study-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 2px;
-    }
-
-    .study-kpi {
-      border: 1px solid #cddff1;
-      border-radius: 12px;
-      background: #f6fbff;
-      padding: 10px;
-      display: grid;
-      gap: 3px;
-      align-content: start;
-    }
-
-    .study-kpi span {
-      color: #537092;
-      font-size: 0.73rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .study-kpi strong {
-      color: #1d66c6;
-      font-family: "Sora", sans-serif;
-      font-size: 1.03rem;
-      line-height: 1.15;
-    }
-
-    .study-kpi small {
-      color: #5a728b;
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
-
-    .study-card__actions {
-      margin-top: 4px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .studies-actions {
-      margin-top: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
     }
 
     .step__num {
@@ -2678,10 +2578,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .studies-grid {
-        grid-template-columns: 1fr;
-      }
-
       .stack__layout,
       .compare-grid,
       .trust-grid,
@@ -2825,10 +2721,6 @@
 
       .mid-cta__actions .cta,
       .mid-cta__actions .cta-secondary,
-      .studies-actions .cta,
-      .studies-actions .cta-secondary,
-      .study-card__actions .cta,
-      .study-card__actions .cta-secondary,
       .institutional__actions .cta,
       .institutional__actions .cta-secondary {
         width: 100%;
@@ -3255,68 +3147,6 @@
           </div>
           <a class="cta-secondary case__cta" href="#lead-form" data-cta="case-support-diagnostic">Réserver un diagnostic similaire</a>
         </article>
-      </div>
-    </section>
-
-    <section class="studies container reveal" id="etudes" data-hide-mobile-cta>
-      <div class="section-title">
-        <h2>Études de cas (version courte)</h2>
-        <p>Deux cas résumés avec KPI avant/après.</p>
-      </div>
-
-      <div class="studies-grid">
-        <article class="study-card">
-          <div class="study-card__head">
-            <span class="case__tag">SaaS B2B</span>
-            <span class="badge">6 semaines</span>
-          </div>
-          <h3>Qualification commerciale automatisée</h3>
-          <p>Stack: HubSpot, n8n, OpenAI API.</p>
-          <div class="study-kpi-grid" aria-label="KPI avant après SaaS B2B">
-            <article class="study-kpi">
-              <span>Avant</span>
-              <strong>36h</strong>
-              <small>Délai moyen de qualification lead</small>
-            </article>
-            <article class="study-kpi">
-              <span>Après</span>
-              <strong>8 min</strong>
-              <small>+41% SQL en 6 semaines</small>
-            </article>
-          </div>
-          <div class="study-card__actions">
-            <a class="cta-secondary" href="#lead-form" data-cta="etude-saas-diagnostic">Réserver un diagnostic playbook</a>
-          </div>
-        </article>
-
-        <article class="study-card">
-          <div class="study-card__head">
-            <span class="case__tag">Industrie multi-sites</span>
-            <span class="badge">8 semaines</span>
-          </div>
-          <h3>Order-to-cash fiabilisé</h3>
-          <p>Stack: ERP, OCR, Airtable, n8n.</p>
-          <div class="study-kpi-grid" aria-label="KPI avant après Industrie">
-            <article class="study-kpi">
-              <span>Avant</span>
-              <strong>12.4%</strong>
-              <small>Taux d'erreur de facturation</small>
-            </article>
-            <article class="study-kpi">
-              <span>Après</span>
-              <strong>1.6%</strong>
-              <small>-87% d'erreurs facture</small>
-            </article>
-          </div>
-          <div class="study-card__actions">
-            <a class="cta-secondary" href="#lead-form" data-cta="etude-industrie-diagnostic">Réserver un diagnostic playbook</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="studies-actions">
-        <a class="cta" href="#lead-form" data-cta="etudes-diagnostic">Réserver un diagnostic similaire</a>
-        <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="etudes-calendly">Prendre un créneau</a>
       </div>
     </section>
 
@@ -3975,9 +3805,6 @@
       "faq-cta": "Nous avons encore quelques points à clarifier avant lancement et voulons une recommandation explicite.",
       "equipe-amine": "Nous cherchons un cadrage technique et une architecture fiable pour automatiser nos opérations.",
       "equipe-yassine": "Nous cherchons une mise en œuvre opérationnelle rapide avec des gains visibles sur nos KPI.",
-      "etudes-diagnostic": "Nous voulons reproduire un cas similaire dans notre contexte avec un plan d'action concret et un ROI mesurable.",
-      "etude-saas-diagnostic": "Nous voulons reproduire un playbook lead-to-SQL avec scoring, routage et relances automatisées pour accélérer notre pipeline.",
-      "etude-industrie-diagnostic": "Nous voulons reproduire un playbook order-to-cash avec contrôles automatiques pour réduire les erreurs et sécuriser la facturation.",
       "case-saas-diagnostic": "Nous voulons industrialiser notre flux lead-to-SQL avec un scoring fiable, des relances automatiques et un suivi RevOps.",
       "case-otc-diagnostic": "Nous voulons fiabiliser notre process order-to-cash et réduire les erreurs de facturation entre équipes et outils.",
       "case-support-diagnostic": "Nous voulons structurer notre support client avec un routage unifié, un pilotage SLA et moins de charge opérationnelle.",
@@ -4215,7 +4042,7 @@
       document.addEventListener("visibilitychange", syncMarqueeVisibility);
     }
 
-    const staggerContainers = document.querySelectorAll(".card-grid, .studies-grid, .process-grid, .faq-list");
+    const staggerContainers = document.querySelectorAll(".card-grid, .process-grid, .faq-list");
     staggerContainers.forEach((container) => {
       Array.from(container.children).forEach((child, index) => {
         if (!(child instanceof HTMLElement)) return;
