@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220" role="img" aria-labelledby="title desc">
+  <title id="title">I2A Allerta Light</title>
+  <desc id="desc">Logo I2A en Allerta Stencil pour fond clair</desc>
+  <defs>
+    <linearGradient id="brandGrad" x1="40" y1="30" x2="460" y2="186" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f6fff"/>
+      <stop offset="1" stop-color="#00a7a0"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&amp;display=swap');
+
+    .brand {
+      font-family: 'Allerta Stencil', 'Arial Black', sans-serif;
+      font-size: 168px;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+  </style>
+
+  <rect x="28" y="22" width="14" height="176" rx="7" fill="url(#brandGrad)"/>
+  <text x="68" y="162" class="brand" fill="url(#brandGrad)">I2A</text>
+</svg>

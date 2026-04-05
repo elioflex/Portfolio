@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnouarElaoudi | Portfolio</title>
+    <meta name="author" content="Anouar El Aoudi" />
+    <meta name="copyright" content="© 2025 Anouar El Aoudi" />
+    <meta name="description" content="Personal portfolio of Anouar El Aoudi. Software engineer crafting clean, performant solutions with React, TypeScript, and modern tooling." />
+    <meta name="keywords" content="Anouar El Aoudi, Portfolio, Software Engineer, React, TypeScript, Framer Motion, Vite, Web Development" />
+    <meta name="theme-color" content="#050505" />
+
+    <meta property="og:title" content="Anouar El Aoudi | Portfolio" />
+    <meta property="og:description" content="Showcasing projects, animations, and smooth experiences built with React, TypeScript, and Framer Motion." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/pf-D99vnoO2.jpg" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anouar El Aoudi | Portfolio" />
+    <meta name="twitter:description" content="Clean, performant, animated portfolio built with React + TypeScript." />
+    <meta name="twitter:image" content="/assets/pf-D99vnoO2.jpg" />
+
+    <link rel="icon" type="image/png" href="/assets/pf-D99vnoO2.jpg" />
+    <link rel="apple-touch-icon" href="/assets/pf-D99vnoO2.jpg" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;700&family=Syne:wght@400;700;800&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Devicon for Tech Stack Logos -->
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+              display: ['Syne', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+              arabic: ['Cairo', 'sans-serif'],
+            },
+            colors: {
+              background: '#050505',
+              surface: '#111111',
+              primary: '#ffffff',
+            },
+            animation: {
+              'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+              'marquee': 'marquee var(--duration) linear infinite',
+            },
+            keyframes: {
+              'border-beam': {
+                '100%': { offsetDistance: '100%' },
+              },
+              marquee: {
+                from: { transform: 'translateX(0)' },
+                to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      @property --angle {
+        syntax: '<angle>';
+        initial-value: 0deg;
+        inherits: false;
+      }
+      
+      html.lenis, html.lenis body {
+        height: auto;
+      }
+      
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      
+      .lenis.lenis-scrolling iframe {
+        pointer-events: none;
+      }
+
+      body {
+        background-color: #050505;
+        color: #ffffff;
+        overflow-x: hidden;
+        font-family: 'Outfit', sans-serif;
+        overscroll-behavior: none;
+      }
+      
+      /* Arabic Font Override */
+      html[dir="rtl"] body {
+        font-family: 'Cairo', sans-serif;
+      }
+      html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4, html[dir="rtl"] h5, html[dir="rtl"] h6 {
+        font-family: 'Cairo', sans-serif;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Syne', sans-serif;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Custom Scrollbar for Dark Theme */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #050505;
+        border-left: 1px solid #111;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #27272a; /* zinc-800 */
+        border: 2px solid #050505; /* Creates padding effect */
+        border-radius: 9999px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3f3f46; /* zinc-700 */
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.4.0",
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "lenis": "https://unpkg.com/lenis@1.1.20/dist/lenis.mjs"
+  }
+}
+</script>
+    <script type="module" crossorigin src="/assets/index-Cfa5sbW9.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anouar El Aoudi",
+        "email": "mailto:Anouarelaoudi@proton.me",
+        "jobTitle": "Software Engineer"
+      }
+    </script>
+  </body>
+</html>
