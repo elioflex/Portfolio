@@ -1170,6 +1170,21 @@
       gap: 8px;
     }
 
+    .offers__retainer {
+      margin-top: 14px;
+    }
+
+    .offers__retainer .card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .offer--retainer {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(240, 249, 255, 0.92));
+      border-color: #b7d4ef;
+      box-shadow: 0 14px 30px rgba(43, 100, 165, 0.14);
+    }
+
     .kpis {
       display: flex;
       flex-wrap: wrap;
@@ -2950,58 +2965,98 @@
     <section class="offers container reveal" id="offres" data-hide-mobile-cta>
       <div class="section-title">
         <h2>Offres claires pour passer à l'action</h2>
-        <p>Trois niveaux d'accompagnement selon votre maturité, vos objectifs business et votre vitesse d'exécution.</p>
+        <p>Choisissez un point d'entrée. On vous recommande la meilleure option après diagnostic.</p>
       </div>
 
-      <div class="card-grid card-grid--3">
+      <div class="card-grid card-grid--2">
         <article class="card offer">
           <div class="offer__head">
-            <h3>Audit Express</h3>
+            <h3>Audit ROI</h3>
             <span class="badge">2 semaines</span>
           </div>
-          <p>Diagnostic structuré de vos processus à fort impact avec priorisation business + technique.</p>
+          <p>On identifie les 3 automatisations qui vont générer le plus de gain en 90 jours.</p>
           <ul class="bullet-list">
             <li>Cartographie des flux actuels</li>
-            <li>Top 10 des automatisations à ROI rapide</li>
-            <li>Roadmap 90 jours immédiatement exploitable</li>
+            <li>Priorisation impact / effort</li>
+            <li>Roadmap 30-60-90 jours exécutable</li>
+            <li>Estimation ROI (temps, erreurs, coût)</li>
           </ul>
           <p class="price">À partir de 1 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form" data-offer="Audit Express" data-cta="offre-audit-express">Réserver un diagnostic audit</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Audit ROI" data-cta="offre-audit-roi">Réserver un diagnostic audit</a>
           </div>
         </article>
 
         <article class="card offer offer--featured">
           <div class="offer__head">
-            <h3>Implementation</h3>
+            <h3>Sales Automation</h3>
             <span class="badge badge--accent">Recommandee</span>
           </div>
-          <p>Conception et déploiement de workflows métier connectés à votre écosystème existant.</p>
+          <p>Automatisez le flux Lead vers Qualification vers Relance pour accélérer votre pipeline commercial.</p>
           <ul class="bullet-list">
-            <li>Integrations API / CRM / ERP</li>
-            <li>Automatisation ventes, ops, finance</li>
-            <li>Tests, observabilité et documentation d'exploitation</li>
+            <li>Scoring et qualification IA des leads</li>
+            <li>Routage CRM et relances automatiques</li>
+            <li>Alertes commerciales et reporting pipeline</li>
+            <li>Mise en production en 2 à 6 semaines</li>
           </ul>
           <p class="price">À partir de 4 900 EUR</p>
           <div class="offer__actions">
-            <a class="cta" href="#lead-form" data-offer="Implementation" data-cta="offre-implementation">Réserver un diagnostic pilote</a>
+            <a class="cta" href="#lead-form" data-offer="Sales Automation" data-cta="offre-sales-automation">Lancer mon pilote sales</a>
           </div>
         </article>
 
         <article class="card offer">
           <div class="offer__head">
-            <h3>Accompagnement Mensuel</h3>
+            <h3>Support Automation</h3>
+            <span class="badge">Service client</span>
+          </div>
+          <p>Réduisez vos délais de réponse grâce au triage intelligent et à l'orchestration des SLA.</p>
+          <ul class="bullet-list">
+            <li>Routage automatique des tickets</li>
+            <li>Réponses assistées IA</li>
+            <li>Priorisation par urgence et valeur client</li>
+            <li>Dashboard SLA en temps réel</li>
+          </ul>
+          <p class="price">À partir de 3 900 EUR</p>
+          <div class="offer__actions">
+            <a class="cta-secondary" href="#lead-form" data-offer="Support Automation" data-cta="offre-support-automation">Lancer mon pilote support</a>
+          </div>
+        </article>
+
+        <article class="card offer">
+          <div class="offer__head">
+            <h3>Back-Office Automation</h3>
+            <span class="badge">Finance &amp; Ops</span>
+          </div>
+          <p>Fiabilisez vos flux factures, commandes et contrôles sans ressaisie manuelle.</p>
+          <ul class="bullet-list">
+            <li>OCR, extraction et validation des documents</li>
+            <li>Synchronisation ERP, CRM et comptabilité</li>
+            <li>Détection d'anomalies et alerting proactif</li>
+            <li>Traçabilité complète des opérations</li>
+          </ul>
+          <p class="price">À partir de 4 500 EUR</p>
+          <div class="offer__actions">
+            <a class="cta-secondary" href="#lead-form" data-offer="Back-Office Automation" data-cta="offre-back-office-automation">Lancer mon pilote ops</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="offers__retainer">
+        <article class="card offer offer--retainer">
+          <div class="offer__head">
+            <h3>Run &amp; Optimisation mensuelle</h3>
             <span class="badge">Scale continue</span>
           </div>
-          <p>Pilotage des automatisations, suivi des KPI et optimisation continue des performances.</p>
+          <p>On maintient, optimise et fait évoluer vos automatisations déjà en production.</p>
           <ul class="bullet-list">
-            <li>Support prioritaire</li>
-            <li>Évolution continue des workflows</li>
-            <li>Comité de pilotage mensuel</li>
+            <li>Monitoring et correction proactive</li>
+            <li>Optimisation mensuelle des KPI</li>
+            <li>Comité de pilotage et backlog priorisé</li>
           </ul>
           <p class="price">À partir de 1 500 EUR / mois</p>
           <div class="offer__actions">
-            <a class="cta-secondary" href="#lead-form" data-offer="Accompagnement Mensuel" data-cta="offre-accompagnement-mensuel">Réserver un diagnostic cadrage</a>
+            <a class="cta-secondary" href="#lead-form" data-offer="Run &amp; Optimisation mensuelle" data-cta="offre-run-optimisation">Activer l'accompagnement</a>
           </div>
         </article>
       </div>
