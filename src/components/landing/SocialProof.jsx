@@ -8,7 +8,20 @@ const KPIS = [
   { icon: Users, value: '50+', label: 'équipes accompagnées' },
 ];
 
-const TOOLS = ['Make', 'Zapier', 'n8n', 'OpenAI', 'Notion', 'Airtable', 'HubSpot', 'Slack', 'Pipedrive', 'Typeform', 'Monday', 'ActiveCampaign'];
+const TOOLS = [
+  { name: 'Make', logo: 'https://cdn.simpleicons.org/make' },
+  { name: 'Zapier', logo: 'https://cdn.simpleicons.org/zapier' },
+  { name: 'n8n', logo: 'https://cdn.simpleicons.org/n8n' },
+  { name: 'OpenAI', logo: 'https://cdn.simpleicons.org/openai' },
+  { name: 'Notion', logo: 'https://cdn.simpleicons.org/notion' },
+  { name: 'Airtable', logo: 'https://cdn.simpleicons.org/airtable' },
+  { name: 'HubSpot', logo: 'https://cdn.simpleicons.org/hubspot' },
+  { name: 'Slack', logo: 'https://cdn.simpleicons.org/slack' },
+  { name: 'Pipedrive', logo: 'https://cdn.simpleicons.org/pipedrive' },
+  { name: 'Typeform', logo: 'https://cdn.simpleicons.org/typeform' },
+  { name: 'Monday', logo: 'https://cdn.simpleicons.org/mondaydotcom' },
+  { name: 'ActiveCampaign', logo: 'https://cdn.simpleicons.org/activecampaign' },
+];
 
 export default function SocialProof() {
   // Duplicate the tools list for seamless infinite scroll
@@ -63,10 +76,20 @@ export default function SocialProof() {
               >
                 {allTools.map((tool, i) => (
                   <span
-                    key={i}
-                    className="text-sm font-semibold text-muted-foreground/60 hover:text-primary transition-colors duration-300 cursor-default whitespace-nowrap"
+                    key={`${tool.name}-${i}`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground/70 hover:text-primary transition-colors duration-300 cursor-default whitespace-nowrap"
                   >
-                    {tool}
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-background border border-border/70 p-1">
+                      <img
+                        src={tool.logo}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-contain"
+                      />
+                    </span>
+                    {tool.name}
                   </span>
                 ))}
               </div>
