@@ -41,44 +41,44 @@ const CASES = [
 
 export default function CaseStudies() {
   return (
-    <section id="cas-clients" className="py-20 lg:py-32 bg-surface-elevated border-y border-border" aria-label="Cas clients">
+    <section id="cas-clients" className="py-14 lg:py-20 bg-surface-elevated border-y border-border" aria-label="Cas clients">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <RevealWrapper>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground">
+          <div className="max-w-xl">
+            <h2 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-foreground">
               Résultats concrets, pas des promesses
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-3 text-base text-muted-foreground">
               Chaque projet commence par un diagnostic précis et se mesure en résultats.
             </p>
           </div>
         </RevealWrapper>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
           {CASES.map((c, i) => (
             <RevealWrapper key={c.title} delay={i * 0.1}>
-              <div className="flex flex-col h-full p-8 rounded-2xl border border-border bg-background">
+              <div className="flex flex-col h-full p-5 rounded-xl border border-border bg-background">
                 <span className="text-xs font-mono font-medium text-primary uppercase tracking-wider">
                   {c.sector}
                 </span>
-                <h3 className="mt-3 text-xl font-bold text-foreground">{c.title}</h3>
+                <h3 className="mt-2 text-lg font-bold text-foreground">{c.title}</h3>
 
-                <div className="mt-6 space-y-4 flex-1">
+                <div className="mt-4 space-y-3 flex-1">
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Avant</p>
-                    <p className="text-sm text-muted-foreground">{c.before}</p>
+                    <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Avant</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{c.before}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">Après</p>
-                    <p className="text-sm text-foreground">{c.after}</p>
+                    <p className="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1">Après</p>
+                    <p className="text-xs text-foreground leading-relaxed">{c.after}</p>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border grid grid-cols-3 gap-3">
+                <div className="mt-4 pt-4 border-t border-border grid grid-cols-3 gap-2">
                   {c.kpis.map(kpi => (
                     <div key={kpi.label} className="text-center">
-                      <p className="text-xl font-extrabold text-primary">{kpi.value}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">{kpi.label}</p>
+                      <p className="text-lg font-extrabold text-primary leading-none">{kpi.value}</p>
+                      <p className="text-[11px] text-muted-foreground mt-1 leading-tight">{kpi.label}</p>
                     </div>
                   ))}
                 </div>
@@ -88,8 +88,8 @@ export default function CaseStudies() {
         </div>
 
         <RevealWrapper delay={0.4}>
-          <div className="mt-12 text-center">
-            <Button asChild size="lg" className="rounded-full px-8 font-semibold">
+          <div className="mt-8 text-center">
+            <Button asChild className="rounded-full px-7 font-semibold">
               <a href="#contact">
                 Discuter de votre projet
                 <ArrowRight className="w-4 h-4 ml-2" />
