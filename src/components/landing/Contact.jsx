@@ -6,18 +6,89 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import RevealWrapper from './RevealWrapper';
 
+const WEBHOOK_TIMEOUT_MS = 15000;
+
+function getTrackingParams() {
+  const params = new URLSearchParams(window.location.search);
+  const tracking = {};
+
+  for (const [key, value] of params.entries()) {
+    if (
+      key.startsWith('utm_')
+      || key === 'gclid'
+      || key === 'fbclid'
+      || key === 'msclkid'
+      || key === 'ttclid'
+      || key === 'li_fat_id'
+    ) {
+      tracking[key] = value;
+    }
+  }
+
+  return tracking;
+}
+
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', objective: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submittedName, setSubmittedName] = useState('');
+  const [submitError, setSubmitError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+
+    setSubmitError('');
     setLoading(true);
-    // Simulate submission delay
-    await new Promise(resolve => setTimeout(resolve, 1200));
-    setLoading(false);
-    setSubmitted(true);
+
+    try {
+      const webhookUrl = import.meta.env.VITE_LEAD_WEBHOOK_URL;
+      if (!webhookUrl) {
+        throw new Error('Webhook non configuré. Ajoutez VITE_LEAD_WEBHOOK_URL.');
+      }
+
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
+
+      const payload = {
+        ...form,
+        page_url: window.location.href,
+        page_path: window.location.pathname,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+        locale: navigator.language,
+        tracking: getTrackingParams(),
+        created_at: new Date().toISOString(),
+      };
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+
+      window.clearTimeout(timeout);
+
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => '');
+        throw new Error(errorText || `Webhook error (${response.status})`);
+      }
+
+      setSubmittedName(form.name);
+      setSubmitted(true);
+      setForm({ name: '', email: '', objective: '' });
+    } catch (error) {
+      const isTimeout = error?.name === 'AbortError';
+      setSubmitError(
+        isTimeout
+          ? 'Le serveur met trop de temps à répondre. Réessayez dans quelques secondes.'
+          : 'Impossible d’envoyer votre demande pour le moment. Écrivez-nous à contact@ideatoautomation.com.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,7 +146,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-2xl font-bold text-foreground">Demande envoyée !</h3>
                 <p className="mt-3 text-muted-foreground max-w-sm">
-                  Merci {form.name}. Nous revenons vers vous sous 24h ouvrables avec un créneau de diagnostic.
+                  Merci {submittedName || 'à vous'}. Nous revenons vers vous sous 24h ouvrables avec un créneau de diagnostic.
                 </p>
               </div>
             ) : (
@@ -124,10 +195,17 @@ export default function Contact() {
                   </div>
                 </div>
 
+                {submitError && (
+                  <p className="mt-5 text-sm text-destructive" role="alert">
+                    {submitError}
+                  </p>
+                )}
+
                 <Button
                   type="submit"
                   size="lg"
                   disabled={loading}
+                  aria-busy={loading}
                   className="w-full rounded-full font-semibold mt-6"
                 >
                   {loading ? (
