@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview Animation | Impact Automatisation</title>
+  <style>
+    :root {
+      --bg-1: #060b16;
+      --bg-2: #0f1f3b;
+      --line: #47cfff;
+      --line-soft: #88dfff;
+      --desk: #1a2947;
+      --screen: #1c3658;
+      --person: #8be6ff;
+      --person-soft: #58b5d5;
+      --text: #e6f0ff;
+      --muted: #90a7c6;
+      --glow: rgba(71, 207, 255, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Sora", "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 520px at 20% 0%, #11305e, transparent 62%),
+        radial-gradient(900px 500px at 85% 100%, #123f63, transparent 60%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
+    }
+
+    .wrap {
+      width: min(1140px, 100%);
+      display: grid;
+      gap: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+      min-height: 1.6em;
+      transition: opacity 240ms ease;
+    }
+
+    .scene {
+      border: 1px solid rgba(140, 194, 255, 0.32);
+      border-radius: 22px;
+      background:
+        linear-gradient(170deg, rgba(10, 20, 38, 0.95), rgba(11, 27, 50, 0.92)),
+        radial-gradient(380px 220px at 20% 20%, rgba(71, 207, 255, 0.12), transparent 68%);
+      box-shadow:
+        0 24px 54px rgba(5, 11, 24, 0.58),
+        inset 0 0 0 1px rgba(167, 208, 255, 0.06);
+      overflow: hidden;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .floor-grid {
+      stroke: rgba(105, 151, 197, 0.22);
+      stroke-width: 1;
+    }
+
+    .desk {
+      fill: var(--desk);
+      stroke: rgba(141, 182, 224, 0.28);
+      stroke-width: 1;
+      rx: 8;
+    }
+
+    .screen {
+      fill: var(--screen);
+      stroke: rgba(138, 203, 255, 0.42);
+      stroke-width: 1.2;
+      rx: 6;
+    }
+
+    .screen::after {
+      content: "";
+    }
+
+    .screen-light {
+      fill: rgba(96, 213, 255, 0.27);
+      animation: pulseScreen 2.1s ease-in-out infinite;
+    }
+
+    .keyboard {
+      fill: rgba(171, 212, 249, 0.36);
+      rx: 3;
+    }
+
+    .head {
+      fill: var(--person);
+    }
+
+    .body {
+      fill: var(--person-soft);
+      rx: 6;
+    }
+
+    .chair {
+      fill: rgba(129, 182, 228, 0.32);
+      rx: 5;
+    }
+
+    .worker {
+      opacity: 1;
+      transform-origin: center;
+      transition: filter 320ms ease;
+    }
+
+    .worker.core-focus {
+      filter: drop-shadow(0 0 14px rgba(122, 229, 255, 0.7));
+    }
+
+    .worker.evaporate {
+      animation: evaporate 1500ms ease forwards;
+    }
+
+    .worker.evaporate .spark {
+      animation: sparkOut 950ms ease-out forwards;
+    }
+
+    .worker.evaporate .spark:nth-child(1) { animation-delay: 40ms; }
+    .worker.evaporate .spark:nth-child(2) { animation-delay: 120ms; }
+    .worker.evaporate .spark:nth-child(3) { animation-delay: 180ms; }
+    .worker.evaporate .spark:nth-child(4) { animation-delay: 240ms; }
+
+    .spark {
+      opacity: 0;
+      fill: rgba(154, 233, 255, 0.95);
+    }
+
+    .link {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 2.8;
+      opacity: 0.18;
+      filter: drop-shadow(0 0 8px var(--glow));
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .link.active {
+      opacity: 1;
+      animation: flow 980ms ease forwards;
+    }
+
+    .caption {
+      margin: 0;
+      color: #7f9cbe;
+      font-size: 0.8rem;
+      letter-spacing: 0.01em;
+    }
+
+    @keyframes flow {
+      from {
+        stroke-dashoffset: var(--path-length);
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes evaporate {
+      0% {
+        opacity: 1;
+        filter: blur(0);
+      }
+      50% {
+        opacity: 0.45;
+        filter: blur(2px);
+      }
+      100% {
+        opacity: 0;
+        filter: blur(7px);
+      }
+    }
+
+    @keyframes sparkOut {
+      0% {
+        opacity: 0.95;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-18px) scale(0.2);
+      }
+    }
+
+    @keyframes pulseScreen {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.7; }
+    }
+
+    @media (max-width: 760px) {
+      .subtitle {
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .screen-light,
+      .worker,
+      .spark,
+      .link {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Animation Concept: Impact de l'automatisation</h1>
+    <p class="subtitle" id="stageText">Etape 1: plusieurs employes executent des taches manuelles en parallele.</p>
+
+    <section class="scene">
+      <svg viewBox="0 0 1000 620" aria-label="Animation preview automatisation">
+        <defs>
+          <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="floor-grid" />
+          </pattern>
+        </defs>
+
+        <rect x="0" y="0" width="1000" height="620" fill="url(#gridPattern)" opacity="0.35"></rect>
+
+        <g id="links">
+          <path class="link" d="M162 173 C 232 146, 332 146, 402 173"></path>
+          <path class="link" d="M402 173 C 472 146, 572 146, 642 173"></path>
+          <path class="link" d="M642 173 C 712 146, 812 146, 882 173"></path>
+
+          <path class="link" d="M162 403 C 232 376, 332 376, 402 403"></path>
+          <path class="link" d="M402 403 C 472 376, 572 376, 642 403"></path>
+          <path class="link" d="M642 403 C 712 376, 812 376, 882 403"></path>
+
+          <path class="link" d="M162 173 C 138 262, 138 314, 162 403"></path>
+          <path class="link" d="M402 173 C 378 262, 378 314, 402 403"></path>
+          <path class="link" d="M642 173 C 618 262, 618 314, 642 403"></path>
+          <path class="link" d="M882 173 C 858 262, 858 314, 882 403"></path>
+
+          <path class="link" d="M402 173 C 488 218, 556 258, 642 403"></path>
+          <path class="link" d="M642 173 C 556 218, 488 258, 402 403"></path>
+        </g>
+
+        <g id="workers">
+          <g class="worker" data-id="0" transform="translate(90 110)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="1" transform="translate(330 110)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="2" transform="translate(570 110)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="3" transform="translate(810 110)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="4" transform="translate(90 340)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="5" transform="translate(330 340)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="6" transform="translate(570 340)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+
+          <g class="worker" data-id="7" transform="translate(810 340)">
+            <rect class="desk" x="0" y="74" width="144" height="15"></rect>
+            <rect class="screen" x="40" y="42" width="64" height="38"></rect>
+            <rect class="screen-light" x="44" y="46" width="56" height="20"></rect>
+            <rect class="keyboard" x="52" y="84" width="40" height="4"></rect>
+            <circle class="head" cx="72" cy="22" r="12"></circle>
+            <rect class="body" x="62" y="34" width="20" height="28"></rect>
+            <rect class="chair" x="58" y="59" width="28" height="12"></rect>
+            <circle class="spark" cx="72" cy="26" r="3"></circle>
+            <circle class="spark" cx="84" cy="24" r="2.5"></circle>
+            <circle class="spark" cx="62" cy="30" r="2"></circle>
+            <circle class="spark" cx="76" cy="36" r="2.4"></circle>
+          </g>
+        </g>
+      </svg>
+    </section>
+
+    <p class="caption">Preview uniquement: on peut ensuite integrer cette motion dans la page principale, dans une version plus premium.</p>
+  </main>
+
+  <script>
+    const stageText = document.getElementById("stageText");
+    const links = Array.from(document.querySelectorAll(".link"));
+    const workers = Array.from(document.querySelectorAll(".worker"));
+    const keepers = new Set([1, 6]);
+    const sequenceDuration = 11800;
+    let loopTimer = null;
+
+    const messages = {
+      start: "Etape 1: plusieurs employes executent des taches manuelles en parallele.",
+      connect: "Etape 2: les postes se connectent et les workflows s'automatisent.",
+      reduce: "Etape 3: les taches repetitives disparaissent, l'equipe se concentre sur l'essentiel.",
+      end: "Etat final: 2 personnes pilotent un systeme automatise."
+    };
+
+    const initLinks = () => {
+      links.forEach((path) => {
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = String(len);
+        path.style.strokeDashoffset = String(len);
+        path.style.setProperty("--path-length", String(len));
+      });
+    };
+
+    const resetScene = () => {
+      stageText.textContent = messages.start;
+      links.forEach((path) => {
+        path.classList.remove("active");
+        const len = path.getTotalLength();
+        path.style.strokeDashoffset = String(len);
+      });
+      workers.forEach((worker) => {
+        worker.classList.remove("evaporate", "core-focus");
+      });
+    };
+
+    const playSequence = () => {
+      resetScene();
+
+      setTimeout(() => {
+        stageText.textContent = messages.connect;
+        links.forEach((path, index) => {
+          setTimeout(() => {
+            path.classList.add("active");
+          }, index * 190);
+        });
+      }, 1200);
+
+      setTimeout(() => {
+        stageText.textContent = messages.reduce;
+        workers.forEach((worker, index) => {
+          if (keepers.has(index)) {
+            worker.classList.add("core-focus");
+            return;
+          }
+          worker.classList.add("evaporate");
+        });
+      }, 5200);
+
+      setTimeout(() => {
+        stageText.textContent = messages.end;
+      }, 7800);
+    };
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    initLinks();
+
+    if (reducedMotion) {
+      stageText.textContent = messages.end;
+      links.forEach((path) => {
+        path.classList.add("active");
+        path.style.strokeDashoffset = "0";
+      });
+      workers.forEach((worker, index) => {
+        if (keepers.has(index)) worker.classList.add("core-focus");
+        else worker.style.opacity = "0";
+      });
+    } else {
+      playSequence();
+      loopTimer = window.setInterval(playSequence, sequenceDuration);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      if (loopTimer) window.clearInterval(loopTimer);
+    });
+  </script>
+</body>
+</html>
