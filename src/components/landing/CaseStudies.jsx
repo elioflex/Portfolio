@@ -1,6 +1,7 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import RevealWrapper from './RevealWrapper';
 
 const CASES = [
@@ -39,7 +40,58 @@ const CASES = [
   },
 ];
 
+function CaseCard({ c }) {
+  return (
+    <div className="flex flex-col h-full p-5 rounded-xl border border-border bg-background transition-all duration-300">
+      <span className="text-xs font-mono font-medium text-primary uppercase tracking-wider">
+        {c.sector}
+      </span>
+      <h3 className="mt-2 text-lg font-bold text-foreground">{c.title}</h3>
+
+      <div className="mt-4 space-y-3 flex-1">
+        <div>
+          <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Avant</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">{c.before}</p>
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1">Après</p>
+          <p className="text-xs text-foreground leading-relaxed">{c.after}</p>
+        </div>
+      </div>
+
+      <div className="mt-4 pt-4 border-t border-border grid grid-cols-3 gap-2">
+        {c.kpis.map((kpi) => (
+          <div key={kpi.label} className="text-center">
+            <p className="text-lg font-extrabold text-primary leading-none">{kpi.value}</p>
+            <p className="text-[11px] text-muted-foreground mt-1 leading-tight">{kpi.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function CaseStudies() {
+  const [api, setApi] = useState();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => {
+      setActiveIndex(api.selectedScrollSnap());
+    };
+
+    onSelect();
+    api.on('select', onSelect);
+    api.on('reInit', onSelect);
+
+    return () => {
+      api.off('select', onSelect);
+      api.off('reInit', onSelect);
+    };
+  }, [api]);
+
   return (
     <section id="cas-clients" className="py-14 lg:py-20 bg-surface-elevated border-y border-border" aria-label="Cas clients">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,35 +106,62 @@ export default function CaseStudies() {
           </div>
         </RevealWrapper>
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
+        <RevealWrapper delay={0.05}>
+          <div className="mt-8 lg:hidden">
+            <Carousel
+              setApi={setApi}
+              opts={{ align: 'start', loop: true }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-0">
+                {CASES.map((c) => (
+                  <CarouselItem key={c.title} className="pl-0">
+                    <CaseCard c={c} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+
+            <div className="mt-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {CASES.map((c, index) => (
+                  <button
+                    key={c.title}
+                    type="button"
+                    onClick={() => api?.scrollTo(index)}
+                    aria-label={`Aller au cas ${index + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      activeIndex === index ? 'w-6 bg-primary' : 'w-2 bg-border'
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => api?.scrollPrev()}
+                  aria-label="Précédent"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-border bg-background text-foreground hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => api?.scrollNext()}
+                  aria-label="Suivant"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-border bg-background text-foreground hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </RevealWrapper>
+
+        <div className="hidden lg:grid mt-8 grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
           {CASES.map((c, i) => (
             <RevealWrapper key={c.title} delay={i * 0.1}>
-              <div className="flex flex-col h-full p-5 rounded-xl border border-border bg-background">
-                <span className="text-xs font-mono font-medium text-primary uppercase tracking-wider">
-                  {c.sector}
-                </span>
-                <h3 className="mt-2 text-lg font-bold text-foreground">{c.title}</h3>
-
-                <div className="mt-4 space-y-3 flex-1">
-                  <div>
-                    <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Avant</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{c.before}</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-primary uppercase tracking-wider mb-1">Après</p>
-                    <p className="text-xs text-foreground leading-relaxed">{c.after}</p>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-border grid grid-cols-3 gap-2">
-                  {c.kpis.map(kpi => (
-                    <div key={kpi.label} className="text-center">
-                      <p className="text-lg font-extrabold text-primary leading-none">{kpi.value}</p>
-                      <p className="text-[11px] text-muted-foreground mt-1 leading-tight">{kpi.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CaseCard c={c} />
             </RevealWrapper>
           ))}
         </div>
