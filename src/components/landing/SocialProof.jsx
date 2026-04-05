@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TrendingUp, Clock, Users } from 'lucide-react';
 import RevealWrapper from './RevealWrapper';
 
@@ -17,13 +17,14 @@ const TOOLS = [
   { name: 'Airtable', logo: 'https://cdn.simpleicons.org/airtable' },
   { name: 'HubSpot', logo: 'https://cdn.simpleicons.org/hubspot' },
   { name: 'Slack', logo: 'https://cdn.simpleicons.org/slack' },
-  { name: 'Pipedrive', logo: 'https://cdn.simpleicons.org/pipedrive' },
+  { name: 'Pipedrive', logo: 'https://www.google.com/s2/favicons?domain=pipedrive.com&sz=64' },
   { name: 'Typeform', logo: 'https://cdn.simpleicons.org/typeform' },
-  { name: 'Monday', logo: 'https://cdn.simpleicons.org/mondaydotcom' },
-  { name: 'ActiveCampaign', logo: 'https://cdn.simpleicons.org/activecampaign' },
+  { name: 'Monday', logo: 'https://www.google.com/s2/favicons?domain=monday.com&sz=64' },
+  { name: 'ActiveCampaign', logo: 'https://www.google.com/s2/favicons?domain=activecampaign.com&sz=64' },
 ];
 
 export default function SocialProof() {
+  const [failedLogos, setFailedLogos] = useState({});
   // Duplicate the tools list for seamless infinite scroll
   const allTools = [...TOOLS, ...TOOLS];
 
@@ -80,14 +81,21 @@ export default function SocialProof() {
                     className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground/70 hover:text-primary transition-colors duration-300 cursor-default whitespace-nowrap"
                   >
                     <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-background border border-border/70 p-1">
-                      <img
-                        src={tool.logo}
-                        alt=""
-                        aria-hidden="true"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain"
-                      />
+                      {failedLogos[tool.name] ? (
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase leading-none">
+                          {tool.name.slice(0, 2)}
+                        </span>
+                      ) : (
+                        <img
+                          src={tool.logo}
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
+                          onError={() => setFailedLogos((prev) => ({ ...prev, [tool.name]: true }))}
+                          className="w-full h-full object-contain"
+                        />
+                      )}
                     </span>
                     {tool.name}
                   </span>
