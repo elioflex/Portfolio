@@ -54,12 +54,7 @@ export default function Hero() {
             <RevealWrapper delay={0.1}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-foreground">
                 Réduisez 80% du travail manuel de vos équipes{' '}
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{ backgroundImage: 'linear-gradient(135deg, hsl(225,80%,65%) 0%, hsl(200,90%,70%) 100%)' }}
-                >
-                  en 6 semaines.
-                </span>
+                <span>en 6 semaines.</span>
               </h1>
             </RevealWrapper>
 
