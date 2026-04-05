@@ -439,7 +439,7 @@
 
     .hero h1 {
       margin: 0;
-      max-width: 17ch;
+      max-width: 16ch;
       font-family: "Sora", sans-serif;
       font-size: clamp(2.1rem, 4.9vw, 4.2rem);
       line-height: 1.05;
@@ -458,7 +458,7 @@
     }
 
     .hero__lead {
-      margin: 20px 0 26px;
+      margin: 16px 0 14px;
       max-width: 60ch;
       color: var(--muted);
       line-height: 1.75;
@@ -474,6 +474,43 @@
       transition-delay: 0.2s;
     }
 
+    .hero__focus {
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      max-width: 60ch;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.58s ease, transform 0.58s ease;
+    }
+
+    body.is-ready .hero__focus {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.42s;
+    }
+
+    .hero__focus li {
+      position: relative;
+      padding-left: 18px;
+      color: #48637e;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .hero__focus li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.49em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    }
+
     .hero__actions {
       display: flex;
       flex-wrap: wrap;
@@ -486,7 +523,23 @@
     body.is-ready .hero__actions {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0.28s;
+      transition-delay: 0.34s;
+    }
+
+    .hero__microcopy {
+      margin: 8px 0 0;
+      color: #5a738d;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.58s ease, transform 0.58s ease;
+    }
+
+    body.is-ready .hero__microcopy {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.38s;
     }
 
     .hero__trust {
@@ -502,7 +555,7 @@
     body.is-ready .hero__trust {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0.32s;
+      transition-delay: 0.48s;
     }
 
     .hero__trust span {
@@ -531,7 +584,7 @@
     body.is-ready .hero__numbers {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0.4s;
+      transition-delay: 0.56s;
     }
 
     .hero__numbers article {
@@ -2657,7 +2710,9 @@
 
       .hero h1 .word,
       .hero__lead,
+      .hero__focus,
       .hero__actions,
+      .hero__microcopy,
       .hero__trust,
       .hero__numbers {
         animation: none !important;
@@ -2802,8 +2857,20 @@
       }
 
       .hero h1 {
-        font-size: clamp(2rem, 9.5vw, 3rem);
-        line-height: 1.06;
+        font-size: clamp(1.86rem, 8.4vw, 2.85rem);
+        line-height: 1.08;
+      }
+
+      .hero__focus {
+        margin-bottom: 16px;
+      }
+
+      .hero__focus li {
+        font-size: 0.86rem;
+      }
+
+      .hero__microcopy {
+        font-size: 0.78rem;
       }
 
       .hero__numbers {
@@ -2978,28 +3045,33 @@
     <section class="hero" id="accueil">
       <div class="hero__grid">
         <div>
-          <p class="eyebrow">Idea To Automation</p>
-          <h1 data-split="words">Automatisez vos opérations critiques et libérez vos équipes en moins de 90 jours.</h1>
+          <p class="eyebrow">Automatisation opérationnelle pour PME</p>
+          <h1 data-split="words">Réduisez de 30 à 70 % le temps de vos opérations critiques en moins de 90 jours.</h1>
           <p class="hero__lead">
-            Nous accompagnons les PME qui veulent réduire la charge opérationnelle sans ralentir leur croissance.
-            De la qualification commerciale à la facturation, nous déployons des workflows fiables, mesurables et maintenables.
+            Nous aidons les équipes opérations, finance et revenue à supprimer les tâches manuelles répétitives sans casser les process existants.
           </p>
 
           <div class="hero__actions">
-            <a class="cta" href="#lead-form" data-cta="hero-principal">Réserver un diagnostic</a>
+            <a class="cta" href="#lead-form" data-cta="hero-principal">Réserver un diagnostic 30 min</a>
             <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="hero-calendly">Prendre un créneau</a>
           </div>
+          <p class="hero__microcopy">Sans engagement. Réponse sous 24h ouvrables.</p>
+          <ul class="hero__focus" aria-label="Résultats attendus du diagnostic">
+            <li>Diagnostic de 30 min pour identifier vos 3 workflows prioritaires.</li>
+            <li>Plan d'exécution en 72h avec estimation des gains business.</li>
+            <li>Mise en production pilote en 2 à 6 semaines selon votre contexte.</li>
+          </ul>
 
           <div class="hero__trust">
-            <span>Diagnostic de 30 min sans engagement</span>
-            <span>Plan d'action priorisé en 72h</span>
-            <span>Pilote déployé en 2 à 6 semaines</span>
+            <span>NDA possible dès la phase de cadrage</span>
+            <span>Décision claire: lancer, cadrer ou reporter</span>
+            <span>Compatible avec votre stack existante</span>
           </div>
 
           <div class="hero__numbers">
             <article>
               <strong>-72%</strong>
-              <span>de temps moyen gagné sur les opérations répétitives</span>
+              <span>de temps opérationnel sur les tâches répétitives</span>
             </article>
             <article>
               <strong>+3.8x</strong>
