@@ -391,7 +391,7 @@
     }
 
     .hero {
-      min-height: 92vh;
+      min-height: 88vh;
       display: grid;
       place-items: center;
       position: relative;
@@ -458,11 +458,11 @@
     }
 
     .hero__lead {
-      margin: 16px 0 14px;
+      margin: 14px 0 12px;
       max-width: 60ch;
       color: var(--muted);
-      line-height: 1.75;
-      font-size: clamp(1rem, 1.7vw, 1.16rem);
+      line-height: 1.66;
+      font-size: clamp(0.98rem, 1.55vw, 1.1rem);
       opacity: 0;
       transform: translateY(15px);
       transition: opacity 0.58s ease, transform 0.58s ease;
@@ -475,11 +475,11 @@
     }
 
     .hero__focus {
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       padding: 0;
       list-style: none;
       display: grid;
-      gap: 8px;
+      gap: 7px;
       max-width: 60ch;
       opacity: 0;
       transform: translateY(15px);
@@ -496,8 +496,8 @@
       position: relative;
       padding-left: 18px;
       color: #48637e;
-      font-size: 0.88rem;
-      line-height: 1.55;
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
 
     .hero__focus li::before {
@@ -529,7 +529,7 @@
     .hero__microcopy {
       margin: 8px 0 0;
       color: #5a738d;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       line-height: 1.45;
       opacity: 0;
       transform: translateY(12px);
@@ -542,68 +542,21 @@
       transition-delay: 0.38s;
     }
 
-    .hero__trust {
-      margin-top: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .hero__proof {
+      margin: 8px 0 0;
+      color: #4a6785;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      font-weight: 600;
       opacity: 0;
-      transform: translateY(14px);
+      transform: translateY(12px);
       transition: opacity 0.58s ease, transform 0.58s ease;
     }
 
-    body.is-ready .hero__trust {
+    body.is-ready .hero__proof {
       opacity: 1;
       transform: translateY(0);
       transition-delay: 0.48s;
-    }
-
-    .hero__trust span {
-      border: 1px solid #cfe0f1;
-      background: #f4f9ff;
-      color: #3d607f;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 0.77rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-
-    .hero__numbers {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      max-width: 560px;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.58s ease, transform 0.58s ease;
-    }
-
-    body.is-ready .hero__numbers {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.56s;
-    }
-
-    .hero__numbers article {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 12px;
-    }
-
-    .hero__numbers strong {
-      display: block;
-      font-family: "Sora", sans-serif;
-      font-size: 1.2rem;
-      color: #1f66c7;
-    }
-
-    .hero__numbers span {
-      font-size: 0.84rem;
-      color: #607489;
     }
 
     .proof-strip {
@@ -2555,8 +2508,7 @@
       .hero__focus,
       .hero__actions,
       .hero__microcopy,
-      .hero__trust,
-      .hero__numbers,
+      .hero__proof,
       .reveal .stagger-item,
       details[open] > *:not(summary) {
         animation: none !important;
@@ -2701,8 +2653,8 @@
         font-size: 0.78rem;
       }
 
-      .hero__numbers {
-        grid-template-columns: 1fr;
+      .hero__proof {
+        font-size: 0.8rem;
       }
 
       .proof-strip__metrics {
@@ -2867,40 +2819,20 @@
           <p class="eyebrow">Automatisation opérationnelle pour PME</p>
           <h1 data-split="words">Réduisez de 30 à 70 % le temps de vos opérations critiques.</h1>
           <p class="hero__lead">
-            Nous aidons les équipes opérations, finance et revenue à supprimer les tâches manuelles répétitives sans casser les process existants.
+            Nous aidons vos équipes sales, support, ops et finance à supprimer les tâches répétitives sans casser vos process existants.
           </p>
+          <ul class="hero__focus" aria-label="Résultats attendus du diagnostic">
+            <li>Diagnostic de 30 min pour identifier vos 3 workflows prioritaires.</li>
+            <li>Plan d'exécution en 72h avec estimation des gains business.</li>
+            <li>Pilote livré en 2 à 6 semaines selon votre contexte.</li>
+          </ul>
 
           <div class="hero__actions">
             <a class="cta" href="#lead-form" data-cta="hero-principal">Réserver un diagnostic 30 min</a>
             <a class="cta-secondary" href="https://calendly.com/ideatoautomation/diagnostic" target="_blank" rel="noopener noreferrer" data-cta="hero-calendly">Prendre un créneau</a>
           </div>
           <p class="hero__microcopy">Sans engagement. Réponse sous 24h ouvrables.</p>
-          <ul class="hero__focus" aria-label="Résultats attendus du diagnostic">
-            <li>Diagnostic de 30 min pour identifier vos 3 workflows prioritaires.</li>
-            <li>Plan d'exécution en 72h avec estimation des gains business.</li>
-            <li>Mise en production pilote en 2 à 6 semaines selon votre contexte.</li>
-          </ul>
-
-          <div class="hero__trust">
-            <span>NDA possible dès la phase de cadrage</span>
-            <span>Décision claire: lancer, cadrer ou reporter</span>
-            <span>Compatible avec votre stack existante</span>
-          </div>
-
-          <div class="hero__numbers">
-            <article>
-              <strong>-72%</strong>
-              <span>de temps opérationnel sur les tâches répétitives</span>
-            </article>
-            <article>
-              <strong>+3.8x</strong>
-              <span>de vitesse d'exécution sur les processus internes</span>
-            </article>
-            <article>
-              <strong>99.2%</strong>
-              <span>de fiabilité sur les workflows en production</span>
-            </article>
-          </div>
+          <p class="hero__proof">11 projets livrés depuis 2024 • NDA possible dès le cadrage • ROI observé en 30 à 90 jours.</p>
         </div>
 
         <div class="hero__visual" id="heroVisual" aria-hidden="true">
@@ -2909,18 +2841,18 @@
 
           <div class="command-card" id="commandCard">
             <div class="command-card__head">
-              <span>Execution Console</span>
+              <span>Console d'exécution</span>
               <span class="dots"><span></span><span></span><span></span></span>
             </div>
-            <div class="line"><b>Lead -> Qualification IA</b><code>n8n + GPT</code><small>LIVE</small></div>
+            <div class="line"><b>Lead -> Qualification IA</b><code>n8n + GPT</code><small>ACTIF</small></div>
             <div class="line"><b>Facture -> ERP -> Banque</b><code>API + OCR</code><small>SYNC</small></div>
-            <div class="line"><b>Ticket -> Routage Support</b><code>AI classifier</code><small>AUTO</small></div>
-            <div class="line"><b>Data -> Dashboard KPI</b><code>ETL + BI</code><small>OK</small></div>
+            <div class="line"><b>Ticket -> Routage Support</b><code>Classifieur IA</code><small>AUTO</small></div>
+            <div class="line"><b>Données -> Dashboard KPI</b><code>ETL + BI</code><small>OK</small></div>
           </div>
 
           <aside class="micro micro--left">
             <strong>24/7</strong>
-            Operations automatisees
+            Opérations automatisées
           </aside>
           <aside class="micro micro--right">
             <strong>ROI &lt; 90 jours</strong>
