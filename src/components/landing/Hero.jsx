@@ -5,33 +5,34 @@ import RevealWrapper from './RevealWrapper';
 
 export default function Hero() {
   return (
-    <section className="relative pt-28 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen flex items-center" aria-label="Introduction">
+    <section
+      className="relative pt-28 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen flex items-center"
+      aria-label="Introduction"
+      style={{
+        background: 'linear-gradient(135deg, hsl(220,20%,5%) 0%, hsl(225,40%,12%) 50%, hsl(220,20%,7%) 100%)',
+        backgroundSize: '400% 400%',
+        animation: 'gradientShift 10s ease infinite',
+      }}
+    >
       {/* Video background */}
       <video
         autoPlay
         loop
         muted
         playsInline
+        preload="metadata"
+        poster="https://images.pexels.com/videos/36439665/pictures/preview-3.jpg"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="https://videos.pexels.com/video-files/36439665/36439665-uhd_2560_1440_24fps.mp4" type="video/mp4" />
-        <source src="https://videos.pexels.com/video-files/36439665/36439665-hd_1920_1080_24fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/36439665/15452141_1920_1080_60fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/36439665/15452135_1280_720_60fps.mp4" type="video/mp4" />
       </video>
-      {/* Animated gradient fallback (shows if video fails) */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: 'linear-gradient(135deg, hsl(220,20%,5%) 0%, hsl(225,40%,12%) 50%, hsl(220,20%,7%) 100%)',
-          backgroundSize: '400% 400%',
-          animation: 'gradientShift 10s ease infinite',
-        }}
-      />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/85 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-background/52 z-10 pointer-events-none" />
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/85 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/42 via-transparent to-transparent z-10 pointer-events-none" />
       {/* Blue glow accent */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl z-10 pointer-events-none" />
 
@@ -57,7 +58,7 @@ export default function Hero() {
           </RevealWrapper>
 
           <RevealWrapper delay={0.2}>
-            <p className="mt-6 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="mt-6 text-lg lg:text-xl text-foreground/72 leading-relaxed max-w-2xl">
               Nous concevons et déployons des systèmes d'automatisation sur mesure pour les équipes en croissance.
               Moins d'erreurs, une exécution plus rapide, des résultats mesurables.
             </p>
