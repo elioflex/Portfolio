@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 const WEBHOOK_TIMEOUT_MS = 15000;
@@ -38,6 +39,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
+    trackEvent('lead_submit_attempt', { form: 'contact' });
 
     setSubmitError('');
     setLoading(true);
@@ -79,6 +81,7 @@ export default function Contact() {
       setSubmittedName(form.name);
       setSubmitted(true);
       setForm({ name: '', email: '', objective: '' });
+      trackEvent('lead_submit_success', { form: 'contact' });
     } catch (error) {
       const isTimeout = error?.name === 'AbortError';
       setSubmitError(
@@ -86,6 +89,10 @@ export default function Contact() {
           ? 'Le serveur met trop de temps à répondre. Réessayez dans quelques secondes.'
           : 'Impossible d’envoyer votre demande pour le moment. Écrivez-nous à contact@ideatoautomation.com.'
       );
+      trackEvent('lead_submit_error', {
+        form: 'contact',
+        reason: isTimeout ? 'timeout' : 'request_error',
+      });
     } finally {
       setLoading(false);
     }

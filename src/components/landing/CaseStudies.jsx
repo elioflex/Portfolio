@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 const CASES = [
@@ -169,7 +170,10 @@ export default function CaseStudies() {
         <RevealWrapper delay={0.4}>
           <div className="mt-8 text-center">
             <Button asChild className="rounded-full px-7 font-semibold">
-              <a href="#contact">
+              <a
+                href="#contact"
+                onClick={() => trackEvent('cta_click', { placement: 'case_studies_section', cta_text: 'discuss_project' })}
+              >
                 Discuter de votre projet
                 <ArrowRight className="w-4 h-4 ml-2" />
               </a>

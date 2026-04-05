@@ -1,4 +1,5 @@
 import React from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 const QUICK_LINKS = [
   { label: 'Offres', href: '#offres' },
@@ -52,6 +53,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-50">Contact</h4>
             <a
               href="mailto:contact@ideatoautomation.com"
+              onClick={() => trackEvent('contact_click', { channel: 'email_footer' })}
               className="text-sm opacity-70 hover:opacity-100 transition-opacity"
             >
               contact@ideatoautomation.com

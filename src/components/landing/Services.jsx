@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, BarChart3, Headphones, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 const SERVICES = [
@@ -70,7 +71,10 @@ export default function Services() {
               Diagnostic 30 min → plan d'exécution 72h → pilote en 2 à 6 semaines.
             </p>
             <Button asChild size="lg" className="rounded-full px-8 font-semibold">
-              <a href="#contact">
+              <a
+                href="#contact"
+                onClick={() => trackEvent('cta_click', { placement: 'services_section', cta_text: 'book_diagnostic' })}
+              >
                 Réserver un diagnostic
                 <ArrowRight className="w-4 h-4 ml-2" />
               </a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Calendar, Clock, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 export default function HeroPreview2() {
@@ -93,7 +94,10 @@ export default function HeroPreview2() {
                   size="lg"
                   className="rounded-full px-8 font-semibold text-base shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.03] transition-all duration-300"
                 >
-                  <a href="#contact">
+                  <a
+                    href="#contact"
+                    onClick={() => trackEvent('cta_click', { placement: 'hero_primary', cta_text: 'book_diagnostic' })}
+                  >
                     Réserver un diagnostic
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </a>
@@ -104,7 +108,12 @@ export default function HeroPreview2() {
                   size="lg"
                   className="rounded-full px-8 font-semibold text-base border-border/50 backdrop-blur-sm hover:bg-white/10 hover:border-primary/40 hover:scale-[1.03] transition-all duration-300"
                 >
-                  <a href="#methode">Découvrir la méthode</a>
+                  <a
+                    href="#methode"
+                    onClick={() => trackEvent('cta_click', { placement: 'hero_secondary', cta_text: 'discover_method' })}
+                  >
+                    Découvrir la méthode
+                  </a>
                 </Button>
               </div>
             </RevealWrapper>

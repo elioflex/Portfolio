@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 const FOUNDERS = [
@@ -47,7 +48,10 @@ export default function Team() {
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{f.bio}</p>
                 <div className="mt-6">
                   <Button asChild variant="outline" size="sm" className="rounded-full">
-                    <a href="#contact">
+                    <a
+                      href="#contact"
+                      onClick={() => trackEvent('cta_click', { placement: 'team_section', cta_text: 'contact_founder' })}
+                    >
                       Prendre contact
                       <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                     </a>

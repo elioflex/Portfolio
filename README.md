@@ -23,11 +23,13 @@ Any change pushed to the repo will also be reflected in the Base44 Builder.
 VITE_BASE44_APP_ID=your_app_id
 VITE_BASE44_APP_BASE_URL=your_backend_url
 VITE_LEAD_WEBHOOK_URL=your_n8n_webhook_url
+VITE_GA_ID=G-XXXXXXXXXX
 
 e.g.
 VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
 VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.db.app
 VITE_LEAD_WEBHOOK_URL=https://your-n8n-domain/webhook/lead
+VITE_GA_ID=G-XXXXXXXXXX
 ```
 
 Run the app: `npm run dev`
