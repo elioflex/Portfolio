@@ -899,6 +899,19 @@
       line-height: 1.7;
     }
 
+    .reveal .stagger-item {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.42s ease, transform 0.42s ease;
+      transition-delay: 0ms;
+    }
+
+    .reveal.in .stagger-item {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: calc(var(--stagger-index, 0) * 60ms);
+    }
+
     .offers,
     .cases,
     .studies,
@@ -1076,37 +1089,6 @@
       font-size: 0.82rem;
       color: #4b6681;
       line-height: 1.55;
-      font-weight: 600;
-    }
-
-    .cases-proof {
-      margin: 14px 0 0;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .cases-proof__item {
-      border: 1px solid #cbddef;
-      border-radius: 12px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(239, 248, 255, 0.86));
-      padding: 11px 12px 10px;
-      display: grid;
-      gap: 4px;
-      align-content: start;
-    }
-
-    .cases-proof__item strong {
-      color: #214f84;
-      font-family: "Sora", sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.2;
-    }
-
-    .cases-proof__item span {
-      color: #527191;
-      font-size: 0.79rem;
-      line-height: 1.45;
       font-weight: 600;
     }
 
@@ -1289,64 +1271,6 @@
       color: #5a728b;
       font-size: 0.78rem;
       line-height: 1.45;
-    }
-
-    .studies-proof {
-      margin-top: 14px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .studies-proof__item {
-      border: 1px solid #cddff1;
-      border-radius: 12px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(241, 248, 255, 0.92));
-      padding: 10px 12px;
-      display: grid;
-      gap: 3px;
-      align-content: start;
-    }
-
-    .studies-proof__item strong {
-      color: #27578d;
-      font-family: "Sora", sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.3;
-    }
-
-    .studies-proof__item span {
-      color: #54718f;
-      font-size: 0.78rem;
-      line-height: 1.45;
-      font-weight: 600;
-    }
-
-    .study-card__framework {
-      margin: 2px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 7px;
-    }
-
-    .study-card__framework li {
-      position: relative;
-      padding-left: 16px;
-      color: #4a6684;
-      font-size: 0.83rem;
-      line-height: 1.52;
-    }
-
-    .study-card__framework li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.47em;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
     }
 
     .study-card__actions {
@@ -1951,6 +1875,14 @@
       background: rgba(255, 255, 255, 0.88);
       padding: 13px 15px;
       box-shadow: var(--shadow-md);
+    }
+
+    details > *:not(summary) {
+      overflow: hidden;
+    }
+
+    details[open] > *:not(summary) {
+      animation: detailsReveal 0.22s ease;
     }
 
     .faq summary {
@@ -2633,6 +2565,17 @@
       }
     }
 
+    @keyframes detailsReveal {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @keyframes preloaderIntro {
       0% {
         opacity: 0;
@@ -2714,7 +2657,9 @@
       .hero__actions,
       .hero__microcopy,
       .hero__trust,
-      .hero__numbers {
+      .hero__numbers,
+      .reveal .stagger-item,
+      details[open] > *:not(summary) {
         animation: none !important;
         transition: none !important;
         opacity: 1 !important;
@@ -2755,10 +2700,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .cases-proof {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       .process-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2768,10 +2709,6 @@
       }
 
       .studies-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .studies-proof {
         grid-template-columns: 1fr;
       }
 
@@ -2878,10 +2815,6 @@
       }
 
       .proof-strip__metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .cases-proof {
         grid-template-columns: 1fr;
       }
 
@@ -3272,7 +3205,7 @@
     <section class="container reveal" id="fit">
       <div class="section-title">
         <h2>Pour qui / pas pour qui</h2>
-        <p>Ce format fonctionne quand les objectifs, les données et la capacité de mise en œuvre sont alignés.</p>
+        <p>Ce format fonctionne si l'équipe peut décider vite et déployer un pilote rapidement.</p>
       </div>
 
       <div class="fit-grid">
@@ -3281,7 +3214,6 @@
           <ul class="bullet-list">
             <li>Vous avez des flux répétitifs avec un volume suffisant pour créer un ROI rapide.</li>
             <li>Un décideur métier et un référent technique sont disponibles pendant le projet.</li>
-            <li>Vous voulez une mise en production pilote en quelques semaines, pas un projet à 12 mois.</li>
           </ul>
         </article>
 
@@ -3290,7 +3222,6 @@
           <ul class="bullet-list">
             <li>Vous cherchez uniquement une maquette sans déploiement en production.</li>
             <li>Vos données sont inaccessibles ou non exploitables à court terme.</li>
-            <li>Aucun sponsor interne ne peut valider les priorités et les changements d'usage.</li>
           </ul>
         </article>
       </div>
@@ -3299,25 +3230,7 @@
     <section class="cases container reveal" id="cas">
       <div class="section-title">
         <h2>Cas clients et résultats mesurables</h2>
-        <p>Chaque mission est pilotée par des indicateurs concrets: temps gagné, erreurs réduites, revenus accélérés.</p>
-        <div class="cases-proof" aria-label="Repères de performance observés">
-          <article class="cases-proof__item">
-            <strong>3 flux critiques</strong>
-            <span>RevOps, order-to-cash et support client déjà industrialisés.</span>
-          </article>
-          <article class="cases-proof__item">
-            <strong>5 à 8 semaines</strong>
-            <span>Fenêtre de déploiement typique pour un premier pilote en production.</span>
-          </article>
-          <article class="cases-proof__item">
-            <strong>ROI &lt; 90 jours</strong>
-            <span>Résultats suivis sur les KPI business décidés en amont avec l'équipe.</span>
-          </article>
-          <article class="cases-proof__item">
-            <strong>Validation sous NDA</strong>
-            <span>Chiffres détaillés et contexte complet partagés pendant le diagnostic.</span>
-          </article>
-        </div>
+        <p>3 exemples réels, orientés résultats.</p>
       </div>
 
       <div class="card-grid card-grid--3">
@@ -3327,9 +3240,8 @@
             <p class="case__summary">+41% SQL en 6 semaines</p>
           </div>
           <h3>Qualification commerciale automatisée</h3>
-          <p class="case__line"><strong>Contexte</strong> Leads qualifiés trop lentement et pipeline commercial instable.</p>
-          <p class="case__line"><strong>Intervention</strong> Scoring IA, qualification automatique, relances CRM et dashboard RevOps.</p>
-          <p class="case__meta">Équipe: Head of Revenue + 6 SDR | Durée: 6 semaines | Flux: lead-to-SQL</p>
+          <p class="case__line">Scoring IA, qualification automatique et relances CRM orchestrées.</p>
+          <p class="case__meta">6 semaines • Flux lead-to-SQL</p>
           <div class="case__delta" aria-label="Avant après SaaS B2B">
             <article class="case__delta-item">
               <span>Avant</span>
@@ -3354,9 +3266,8 @@
             <p class="case__summary">Erreurs facture -87%</p>
           </div>
           <h3>Order-to-cash fiabilisé de bout en bout</h3>
-          <p class="case__line"><strong>Contexte</strong> Retards de facturation et erreurs de saisie entre sites et ERP.</p>
-          <p class="case__line"><strong>Intervention</strong> Automatisation commandes-achats-facturation avec OCR et contrôles d'anomalies.</p>
-          <p class="case__meta">Équipe: Direction Finance + Operations | Durée: 8 semaines | Flux: order-to-cash</p>
+          <p class="case__line">Automatisation commandes, OCR et contrôles d'anomalies en continu.</p>
+          <p class="case__meta">8 semaines • Flux order-to-cash</p>
           <div class="case__delta" aria-label="Avant après industrie">
             <article class="case__delta-item">
               <span>Avant</span>
@@ -3381,9 +3292,8 @@
             <p class="case__summary">Temps de réponse -53%</p>
           </div>
           <h3>Support client unifie et pilote par SLA</h3>
-          <p class="case__line"><strong>Contexte</strong> Support fragmenté, délais de réponse trop longs et reporting manuel.</p>
-          <p class="case__line"><strong>Intervention</strong> Routage automatique, orchestration support-planning et suivi SLA en temps réel.</p>
-          <p class="case__meta">Équipe: Responsable Service Client + Ops | Durée: 5 semaines | Flux: support-to-resolution</p>
+          <p class="case__line">Routage automatique, orchestration support-planning et suivi SLA.</p>
+          <p class="case__meta">5 semaines • Flux support-to-resolution</p>
           <div class="case__delta" aria-label="Avant après support">
             <article class="case__delta-item">
               <span>Avant</span>
@@ -3406,22 +3316,8 @@
 
     <section class="studies container reveal" id="etudes" data-hide-mobile-cta>
       <div class="section-title">
-        <h2>Études de cas détaillées</h2>
-        <p>Deux exemples documentés avec contexte, stack, délai et KPI avant/après. Les références détaillées sont partagées pendant le call (NDA).</p>
-        <div class="studies-proof" aria-label="Niveau de preuve des études de cas">
-          <article class="studies-proof__item">
-            <strong>Contexte + stack + KPI</strong>
-            <span>Chaque étude documente la chaîne complète, pas seulement un résultat marketing.</span>
-          </article>
-          <article class="studies-proof__item">
-            <strong>Mesures avant / après</strong>
-            <span>Indicateurs chiffrés sur les mêmes périmètres pour une lecture décisionnelle.</span>
-          </article>
-          <article class="studies-proof__item">
-            <strong>Feuille de route activable</strong>
-            <span>Le diagnostic transforme ces apprentissages en plan d'exécution adapté à votre contexte.</span>
-          </article>
-        </div>
+        <h2>Études de cas (version courte)</h2>
+        <p>Deux cas résumés avec KPI avant/après.</p>
       </div>
 
       <div class="studies-grid">
@@ -3430,14 +3326,8 @@
             <span class="case__tag">SaaS B2B</span>
             <span class="badge">6 semaines</span>
           </div>
-          <h3>Qualification commerciale automatisée pour une équipe RevOps</h3>
-          <p>Stack déployée: HubSpot, n8n, OpenAI API, scoring IA, séquences de relance et dashboard d'arbitrage commercial.</p>
-          <p class="study-card__meta">Périmètre: lead-to-SQL | Équipe: Head of Revenue + 6 SDR</p>
-          <ul class="study-card__framework">
-            <li>Point de départ: qualification irrégulière et dépendance forte au traitement manuel.</li>
-            <li>Levier activé: scoring + routage + relance orchestrés avec garde-fous RevOps.</li>
-            <li>Résultat: rythme commercial stabilisé et meilleure capacité d'arbitrage pipeline.</li>
-          </ul>
+          <h3>Qualification commerciale automatisée</h3>
+          <p>Stack: HubSpot, n8n, OpenAI API.</p>
           <div class="study-kpi-grid" aria-label="KPI avant après SaaS B2B">
             <article class="study-kpi">
               <span>Avant</span>
@@ -3447,17 +3337,7 @@
             <article class="study-kpi">
               <span>Après</span>
               <strong>8 min</strong>
-              <small>Qualification initiale automatisée</small>
-            </article>
-            <article class="study-kpi">
-              <span>Avant</span>
-              <strong>9.8%</strong>
-              <small>Taux de conversion lead-to-SQL</small>
-            </article>
-            <article class="study-kpi">
-              <span>Après</span>
-              <strong>13.8%</strong>
-              <small>+41% de SQL en 6 semaines</small>
+              <small>+41% SQL en 6 semaines</small>
             </article>
           </div>
           <div class="study-card__actions">
@@ -3470,14 +3350,8 @@
             <span class="case__tag">Industrie multi-sites</span>
             <span class="badge">8 semaines</span>
           </div>
-          <h3>Order-to-cash fiabilisé avec contrôles de données en continu</h3>
-          <p>Stack déployée: ERP, OCR, Airtable, automatisations n8n, alerting Slack, tableau de bord finance et conformité des flux.</p>
-          <p class="study-card__meta">Périmètre: order-to-cash | Équipe: Direction Finance + Operations</p>
-          <ul class="study-card__framework">
-            <li>Point de départ: écarts de données inter-sites et facturation instable.</li>
-            <li>Levier activé: OCR + contrôles automatiques + alerting + traçabilité finance.</li>
-            <li>Résultat: réduction massive des erreurs et pilotage beaucoup plus rapide.</li>
-          </ul>
+          <h3>Order-to-cash fiabilisé</h3>
+          <p>Stack: ERP, OCR, Airtable, n8n.</p>
           <div class="study-kpi-grid" aria-label="KPI avant après Industrie">
             <article class="study-kpi">
               <span>Avant</span>
@@ -3488,16 +3362,6 @@
               <span>Après</span>
               <strong>1.6%</strong>
               <small>-87% d'erreurs facture</small>
-            </article>
-            <article class="study-kpi">
-              <span>Avant</span>
-              <strong>5 j</strong>
-              <small>Délai moyen de consolidation</small>
-            </article>
-            <article class="study-kpi">
-              <span>Après</span>
-              <strong>&lt; 24h</strong>
-              <small>Données fiabilisées en quasi temps réel</small>
             </article>
           </div>
           <div class="study-card__actions">
@@ -4406,6 +4270,15 @@
       syncMarqueeVisibility();
       document.addEventListener("visibilitychange", syncMarqueeVisibility);
     }
+
+    const staggerContainers = document.querySelectorAll(".card-grid, .studies-grid, .process-grid, .faq-list, .fit-grid");
+    staggerContainers.forEach((container) => {
+      Array.from(container.children).forEach((child, index) => {
+        if (!(child instanceof HTMLElement)) return;
+        child.classList.add("stagger-item");
+        child.style.setProperty("--stagger-index", String(index));
+      });
+    });
 
     const revealNodes = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
