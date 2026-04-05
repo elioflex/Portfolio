@@ -1,0 +1,79 @@
+import React from 'react';
+import { TrendingUp, Clock, Users } from 'lucide-react';
+import RevealWrapper from './RevealWrapper';
+
+const KPIS = [
+  { icon: TrendingUp, value: '3x', label: 'plus rapide en exécution opérationnelle' },
+  { icon: Clock, value: '80%', label: 'de tâches manuelles éliminées' },
+  { icon: Users, value: '50+', label: 'équipes accompagnées' },
+];
+
+const TOOLS = ['Make', 'Zapier', 'n8n', 'OpenAI', 'Notion', 'Airtable', 'HubSpot', 'Slack', 'Pipedrive', 'Typeform', 'Monday', 'ActiveCampaign'];
+
+export default function SocialProof() {
+  // Duplicate the tools list for seamless infinite scroll
+  const allTools = [...TOOLS, ...TOOLS];
+
+  return (
+    <section className="py-16 lg:py-24 border-y border-border bg-surface-elevated" aria-label="Preuves sociales">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* KPI cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+          {KPIS.map((kpi, i) => (
+            <RevealWrapper key={kpi.value} delay={i * 0.1}>
+              <div className="flex items-start gap-4 p-6 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 group">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+                  <kpi.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-foreground">{kpi.value}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{kpi.label}</p>
+                </div>
+              </div>
+            </RevealWrapper>
+          ))}
+        </div>
+
+        {/* Testimonial */}
+        <RevealWrapper delay={0.3}>
+          <blockquote className="mt-12 max-w-2xl mx-auto text-center">
+            <p className="text-lg lg:text-xl text-foreground italic leading-relaxed">
+              "En 4 semaines, IdeaToAutomation a automatisé notre onboarding client. On a gagné 12h par semaine et réduit les erreurs de 90%."
+            </p>
+            <footer className="mt-4 text-sm text-muted-foreground">
+              — Directeur Opérations, SaaS B2B (série A)
+            </footer>
+          </blockquote>
+        </RevealWrapper>
+
+        {/* Infinite scrolling tools marquee */}
+        <RevealWrapper delay={0.4}>
+          <div className="mt-12 pt-8 border-t border-border overflow-hidden">
+            <p className="text-center text-xs font-medium text-muted-foreground uppercase tracking-widest mb-6">
+              Outils que nous intégrons
+            </p>
+            <div className="relative">
+              {/* Fade edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-elevated to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-elevated to-transparent z-10 pointer-events-none" />
+
+              <div
+                className="flex gap-12 marquee-track"
+                style={{ animation: 'marquee 25s linear infinite', width: 'max-content' }}
+              >
+                {allTools.map((tool, i) => (
+                  <span
+                    key={i}
+                    className="text-sm font-semibold text-muted-foreground/60 hover:text-primary transition-colors duration-300 cursor-default whitespace-nowrap"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </RevealWrapper>
+      </div>
+    </section>
+  );
+}

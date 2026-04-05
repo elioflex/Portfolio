@@ -1,45 +1,41 @@
-# Portfolio IdeaToAutomation - Automatisation & IA
+const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
 
-Landing page portfolio premium en francais pour presenter des solutions d'automatisation en entreprise.
+**Welcome to your Base44 project** 
 
-## Version actuelle
-- Design original (non clone)
-- Hero cinematic avec intro animee (Option 1)
-- Sections: Services, Methode, Projets, Contact
-- Responsive desktop/mobile
-- Stack: HTML + CSS + JavaScript (vanilla)
+**About**
 
-## Fichiers
-- `index.html` (tout-en-un)
+View and Edit  your app on [db.com](http://db.com) 
 
-## Logo & favicon
-- Logo principal clair: `assets/logo/logo-primary-light.svg`
-- Logo principal fond sombre: `assets/logo/logo-primary-dark.svg`
-- Icone claire: `assets/logo/logo-icon-light.svg`
-- Icone fond sombre: `assets/logo/logo-icon-dark.svg`
-- Pack favicon: `assets/favicon/` (`.svg`, `.png`, `.ico`, `site.webmanifest`)
-- Alternative logo Minimal: `assets/logo/alternates/logo-minimal-primary-light.svg`
-- Alternative logo Premium: `assets/logo/alternates/logo-premium-primary-light.svg`
-- Comparateur visuel: `logo-options.html`
+This project contains everything you need to run your app locally.
 
-## Variantes logo (toutes actives)
-- Hub de test: `all-logo-versions.html`
-- Site Concept 1 (Monoline): `index-concept-1.html`
-- Site Concept 2 (Orbit): `index-concept-2.html`
-- Site Concept 3 (Executive): `index-concept-3.html`
-- Assets complets par concept: `assets/brand-concepts/`
-- Comparateur round 2: `assets/logo/tests/round-2-clean/preview.html`
+**Edit the code in your local development environment**
 
-## Lancer en local
-```bash
-python3 -m http.server 8123
+Any change pushed to the repo will also be reflected in the Base44 Builder.
+
+**Prerequisites:** 
+
+1. Clone the repository using the project's Git URL 
+2. Navigate to the project directory
+3. Install dependencies: `npm install`
+4. Create an `.env.local` file and set the right environment variables
+
 ```
-Puis ouvrir:
-- `http://127.0.0.1:8123`
-- ou `http://localhost:8123`
+VITE_BASE44_APP_ID=your_app_id
+VITE_BASE44_APP_BASE_URL=your_backend_url
 
-## Personnalisation rapide
-- Contenu business: sections dans `index.html`
-- Email CTA: lien `mailto:` dans la section Contact
-- Branding: variables CSS dans `:root`
-- Domaine principal: `https://ideatoautomation.com`
+e.g.
+VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
+VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.db.app
+```
+
+Run the app: `npm run dev`
+
+**Publish your changes**
+
+Open [db.com](http://db.com) and click on Publish.
+
+**Docs & Support**
+
+Documentation: [https://docs.db.com/Integrations/Using-GitHub](https://docs.db.com/Integrations/Using-GitHub)
+
+Support: [https://app.db.com/support](https://app.db.com/support)
