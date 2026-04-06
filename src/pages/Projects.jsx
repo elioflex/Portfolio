@@ -130,6 +130,149 @@ const PROJECT_METRICS = [
   { label: 'Payload webhook visible', value: '100%' },
 ];
 
+const SIMULATE_WEBHOOK_SEND = true;
+
+const CHATBOT_EXAMPLES = [
+  {
+    id: 'saas-sales',
+    label: 'SaaS Sales',
+    description: 'Qualification lead B2B pipeline',
+    lead: {
+      name: 'Nadia Martin',
+      email: 'nadia.martin@ecommerceco.fr',
+      company: 'EcommerceCo',
+      useCase: 'Automatiser support client et qualification lead CRM',
+      teamSize: 42,
+      budget: '3000',
+    },
+    userMessage: 'Je veux automatiser support + CRM pour reduire la charge manuelle.',
+  },
+  {
+    id: 'agency-ops',
+    label: 'Agence Ops',
+    description: 'Automatisation production + reporting',
+    lead: {
+      name: 'Karim El Idrissi',
+      email: 'karim@creativeflow.fr',
+      company: 'CreativeFlow',
+      useCase: 'Automatiser reporting client, relances et synchronisation Notion vers HubSpot',
+      teamSize: 18,
+      budget: '1800',
+    },
+    userMessage: 'On perd du temps sur le reporting hebdo et les relances clients.',
+  },
+  {
+    id: 'ecom-support',
+    label: 'Ecommerce CX',
+    description: 'Support + escalation intelligente',
+    lead: {
+      name: 'Julie Bernard',
+      email: 'julie@beauty-market.fr',
+      company: 'Beauty Market',
+      useCase: 'Triage intelligent des tickets support avec escalade VIP et reponses automatiques',
+      teamSize: 85,
+      budget: '5500',
+    },
+    userMessage: 'Nos tickets explosent et on veut prioriser les clients VIP.',
+  },
+];
+
+const SUPPORT_EXAMPLES = [
+  {
+    id: 'late-delivery',
+    label: 'Livraison en retard',
+    description: 'VIP + demande rapide',
+    form: {
+      customerName: 'Claire Martin',
+      customerEmail: 'claire@client.com',
+      orderId: 'MC-10293',
+      language: 'fr',
+      channel: 'email',
+      vip: true,
+      ticketText:
+        'Bonjour, ma commande MC-10293 est en retard depuis 7 jours. Je veux une solution aujourd hui sinon je demande un remboursement.',
+    },
+  },
+  {
+    id: 'billing-issue',
+    label: 'Erreur paiement',
+    description: 'Double debit carte bancaire',
+    form: {
+      customerName: 'Thomas Leroy',
+      customerEmail: 'thomas@client.com',
+      orderId: 'BL-22871',
+      language: 'fr',
+      channel: 'chat',
+      vip: false,
+      ticketText:
+        'J ai ete debite deux fois pour la commande BL-22871. Merci de corriger la facture et de confirmer le remboursement.',
+    },
+  },
+  {
+    id: 'product-defect',
+    label: 'Produit defectueux',
+    description: 'Escalade produit',
+    form: {
+      customerName: 'Emily Carter',
+      customerEmail: 'emily@client.com',
+      orderId: 'UK-99012',
+      language: 'en',
+      channel: 'social',
+      vip: false,
+      ticketText:
+        'My order arrived broken and the device does not work at all. I need an urgent replacement today.',
+    },
+  },
+];
+
+const RECOVERY_EXAMPLES = [
+  {
+    id: 'high-value-returning',
+    label: 'Panier eleve',
+    description: 'Client fidele a forte valeur',
+    form: {
+      customerEmail: 'julie@shopclient.com',
+      cartValue: '149',
+      itemsCount: '3',
+      hoursSinceAbandonment: '2',
+      previousOrders: '2',
+      customerType: 'returning',
+      topProduct: 'Starter Gel Kit',
+      region: 'fr',
+    },
+  },
+  {
+    id: 'new-customer-first-order',
+    label: 'Nouveau client',
+    description: 'Premier achat abandonne',
+    form: {
+      customerEmail: 'newbuyer@shopclient.com',
+      cartValue: '72',
+      itemsCount: '2',
+      hoursSinceAbandonment: '6',
+      previousOrders: '0',
+      customerType: 'new',
+      topProduct: 'Hydrating Serum',
+      region: 'fr',
+    },
+  },
+  {
+    id: 'cold-cart-reactivation',
+    label: 'Panier froid',
+    description: 'Abandon > 48h',
+    form: {
+      customerEmail: 'reactivation@shopclient.com',
+      cartValue: '210',
+      itemsCount: '4',
+      hoursSinceAbandonment: '52',
+      previousOrders: '5',
+      customerType: 'returning',
+      topProduct: 'Premium Care Bundle',
+      region: 'en',
+    },
+  },
+];
+
 function computeQualification(useCase, teamSize, budget) {
   const text = (useCase || '').toLowerCase();
   let score = 46;
@@ -351,6 +494,7 @@ export default function Projects() {
   const [result, setResult] = useState(null);
   const [sending, setSending] = useState(false);
   const [webhookState, setWebhookState] = useState('');
+  const [activeChatbotExample, setActiveChatbotExample] = useState(CHATBOT_EXAMPLES[0].id);
 
   // Support demo state
   const [supportForm, setSupportForm] = useState({
@@ -366,6 +510,7 @@ export default function Projects() {
   const [supportResult, setSupportResult] = useState(null);
   const [supportSending, setSupportSending] = useState(false);
   const [supportWebhookState, setSupportWebhookState] = useState('');
+  const [activeSupportExample, setActiveSupportExample] = useState(SUPPORT_EXAMPLES[0].id);
 
   // Recovery demo state
   const [recoveryForm, setRecoveryForm] = useState({
@@ -382,6 +527,7 @@ export default function Projects() {
   const [recoveryResult, setRecoveryResult] = useState(null);
   const [recoverySending, setRecoverySending] = useState(false);
   const [recoveryWebhookState, setRecoveryWebhookState] = useState('');
+  const [activeRecoveryExample, setActiveRecoveryExample] = useState(RECOVERY_EXAMPLES[0].id);
 
   const chatContainerRef = useRef(null);
   const demoSectionRef = useRef(null);
@@ -408,6 +554,9 @@ export default function Projects() {
   const webhookUrl = (import.meta.env.VITE_CHATBOT_WEBHOOK_URL || import.meta.env.VITE_LEAD_WEBHOOK_URL || '').trim();
   const supportWebhookUrl = (import.meta.env.VITE_SUPPORT_WEBHOOK_URL || import.meta.env.VITE_LEAD_WEBHOOK_URL || '').trim();
   const recoveryWebhookUrl = (import.meta.env.VITE_RECOVERY_WEBHOOK_URL || import.meta.env.VITE_LEAD_WEBHOOK_URL || '').trim();
+  const selectedChatbotExample = CHATBOT_EXAMPLES.find((example) => example.id === activeChatbotExample) || CHATBOT_EXAMPLES[0];
+  const selectedSupportExample = SUPPORT_EXAMPLES.find((example) => example.id === activeSupportExample) || SUPPORT_EXAMPLES[0];
+  const selectedRecoveryExample = RECOVERY_EXAMPLES.find((example) => example.id === activeRecoveryExample) || RECOVERY_EXAMPLES[0];
 
   // Chatbot actions
   const startQualification = () => {
@@ -497,30 +646,23 @@ export default function Projects() {
     setWebhookState('');
   };
 
-  const loadChatbotSample = () => {
-    const sampleLead = {
-      name: 'Nadia Martin',
-      email: 'nadia.martin@ecommerceco.fr',
-      company: 'EcommerceCo',
-      useCase: 'Automatiser support client et qualification lead CRM',
-      teamSize: 42,
-      budget: '3000',
-    };
-    const qual = computeQualification(sampleLead.useCase, Number(sampleLead.teamSize), sampleLead.budget);
-    setLeadData(sampleLead);
+  const loadChatbotSample = (example) => {
+    const qual = computeQualification(example.lead.useCase, Number(example.lead.teamSize), example.lead.budget);
+    setLeadData(example.lead);
     setResult(qual);
     setQualificationStarted(false);
     setActiveStep(-1);
-    setWebhookState('Exemple charge. Tu peux envoyer le payload webhook directement.');
+    setActiveChatbotExample(example.id);
+    setWebhookState(`Exemple "${example.label}" charge. Tu peux envoyer le payload webhook directement.`);
     setMessages([
       { role: 'bot', text: 'Exemple de qualification charge pour une simulation rapide.' },
-      { role: 'user', text: 'Je veux automatiser support + CRM pour reduire la charge manuelle.' },
+      { role: 'user', text: example.userMessage },
       {
         role: 'bot',
         text: `Score ${qual.finalScore}/100, priorite ${qual.priority}. Action recommandee: ${qual.nextAction}.`,
       },
     ]);
-    trackEvent('chatbot_sample_loaded', { page: 'projects' });
+    trackEvent('chatbot_sample_loaded', { page: 'projects', example_id: example.id });
   };
 
   const payloadPreview = useMemo(
@@ -550,11 +692,6 @@ export default function Projects() {
       return;
     }
 
-    if (!webhookUrl) {
-      setWebhookState('Webhook non configure (VITE_CHATBOT_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
-      return;
-    }
-
     setSending(true);
     setWebhookState('');
 
@@ -573,6 +710,18 @@ export default function Projects() {
     };
 
     try {
+      if (SIMULATE_WEBHOOK_SEND) {
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        setWebhookState('Simulation active: envoi simule reussi (aucune requete externe envoyee).');
+        trackEvent('chatbot_webhook_simulated', { page: 'projects', score: result.finalScore });
+        return;
+      }
+
+      if (!webhookUrl) {
+        setWebhookState('Webhook non configure (VITE_CHATBOT_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
+        return;
+      }
+
       const res = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -643,31 +792,24 @@ export default function Projects() {
     });
   };
 
-  const loadSupportSample = () => {
-    setSupportForm({
-      customerName: 'Claire Martin',
-      customerEmail: 'claire@client.com',
-      orderId: 'MC-10293',
-      language: 'fr',
-      channel: 'email',
-      vip: true,
-      ticketText:
-        'Bonjour, ma commande MC-10293 est en retard depuis 7 jours. Je veux une solution aujourd hui sinon je demande un remboursement.',
+  const loadSupportSample = (example) => {
+    setSupportForm(example.form);
+    setActiveSupportExample(example.id);
+    setSupportStepsDone([...SUPPORT_STEPS]);
+    const analysis = analyzeSupportTicket({
+      ticketText: example.form.ticketText,
+      orderId: example.form.orderId,
+      language: example.form.language,
+      vip: example.form.vip,
     });
-    setSupportResult(null);
-    setSupportStepsDone([]);
-    setSupportWebhookState('Exemple charge. Clique sur Analyser le ticket.');
-    trackEvent('support_triage_sample_loaded', { page: 'projects' });
+    setSupportResult(analysis);
+    setSupportWebhookState(`Exemple "${example.label}" charge et analyse.`);
+    trackEvent('support_triage_sample_loaded', { page: 'projects', example_id: example.id });
   };
 
   const sendSupportToWebhook = async () => {
     if (!supportResult) {
       setSupportWebhookState('Lance l analyse support avant envoi.');
-      return;
-    }
-
-    if (!supportWebhookUrl) {
-      setSupportWebhookState('Webhook non configure (VITE_SUPPORT_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
       return;
     }
 
@@ -695,6 +837,18 @@ export default function Projects() {
     };
 
     try {
+      if (SIMULATE_WEBHOOK_SEND) {
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        setSupportWebhookState('Simulation active: envoi triage simule reussi (aucune requete externe envoyee).');
+        trackEvent('support_triage_webhook_simulated', { page: 'projects', score: supportResult.score });
+        return;
+      }
+
+      if (!supportWebhookUrl) {
+        setSupportWebhookState('Webhook non configure (VITE_SUPPORT_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
+        return;
+      }
+
       const res = await fetch(supportWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -760,31 +914,19 @@ export default function Projects() {
     });
   };
 
-  const loadRecoverySample = () => {
-    setRecoveryForm({
-      customerEmail: 'julie@shopclient.com',
-      cartValue: '149',
-      itemsCount: '3',
-      hoursSinceAbandonment: '2',
-      previousOrders: '2',
-      customerType: 'returning',
-      topProduct: 'Starter Gel Kit',
-      region: 'fr',
-    });
-    setRecoveryResult(null);
-    setRecoveryStepsDone([]);
-    setRecoveryWebhookState('Exemple charge. Lance l analyse recovery.');
-    trackEvent('recovery_sample_loaded', { page: 'projects' });
+  const loadRecoverySample = (example) => {
+    setRecoveryForm(example.form);
+    setActiveRecoveryExample(example.id);
+    setRecoveryStepsDone([...RECOVERY_STEPS]);
+    const analysis = analyzeRecoveryFlow(example.form);
+    setRecoveryResult(analysis);
+    setRecoveryWebhookState(`Exemple "${example.label}" charge et analyse.`);
+    trackEvent('recovery_sample_loaded', { page: 'projects', example_id: example.id });
   };
 
   const sendRecoveryToWebhook = async () => {
     if (!recoveryResult) {
       setRecoveryWebhookState('Lance d abord l analyse recovery.');
-      return;
-    }
-
-    if (!recoveryWebhookUrl) {
-      setRecoveryWebhookState('Webhook non configure (VITE_RECOVERY_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
       return;
     }
 
@@ -813,6 +955,18 @@ export default function Projects() {
     };
 
     try {
+      if (SIMULATE_WEBHOOK_SEND) {
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        setRecoveryWebhookState('Simulation active: envoi recovery simule reussi (aucune requete externe envoyee).');
+        trackEvent('recovery_webhook_simulated', { page: 'projects', score: recoveryResult.recoveryScore });
+        return;
+      }
+
+      if (!recoveryWebhookUrl) {
+        setRecoveryWebhookState('Webhook non configure (VITE_RECOVERY_WEBHOOK_URL ou VITE_LEAD_WEBHOOK_URL).');
+        return;
+      }
+
       const res = await fetch(recoveryWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -931,12 +1085,27 @@ export default function Projects() {
                       ))}
                     </div>
 
+                    <div className="rounded-lg border border-border bg-background/70 p-3 space-y-2">
+                      <p className="text-xs font-semibold text-foreground">Choisir un exemple (3 scenarii)</p>
+                      <div className="flex flex-wrap gap-2">
+                        {CHATBOT_EXAMPLES.map((example) => (
+                          <Button
+                            key={example.id}
+                            type="button"
+                            variant={activeChatbotExample === example.id ? 'default' : 'outline'}
+                            onClick={() => loadChatbotSample(example)}
+                            className="rounded-full"
+                          >
+                            {example.label}
+                          </Button>
+                        ))}
+                      </div>
+                      <p className="text-xs text-muted-foreground">{selectedChatbotExample.description}</p>
+                    </div>
+
                     <div className="flex flex-wrap gap-2">
                       <Button type="button" variant="outline" onClick={startQualification} className="rounded-full">
-                        Demarrer qualification
-                      </Button>
-                      <Button type="button" variant="outline" onClick={loadChatbotSample} className="rounded-full">
-                        Charger un exemple
+                        Demarrer qualification manuelle
                       </Button>
                       <Button type="button" variant="outline" onClick={() => sendQuickUserMessage('Quels sont vos tarifs ?')} className="rounded-full">
                         Quick FAQ: Prix
@@ -965,7 +1134,7 @@ export default function Projects() {
                       </Button>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Conseil UX: pour tester vite, clique <strong>Charger un exemple</strong> puis <strong>Envoyer au webhook</strong>.
+                      Conseil UX: clique un exemple, compare le score obtenu, puis envoie le payload webhook.
                     </p>
                   </CardContent>
                 </Card>
@@ -1055,15 +1224,29 @@ export default function Projects() {
                       </label>
                     </div>
 
+                    <div className="rounded-lg border border-border bg-background/70 p-3 space-y-2">
+                      <p className="text-xs font-semibold text-foreground">Choisir un exemple (3 scenarii)</p>
+                      <div className="flex flex-wrap gap-2">
+                        {SUPPORT_EXAMPLES.map((example) => (
+                          <Button
+                            key={example.id}
+                            variant={activeSupportExample === example.id ? 'default' : 'outline'}
+                            onClick={() => loadSupportSample(example)}
+                            className="rounded-full"
+                          >
+                            {example.label}
+                          </Button>
+                        ))}
+                      </div>
+                      <p className="text-xs text-muted-foreground">{selectedSupportExample.description}</p>
+                    </div>
+
                     <label className="text-sm space-y-1 block">
                       <span className="text-muted-foreground">Ticket message</span>
                       <textarea className="w-full min-h-28 rounded-md border border-input bg-background px-3 py-2 text-sm" value={supportForm.ticketText} onChange={(e) => setSupportForm((f) => ({ ...f, ticketText: e.target.value }))} placeholder="Bonjour, ma commande n est toujours pas livree et je veux un remboursement." />
                     </label>
 
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <Button onClick={loadSupportSample} variant="outline" className="rounded-full">
-                        Charger un exemple
-                      </Button>
                       <Button onClick={runSupportTriage} className="rounded-full">
                         <AlertTriangle className="w-4 h-4" />
                         Analyser le ticket
@@ -1074,7 +1257,7 @@ export default function Projects() {
                       </Button>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Sequence ideale: Exemple → Analyser le ticket → Envoyer triage webhook.
+                      Sequence ideale: choisis un exemple, compare intent/priorite, puis envoie au webhook.
                     </p>
                   </CardContent>
                 </Card>
@@ -1173,10 +1356,24 @@ export default function Projects() {
                       </label>
                     </div>
 
+                    <div className="rounded-lg border border-border bg-background/70 p-3 space-y-2">
+                      <p className="text-xs font-semibold text-foreground">Choisir un exemple (3 scenarii)</p>
+                      <div className="flex flex-wrap gap-2">
+                        {RECOVERY_EXAMPLES.map((example) => (
+                          <Button
+                            key={example.id}
+                            variant={activeRecoveryExample === example.id ? 'default' : 'outline'}
+                            onClick={() => loadRecoverySample(example)}
+                            className="rounded-full"
+                          >
+                            {example.label}
+                          </Button>
+                        ))}
+                      </div>
+                      <p className="text-xs text-muted-foreground">{selectedRecoveryExample.description}</p>
+                    </div>
+
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <Button onClick={loadRecoverySample} variant="outline" className="rounded-full">
-                        Charger un exemple
-                      </Button>
                       <Button onClick={runRecoveryAnalysis} className="rounded-full">
                         <ShoppingCart className="w-4 h-4" />
                         Lancer analyse recovery
@@ -1187,7 +1384,7 @@ export default function Projects() {
                       </Button>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Sequence ideale: Exemple → Lancer analyse recovery → Envoyer recovery webhook.
+                      Sequence ideale: choisis un exemple, compare score/incentive, puis envoie au webhook.
                     </p>
                   </CardContent>
                 </Card>
