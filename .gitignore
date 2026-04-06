@@ -29,3 +29,6 @@ dist-ssr
 
 .env
 .vite
+
+# Local business-dev workspace (not committed)
+home-local/

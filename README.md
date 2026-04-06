@@ -1,47 +1,34 @@
-const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
+# IdeaToAutomation Website
 
-**Welcome to your Base44 project** 
+Marketing website deployed on Vercel.
 
-**About**
+## Run locally
 
-View and Edit  your app on [db.com](http://db.com) 
+1. Install dependencies
 
-This project contains everything you need to run your app locally.
-
-**Edit the code in your local development environment**
-
-Any change pushed to the repo will also be reflected in the Base44 Builder.
-
-**Prerequisites:** 
-
-1. Clone the repository using the project's Git URL 
-2. Navigate to the project directory
-3. Install dependencies: `npm install`
-4. Create an `.env.local` file and set the right environment variables
-
+```bash
+npm install
 ```
-VITE_BASE44_APP_ID=your_app_id
-VITE_BASE44_APP_BASE_URL=your_backend_url
-VITE_LEAD_WEBHOOK_URL=your_n8n_webhook_url
-VITE_GA_ID=G-XXXXXXXXXX
-VITE_BOOKING_URL=https://cal.com/your-handle/30min
 
-e.g.
-VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
-VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.db.app
+2. Start dev server
+
+```bash
+npm run dev
+```
+
+3. Build for production
+
+```bash
+npm run build
+```
+
+## Environment variables
+
+Only set variables you actively use:
+
+```bash
 VITE_LEAD_WEBHOOK_URL=https://your-n8n-domain/webhook/lead
 VITE_GA_ID=G-XXXXXXXXXX
 VITE_BOOKING_URL=https://cal.com/your-handle/30min
 ```
 
-Run the app: `npm run dev`
-
-**Publish your changes**
-
-Open [db.com](http://db.com) and click on Publish.
-
-**Docs & Support**
-
-Documentation: [https://docs.db.com/Integrations/Using-GitHub](https://docs.db.com/Integrations/Using-GitHub)
-
-Support: [https://app.db.com/support](https://app.db.com/support)
