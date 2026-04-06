@@ -3,7 +3,6 @@ import Header from '../components/landing/Header';
 import HeroPreview2 from '../components/landing/HeroPreview2';
 import SocialProof from '../components/landing/SocialProof';
 import Services from '../components/landing/Services';
-import CaseStudies from '../components/landing/CaseStudies';
 import Process from '../components/landing/Process';
 import Trust from '../components/landing/Trust';
 import Team from '../components/landing/Team';
@@ -19,7 +18,6 @@ export default function Preview2() {
         <HeroPreview2 />
         <SocialProof />
         <Services />
-        <CaseStudies />
         <Process />
         <Trust />
         <Team />

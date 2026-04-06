@@ -3,7 +3,6 @@ import { trackEvent } from '@/lib/analytics';
 
 const QUICK_LINKS = [
   { label: 'Offres', href: '#offres' },
-  { label: 'Cas clients', href: '#cas-clients' },
   { label: 'Méthode', href: '#methode' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
