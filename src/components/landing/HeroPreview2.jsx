@@ -98,7 +98,7 @@ export default function HeroPreview2() {
                     href="#contact"
                     onClick={() => trackEvent('cta_click', { placement: 'hero_primary', cta_text: 'book_diagnostic' })}
                   >
-                    Réserver un diagnostic
+                    Réserver un diagnostic gratuitement
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </a>
                 </Button>
