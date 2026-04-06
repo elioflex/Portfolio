@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, CheckCircle, Clock, Shield, Loader2 } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { ArrowRight, Calendar, CheckCircle, Clock, Shield, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,6 +8,8 @@ import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
 
 const WEBHOOK_TIMEOUT_MS = 15000;
+const MIN_SUBMIT_DELAY_MS = 2500;
+const BOOKING_URL = (import.meta.env.VITE_BOOKING_URL || '').trim();
 
 function getTrackingParams() {
   const params = new URLSearchParams(window.location.search);
@@ -30,11 +32,12 @@ function getTrackingParams() {
 }
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', objective: '' });
+  const [form, setForm] = useState({ name: '', email: '', objective: '', website: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
   const [submitError, setSubmitError] = useState('');
+  const mountedAtRef = useRef(Date.now());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +45,25 @@ export default function Contact() {
     trackEvent('lead_submit_attempt', { form: 'contact' });
 
     setSubmitError('');
+
+    if (form.website.trim()) {
+      setSubmittedName(form.name || 'à vous');
+      setSubmitted(true);
+      trackEvent('lead_submit_blocked', { form: 'contact', reason: 'honeypot' });
+      return;
+    }
+
+    const elapsedSinceMount = Date.now() - mountedAtRef.current;
+    if (elapsedSinceMount < MIN_SUBMIT_DELAY_MS) {
+      setSubmitError('Merci de patienter 2 à 3 secondes avant d’envoyer le formulaire.');
+      trackEvent('lead_submit_blocked', {
+        form: 'contact',
+        reason: 'too_fast',
+        elapsed_ms: elapsedSinceMount,
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -54,7 +76,9 @@ export default function Contact() {
       const timeout = window.setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
 
       const payload = {
-        ...form,
+        name: form.name,
+        email: form.email,
+        objective: form.objective,
         page_url: window.location.href,
         page_path: window.location.pathname,
         referrer: document.referrer || null,
@@ -80,7 +104,7 @@ export default function Contact() {
 
       setSubmittedName(form.name);
       setSubmitted(true);
-      setForm({ name: '', email: '', objective: '' });
+      setForm({ name: '', email: '', objective: '', website: '' });
       trackEvent('lead_submit_success', { form: 'contact' });
     } catch (error) {
       const isTimeout = error?.name === 'AbortError';
@@ -155,6 +179,21 @@ export default function Contact() {
                 <p className="mt-3 text-muted-foreground max-w-sm">
                   Merci {submittedName || 'à vous'}. Nous revenons vers vous sous 24h ouvrables avec un créneau de diagnostic.
                 </p>
+                {BOOKING_URL && (
+                  <div className="mt-6">
+                    <Button asChild className="rounded-full px-6 font-semibold">
+                      <a
+                        href={BOOKING_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => trackEvent('booking_click', { placement: 'contact_success', cta_text: 'choose_slot' })}
+                      >
+                        Choisir un créneau maintenant
+                        <Calendar className="w-4 h-4 ml-2" />
+                      </a>
+                    </Button>
+                  </div>
+                )}
               </div>
             ) : (
               <form
@@ -198,6 +237,17 @@ export default function Contact() {
                       value={form.objective}
                       onChange={(e) => setForm({ ...form, objective: e.target.value })}
                       className="mt-1.5 h-24 resize-none"
+                    />
+                  </div>
+                  <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden">
+                    <Label htmlFor="website">Ne pas remplir ce champ</Label>
+                    <Input
+                      id="website"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={form.website}
+                      onChange={(e) => setForm({ ...form, website: e.target.value })}
                     />
                   </div>
                 </div>
