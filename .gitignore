@@ -32,3 +32,8 @@ dist-ssr
 
 # Local business-dev workspace (not committed)
 home-local/
+
+# Local audit/screenshot artifacts
+desktop-*
+ideato-*
+ideato.*
