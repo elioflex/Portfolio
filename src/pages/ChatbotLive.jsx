@@ -27,7 +27,7 @@ const CHAT_THREADS = [
     preview: 'Bonjour, est-ce que vous integrez HubSpot ?',
     time: '09:14',
     unread: 2,
-    online: false,
+    online: true,
   },
   {
     id: 'camille',
@@ -63,50 +63,273 @@ const CHAT_THREADS = [
   },
 ];
 
-const SCRIPT = [
-  {
-    role: 'customer',
-    text: 'Bonjour, je veux savoir ou en est ma commande BR-4921 et si vous avez le meme produit en M.',
-    time: '10:21',
-    delay: 1200,
+const THREAD_SCENARIOS = {
+  'new-lead': {
+    caseLabel: 'Cas 1 - Qualification lead',
+    status: 'Prospect actif - qualification IA',
+    script: [
+      {
+        role: 'customer',
+        text: 'Bonjour, je veux automatiser mes leads Shopify vers HubSpot. Vous faites ca ?',
+        time: '09:14',
+        delay: 1100,
+      },
+      {
+        role: 'assistant',
+        text: 'Oui. On peut capter, qualifier, scorer et router vos leads automatiquement.',
+        time: '09:14',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Quel volume de leads par semaine et votre objectif principal ?',
+        time: '09:14',
+        delay: 1200,
+      },
+      {
+        role: 'customer',
+        text: 'Environ 220 leads/semaine. Je veux repondre plus vite et augmenter les calls bookes.',
+        time: '09:15',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Parfait. Votre lead est score "High Intent". Je vous propose un diagnostic de 30 min.',
+        time: '09:15',
+        delay: 1200,
+      },
+      {
+        role: 'system',
+        text: 'CRM sync: source=shopify_form | score=88 | owner=sales | next_action=book_call',
+        time: '09:15',
+        delay: 1000,
+      },
+      {
+        role: 'assistant',
+        text: 'Je peux vous envoyer 2 creneaux pour lancer votre plan en 72h. Vous preferez mardi ou mercredi ?',
+        time: '09:15',
+        delay: 1200,
+      },
+    ],
+    metrics: {
+      idle: { response: '6m 18s', resolved: '0%', score: '--' },
+      progress: { response: '19s', resolved: '58%', score: '78/100' },
+      done: { response: '3.1s', resolved: '81%', score: '88/100' },
+    },
   },
-  {
-    role: 'assistant',
-    text: 'Bonjour Camille. Votre commande BR-4921 est en transit et livree demain avant 18h.',
-    time: '10:21',
-    delay: 1400,
+  camille: {
+    caseLabel: 'Cas 2 - Suivi commande + retour',
+    status: 'Client e-commerce - support actif',
+    script: [
+      {
+        role: 'customer',
+        text: 'Bonjour, je veux savoir ou en est ma commande BR-4921 et si vous avez le meme produit en M.',
+        time: '10:21',
+        delay: 1200,
+      },
+      {
+        role: 'assistant',
+        text: 'Bonjour Camille. Votre commande BR-4921 est en transit et livree demain avant 18h.',
+        time: '10:21',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Pour la taille M: disponible en stock. Je peux vous reserver le panier en 1 clic.',
+        time: '10:21',
+        delay: 1200,
+      },
+      {
+        role: 'customer',
+        text: 'Parfait. Et je veux aussi prioriser un retour sur un autre article.',
+        time: '10:22',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Demande retour recue. Je la classe en priorite haute et je notifie le support.',
+        time: '10:22',
+        delay: 1200,
+      },
+      {
+        role: 'system',
+        text: 'CRM sync: intent=returns | priority=high | owner=support-team-a | SLA=4h',
+        time: '10:22',
+        delay: 1000,
+      },
+      {
+        role: 'assistant',
+        text: 'Souhaitez-vous parler a un agent humain maintenant ou continuer ici ?',
+        time: '10:22',
+        delay: 1200,
+      },
+    ],
+    metrics: {
+      idle: { response: '8m 42s', resolved: '0%', score: '--' },
+      progress: { response: '14s', resolved: '62%', score: '74/100' },
+      done: { response: '2.6s', resolved: '79%', score: '88/100' },
+    },
   },
-  {
-    role: 'assistant',
-    text: 'Pour la taille M: disponible en stock. Je peux vous reserver le panier en 1 clic.',
-    time: '10:21',
-    delay: 1300,
+  'sav-return': {
+    caseLabel: 'Cas 3 - SAV remboursement',
+    status: 'Support back-office automatise',
+    script: [
+      {
+        role: 'customer',
+        text: 'Je veux un remboursement, ma commande est arrivee abimee.',
+        time: '08:57',
+        delay: 1100,
+      },
+      {
+        role: 'assistant',
+        text: 'Je suis desole pour cela. Je cree votre dossier SAV prioritaire tout de suite.',
+        time: '08:57',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Pouvez-vous envoyer une photo du produit pour valider instantanement le retour ?',
+        time: '08:57',
+        delay: 1200,
+      },
+      {
+        role: 'customer',
+        text: 'Oui, photo envoyee. Merci de confirmer le delai de remboursement.',
+        time: '08:58',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Photo validee. Votre remboursement est declenche, confirmation sous 24h.',
+        time: '08:58',
+        delay: 1100,
+      },
+      {
+        role: 'system',
+        text: 'Ticket #2914 -> status=validated_return | refund=queued | owner=finance_ops',
+        time: '08:58',
+        delay: 1000,
+      },
+      {
+        role: 'assistant',
+        text: 'Je vous envoie aussi le lien de suivi SAV dans cette conversation.',
+        time: '08:58',
+        delay: 1200,
+      },
+    ],
+    metrics: {
+      idle: { response: '11m 03s', resolved: '0%', score: '--' },
+      progress: { response: '17s', resolved: '54%', score: '69/100' },
+      done: { response: '3.8s', resolved: '76%', score: '84/100' },
+    },
   },
-  {
-    role: 'customer',
-    text: 'Parfait. Et je veux aussi prioriser un retour sur un autre article.',
-    time: '10:22',
-    delay: 1300,
+  'vip-client': {
+    caseLabel: 'Cas 4 - Client VIP',
+    status: 'Escalade premium active',
+    script: [
+      {
+        role: 'customer',
+        text: 'Je suis cliente VIP. J ai besoin d un traitement prioritaire pour ma commande cadeau.',
+        time: '11:06',
+        delay: 1100,
+      },
+      {
+        role: 'assistant',
+        text: 'Bien recu Julie. Votre statut VIP est reconnu, je passe votre demande en priorite maximale.',
+        time: '11:06',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Souhaitez-vous une livraison express ou un retrait boutique ?',
+        time: '11:06',
+        delay: 1200,
+      },
+      {
+        role: 'customer',
+        text: 'Livraison express, avant vendredi idealement.',
+        time: '11:07',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Cest note. Je reserve un slot express et je notifie un agent senior.',
+        time: '11:07',
+        delay: 1100,
+      },
+      {
+        role: 'system',
+        text: 'VIP route: priority=critical | owner=senior_support | sla=1h | shipping=express',
+        time: '11:07',
+        delay: 1000,
+      },
+      {
+        role: 'assistant',
+        text: 'Votre prise en charge est confirmee. Je reste disponible si vous souhaitez un suivi proactif.',
+        time: '11:07',
+        delay: 1200,
+      },
+    ],
+    metrics: {
+      idle: { response: '7m 55s', resolved: '0%', score: '--' },
+      progress: { response: '11s', resolved: '65%', score: '82/100' },
+      done: { response: '2.1s', resolved: '86%', score: '93/100' },
+    },
   },
-  {
-    role: 'assistant',
-    text: 'Demande retour recue. Je la classe en priorite haute et je notifie le support.',
-    time: '10:22',
-    delay: 1200,
+  'crm-sync': {
+    caseLabel: 'Cas 5 - Sync CRM & sales',
+    status: 'Automatisation sales operationnelle',
+    script: [
+      {
+        role: 'customer',
+        text: 'On perd des leads entre WhatsApp et HubSpot. Vous pouvez automatiser ca ?',
+        time: '15:44',
+        delay: 1100,
+      },
+      {
+        role: 'assistant',
+        text: 'Oui. On peut synchroniser les messages, le score IA et le statut des deals en temps reel.',
+        time: '15:44',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Je peux aussi declencher automatiquement les relances et reminders commerciaux.',
+        time: '15:44',
+        delay: 1200,
+      },
+      {
+        role: 'customer',
+        text: 'Top. Aujourd hui on traite 180 leads/semaine et notre equipe oublie des follow-ups.',
+        time: '15:45',
+        delay: 1300,
+      },
+      {
+        role: 'assistant',
+        text: 'Dans ce cas, je recommande une sequence en 3 etapes + scoring prioritaire des leads chauds.',
+        time: '15:45',
+        delay: 1200,
+      },
+      {
+        role: 'system',
+        text: 'HubSpot sync: lead_score=high | stage=qualified | follow_up=J+1 | owner=sales_ae_2',
+        time: '15:45',
+        delay: 1000,
+      },
+      {
+        role: 'assistant',
+        text: 'Je peux vous montrer un plan executable en 72h, puis un pilote complet en 2-6 semaines.',
+        time: '15:45',
+        delay: 1200,
+      },
+    ],
+    metrics: {
+      idle: { response: '9m 11s', resolved: '0%', score: '--' },
+      progress: { response: '16s', resolved: '57%', score: '76/100' },
+      done: { response: '2.9s', resolved: '82%', score: '90/100' },
+    },
   },
-  {
-    role: 'system',
-    text: 'CRM sync: intent=returns | priority=high | owner=support-team-a | SLA=4h',
-    time: '10:22',
-    delay: 1100,
-  },
-  {
-    role: 'assistant',
-    text: 'Souhaitez-vous parler a un agent humain maintenant ou continuer ici ?',
-    time: '10:22',
-    delay: 1300,
-  },
-];
+};
 
 const PIPELINE_STEPS = [
   'Message client recu',
@@ -135,9 +358,17 @@ function getInitials(name) {
 export default function ChatbotLive() {
   const [visibleCount, setVisibleCount] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
-  const [activeThreadId] = useState('camille');
+  const [activeThreadId, setActiveThreadId] = useState('camille');
   const [loopCount, setLoopCount] = useState(0);
   const chatBodyRef = useRef(null);
+
+  const activeThread = useMemo(
+    () => CHAT_THREADS.find((thread) => thread.id === activeThreadId) || CHAT_THREADS[0],
+    [activeThreadId],
+  );
+
+  const activeScenario = THREAD_SCENARIOS[activeThreadId] || THREAD_SCENARIOS.camille;
+  const activeScript = activeScenario.script;
 
   useEffect(() => {
     const oldTitle = document.title;
@@ -151,13 +382,13 @@ export default function ChatbotLive() {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
-  }, [visibleCount]);
+  }, [visibleCount, activeThreadId]);
 
   useEffect(() => {
     let timeout;
 
-    if (visibleCount < SCRIPT.length) {
-      const delay = SCRIPT[visibleCount]?.delay || 1200;
+    if (visibleCount < activeScript.length) {
+      const delay = activeScript[visibleCount]?.delay || 1200;
       timeout = window.setTimeout(() => {
         setVisibleCount((prev) => prev + 1);
       }, delay);
@@ -168,49 +399,39 @@ export default function ChatbotLive() {
       setVisibleCount(0);
       setLoopCount((prev) => prev + 1);
       setIsRestarting(false);
-    }, 2600);
+    }, 2400);
 
     return () => window.clearTimeout(timeout);
-  }, [visibleCount]);
+  }, [visibleCount, activeScript]);
 
-  const displayedMessages = SCRIPT.slice(0, visibleCount);
+  const displayedMessages = activeScript.slice(0, visibleCount);
   const activeStage = getPipelineStage(visibleCount);
-  const cycleCompleted = visibleCount >= SCRIPT.length;
+  const cycleCompleted = visibleCount >= activeScript.length;
 
   const activeThreadPreview = useMemo(() => {
-    const latest = [...displayedMessages].reverse().find((m) => m.role !== 'system');
-    if (!latest) return 'Conversation en attente...';
+    const latest = [...displayedMessages].reverse().find((message) => message.role !== 'system');
+    if (!latest) return activeThread.preview;
     return latest.text;
-  }, [displayedMessages]);
+  }, [displayedMessages, activeThread.preview]);
 
   const metrics = useMemo(() => {
-    if (activeStage < 0) {
-      return {
-        response: '8m 42s',
-        resolved: '0%',
-        score: '--',
-      };
-    }
-
-    if (!cycleCompleted) {
-      return {
-        response: '14s',
-        resolved: '62%',
-        score: '74/100',
-      };
-    }
-
-    return {
-      response: '2.6s',
-      resolved: '79%',
-      score: '88/100',
-    };
-  }, [activeStage, cycleCompleted]);
+    if (activeStage < 0) return activeScenario.metrics.idle;
+    if (!cycleCompleted) return activeScenario.metrics.progress;
+    return activeScenario.metrics.done;
+  }, [activeScenario.metrics, activeStage, cycleCompleted]);
 
   const restartAnimation = () => {
     setIsRestarting(true);
     setVisibleCount(0);
-    trackEvent('chatbot_live_restart', { page: 'chatbot-live', loop_count: loopCount });
+    trackEvent('chatbot_live_restart', { page: 'chatbot-live', loop_count: loopCount, case_id: activeThreadId });
+  };
+
+  const handleThreadSwitch = (threadId) => {
+    if (threadId === activeThreadId) return;
+    setActiveThreadId(threadId);
+    setVisibleCount(0);
+    setIsRestarting(false);
+    trackEvent('chatbot_live_thread_switch', { page: 'chatbot-live', case_id: threadId });
   };
 
   return (
@@ -246,10 +467,10 @@ export default function ChatbotLive() {
                 WhatsApp-Style AI Demo
               </div>
               <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
-                UI realiste: liste des chats + chatbot IA en action temps reel.
+                UI realiste: liste des chats cliquables + scenarios IA multi-cas.
               </h1>
               <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-3xl">
-                Cette simulation montre ce que voit un prospect: conversation realiste, reponse instantanee, et automatisation metier en arriere-plan.
+                Chaque conversation correspond a un cas concret: qualification lead, suivi commande, SAV, VIP, sync CRM.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button
@@ -301,6 +522,7 @@ export default function ChatbotLive() {
                       <button
                         key={thread.id}
                         type="button"
+                        onClick={() => handleThreadSwitch(thread.id)}
                         className={`w-full px-3 py-3 border-b border-white/5 text-left transition-colors ${
                           isActive ? 'bg-[#2a3942]' : 'bg-transparent hover:bg-[#202c33]'
                         }`}
@@ -340,13 +562,13 @@ export default function ChatbotLive() {
                 <div className="h-16 px-4 border-b border-white/10 bg-[#202c33] flex items-center justify-between">
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-300 text-[#05211d] text-xs font-bold grid place-items-center">
-                      CM
+                      {getInitials(activeThread.name)}
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-slate-100 truncate">Camille Martin</p>
+                      <p className="text-sm font-semibold text-slate-100 truncate">{activeThread.name}</p>
                       <p className="text-xs text-emerald-300 inline-flex items-center gap-1">
                         <Circle className="w-2 h-2 fill-current" />
-                        IA active - reponse instantanee
+                        {activeScenario.status}
                       </p>
                     </div>
                   </div>
@@ -369,6 +591,12 @@ export default function ChatbotLive() {
                     backgroundSize: '20px 20px',
                   }}
                 >
+                  <div className="flex justify-center">
+                    <div className="rounded-md bg-[#1f2c34] border border-white/10 px-3 py-1 text-[11px] text-slate-300">
+                      {activeScenario.caseLabel}
+                    </div>
+                  </div>
+
                   {displayedMessages.map((message, index) => {
                     if (message.role === 'system') {
                       return (
@@ -453,9 +681,15 @@ export default function ChatbotLive() {
 
             <div className="rounded-xl border border-white/10 bg-[#111b21] px-3 py-2 text-xs text-slate-300 sm:col-span-3 lg:col-span-2">
               <p className="font-semibold text-slate-100">KPI live</p>
-              <p className="mt-1">Temps reponse: <span className="text-emerald-300 font-semibold">{metrics.response}</span></p>
-              <p>Auto-resolution: <span className="text-emerald-300 font-semibold">{metrics.resolved}</span></p>
-              <p>Lead score: <span className="text-emerald-300 font-semibold">{metrics.score}</span></p>
+              <p className="mt-1">
+                Temps reponse: <span className="text-emerald-300 font-semibold">{metrics.response}</span>
+              </p>
+              <p>
+                Auto-resolution: <span className="text-emerald-300 font-semibold">{metrics.resolved}</span>
+              </p>
+              <p>
+                Lead score: <span className="text-emerald-300 font-semibold">{metrics.score}</span>
+              </p>
             </div>
           </section>
         </div>
