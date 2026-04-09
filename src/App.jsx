@@ -7,6 +7,7 @@ import PageNotFound from './lib/PageNotFound';
 import Home from './pages/Home';
 import Preview2 from './pages/Preview2';
 import Projects from './pages/Projects';
+import ChatbotLive from './pages/ChatbotLive';
 import { initAnalytics, trackPageView } from '@/lib/analytics';
 // Add page imports here
 
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/preview2" element={<Preview2 />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/chatbot-live" element={<ChatbotLive />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
