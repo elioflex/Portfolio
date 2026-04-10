@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   Bot,
+  ChevronLeft,
   Check,
   CheckCheck,
   Circle,
@@ -386,6 +387,7 @@ export default function ChatbotLive() {
   const [visibleCount, setVisibleCount] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
   const [activeThreadId, setActiveThreadId] = useState('camille');
+  const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
   const [loopCount, setLoopCount] = useState(0);
   const chatBodyRef = useRef(null);
 
@@ -454,11 +456,19 @@ export default function ChatbotLive() {
   };
 
   const handleThreadSwitch = (threadId) => {
-    if (threadId === activeThreadId) return;
+    if (threadId === activeThreadId) {
+      setIsMobileChatOpen(true);
+      return;
+    }
     setActiveThreadId(threadId);
+    setIsMobileChatOpen(true);
     setVisibleCount(0);
     setIsRestarting(false);
     trackEvent('chatbot_live_thread_switch', { page: 'chatbot-live', case_id: threadId });
+  };
+
+  const closeMobileChat = () => {
+    setIsMobileChatOpen(false);
   };
 
   return (
@@ -519,9 +529,9 @@ export default function ChatbotLive() {
           </section>
 
           <section className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-[#111b21] shadow-[0_30px_80px_rgba(0,0,0,.45)]">
-            <div className="grid lg:grid-cols-[330px_1fr] min-h-[640px]">
-              <aside className="border-r border-white/10 bg-[#111b21]">
-                <div className="h-16 px-4 border-b border-white/10 bg-[#202c33] flex items-center justify-between">
+            <div className="min-h-[640px] lg:grid lg:grid-cols-[330px_1fr]">
+              <aside className={`${isMobileChatOpen ? 'hidden' : 'block'} lg:block border-r border-white/10 bg-[#111b21]`}>
+                <div className="h-16 px-4 border-b border-white/10 bg-[#075e54] lg:bg-[#202c33] flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 text-[#022014] text-xs font-bold grid place-items-center">
                       IA
@@ -583,9 +593,17 @@ export default function ChatbotLive() {
                 </div>
               </aside>
 
-              <div className="flex flex-col min-h-[640px] bg-[#0b141a]">
-                <div className="h-16 px-4 border-b border-white/10 bg-[#202c33] flex items-center justify-between">
+              <div className={`${isMobileChatOpen ? 'flex' : 'hidden'} lg:flex flex-col min-h-[640px] bg-[#0b141a]`}>
+                <div className="h-16 px-4 border-b border-white/10 bg-[#075e54] lg:bg-[#202c33] flex items-center justify-between">
                   <div className="flex items-center gap-3 min-w-0">
+                    <button
+                      type="button"
+                      onClick={closeMobileChat}
+                      aria-label="Retour conversations"
+                      className="lg:hidden inline-flex items-center justify-center w-8 h-8 rounded-full text-slate-100/90 hover:bg-white/10"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
                     <ProfileAvatar avatar={activeThread.avatar} name={activeThread.name} className="w-10 h-10" />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-slate-100 truncate">{activeThread.name}</p>
