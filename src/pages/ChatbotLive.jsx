@@ -24,6 +24,7 @@ const CHAT_THREADS = [
   {
     id: 'new-lead',
     name: 'Nouveau lead - Shopify',
+    avatar: '/assets/chatbot-profiles/new-lead.jpg',
     preview: 'Bonjour, est-ce que vous integrez HubSpot ?',
     time: '09:14',
     unread: 2,
@@ -32,6 +33,7 @@ const CHAT_THREADS = [
   {
     id: 'camille',
     name: 'Camille Martin',
+    avatar: '/assets/chatbot-profiles/camille.jpg',
     preview: 'Merci !',
     time: 'Maintenant',
     unread: 1,
@@ -40,6 +42,7 @@ const CHAT_THREADS = [
   {
     id: 'sav-return',
     name: 'SAV Retours',
+    avatar: '/assets/chatbot-profiles/sav-return.jpg',
     preview: 'Le ticket #2914 a ete route vers Support A',
     time: '08:57',
     unread: 0,
@@ -48,6 +51,7 @@ const CHAT_THREADS = [
   {
     id: 'vip-client',
     name: 'Client VIP - Julie B.',
+    avatar: '/assets/chatbot-profiles/vip-client.jpg',
     preview: 'Pouvez-vous prioriser ma demande ?',
     time: 'Hier',
     unread: 0,
@@ -56,6 +60,7 @@ const CHAT_THREADS = [
   {
     id: 'crm-sync',
     name: 'CRM Automations',
+    avatar: '/assets/chatbot-profiles/crm-sync.jpg',
     preview: 'Deal stage updated: Qualified',
     time: 'Hier',
     unread: 0,
@@ -355,6 +360,28 @@ function getInitials(name) {
     .toUpperCase();
 }
 
+function ProfileAvatar({ avatar, name, className }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (!avatar || hasError) {
+    return (
+      <div className={`${className} rounded-full bg-[#2a3942] text-slate-100 text-xs font-semibold grid place-items-center`}>
+        {getInitials(name)}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={avatar}
+      alt={`Photo de profil ${name}`}
+      loading="lazy"
+      onError={() => setHasError(true)}
+      className={`${className} rounded-full object-cover`}
+    />
+  );
+}
+
 export default function ChatbotLive() {
   const [visibleCount, setVisibleCount] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
@@ -529,9 +556,7 @@ export default function ChatbotLive() {
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative shrink-0">
-                            <div className="w-11 h-11 rounded-full bg-[#2a3942] text-slate-100 text-xs font-semibold grid place-items-center">
-                              {getInitials(thread.name)}
-                            </div>
+                            <ProfileAvatar avatar={thread.avatar} name={thread.name} className="w-11 h-11" />
                             {thread.online ? (
                               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#2a3942]" />
                             ) : null}
@@ -561,9 +586,7 @@ export default function ChatbotLive() {
               <div className="flex flex-col min-h-[640px] bg-[#0b141a]">
                 <div className="h-16 px-4 border-b border-white/10 bg-[#202c33] flex items-center justify-between">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-300 text-[#05211d] text-xs font-bold grid place-items-center">
-                      {getInitials(activeThread.name)}
-                    </div>
+                    <ProfileAvatar avatar={activeThread.avatar} name={activeThread.name} className="w-10 h-10" />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-slate-100 truncate">{activeThread.name}</p>
                       <p className="text-xs text-emerald-300 inline-flex items-center gap-1">
