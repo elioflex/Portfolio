@@ -1,8 +1,19 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/projects",
+      "dest": "/projects/index.html"
+    },
+    {
+      "src": "/chatbot-live",
+      "dest": "/chatbot-live/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
