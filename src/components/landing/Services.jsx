@@ -8,18 +8,21 @@ const SERVICES = [
   {
     icon: BarChart3,
     title: 'Sales Automation',
+    href: '/automatisation-crm-hubspot',
     description: 'Qualifiez, relancez et convertissez automatiquement. CRM enrichi, scoring intelligent, séquences personnalisées.',
     results: ['Lead response time ÷ 5', 'Taux de conversion +35%', 'Pipeline toujours à jour'],
   },
   {
     icon: Headphones,
     title: 'Support Automation',
+    href: '/automatisation-service-client-shopify',
     description: 'Routage intelligent, réponses assistées par IA, escalades automatiques. Vos clients obtiennent des réponses plus vite.',
     results: ['Temps de résolution ÷ 3', 'Satisfaction client +40%', 'Volume traité × 2'],
   },
   {
     icon: Settings,
     title: 'Back-Office Automation',
+    href: '/chatbot-whatsapp-service-client',
     description: 'Éliminez la saisie manuelle, les copier-coller entre outils et les erreurs humaines récurrentes.',
     results: ['12h+ gagnées / semaine', 'Erreurs réduites de 90%', 'Onboarding 2× plus rapide'],
   },
@@ -59,6 +62,14 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href={service.href}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                  onClick={() => trackEvent('service_page_click', { from: 'home_services', service: service.title, href: service.href })}
+                >
+                  Voir la page dédiée
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </RevealWrapper>
           ))}

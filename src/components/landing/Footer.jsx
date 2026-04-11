@@ -8,6 +8,12 @@ const QUICK_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const SEO_PAGES = [
+  { label: 'Automatisation service client Shopify', href: '/automatisation-service-client-shopify' },
+  { label: 'Automatisation CRM HubSpot', href: '/automatisation-crm-hubspot' },
+  { label: 'Chatbot WhatsApp service client', href: '/chatbot-whatsapp-service-client' },
+];
+
 const LEGAL_LINKS = [
   { label: 'Mentions légales', href: '#' },
   { label: 'Politique de confidentialité', href: '#' },
@@ -38,6 +44,17 @@ export default function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-50">Navigation</h4>
             <ul className="space-y-2.5">
               {QUICK_LINKS.map(link => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="text-sm font-semibold uppercase tracking-wider mt-8 mb-4 opacity-50">Solutions</h4>
+            <ul className="space-y-2.5">
+              {SEO_PAGES.map(link => (
                 <li key={link.href}>
                   <a href={link.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
                     {link.label}

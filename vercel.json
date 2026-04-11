@@ -12,6 +12,18 @@
       "dest": "/chatbot-live/index.html"
     },
     {
+      "src": "/automatisation-service-client-shopify",
+      "dest": "/automatisation-service-client-shopify/index.html"
+    },
+    {
+      "src": "/automatisation-crm-hubspot",
+      "dest": "/automatisation-crm-hubspot/index.html"
+    },
+    {
+      "src": "/chatbot-whatsapp-service-client",
+      "dest": "/chatbot-whatsapp-service-client/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }

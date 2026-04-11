@@ -51,6 +51,51 @@ const pages = [
       </main>
     `,
   },
+  {
+    route: '/automatisation-service-client-shopify',
+    title: 'Automatisation Service Client Shopify | IdeaToAutomation',
+    description:
+      'Automatisez votre service client Shopify: triage IA, routage SAV, synchronisation Gorgias/CRM et réduction du temps de réponse.',
+    prerenderHtml: `
+      <main>
+        <section aria-label="Automatisation service client Shopify">
+          <h1>Automatisation service client Shopify</h1>
+          <p>Triage intelligent, routage SAV et synchronisation CRM pour accélérer votre support e-commerce.</p>
+          <p><a href="/#contact">Réserver un diagnostic</a></p>
+        </section>
+      </main>
+    `,
+  },
+  {
+    route: '/automatisation-crm-hubspot',
+    title: 'Automatisation CRM HubSpot B2B | IdeaToAutomation',
+    description:
+      'Automatisation CRM HubSpot pour équipes B2B: qualification lead, scoring, suivi commercial et pipeline à jour.',
+    prerenderHtml: `
+      <main>
+        <section aria-label="Automatisation CRM HubSpot">
+          <h1>Automatisation CRM HubSpot pour équipes B2B</h1>
+          <p>Qualification des leads, mise à jour automatique du pipeline et relances commerciales structurées.</p>
+          <p><a href="/#contact">Réserver un diagnostic</a></p>
+        </section>
+      </main>
+    `,
+  },
+  {
+    route: '/chatbot-whatsapp-service-client',
+    title: 'Chatbot WhatsApp Service Client | IdeaToAutomation',
+    description:
+      'Déployez un chatbot WhatsApp pour le service client: réponses instantanées, triage intelligent et escalade agent humain.',
+    prerenderHtml: `
+      <main>
+        <section aria-label="Chatbot WhatsApp service client">
+          <h1>Chatbot WhatsApp pour service client</h1>
+          <p>Réponses 24/7, priorisation des demandes et synchronisation CRM en temps réel.</p>
+          <p><a href="/chatbot-live">Voir la démonstration</a></p>
+        </section>
+      </main>
+    `,
+  },
 ];
 
 function escapeAttr(value) {
