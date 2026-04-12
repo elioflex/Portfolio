@@ -96,6 +96,21 @@ const pages = [
       </main>
     `,
   },
+  {
+    route: '/blog',
+    title: 'Blog IA & Automatisation | IdeaToAutomation',
+    description:
+      'Guides pratiques IA, n8n, CRM et support ops pour déployer des automatisations business utiles.',
+    prerenderHtml: `
+      <main>
+        <section aria-label="Blog IA et automatisation">
+          <h1>Blog IA & Automatisation</h1>
+          <p>Articles pratiques sur n8n, CRM, support client et automatisation opérationnelle.</p>
+          <p><a href="/#contact">Parler de votre use case</a></p>
+        </section>
+      </main>
+    `,
+  },
 ];
 
 function escapeAttr(value) {

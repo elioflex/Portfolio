@@ -11,6 +11,8 @@ import ChatbotLive from './pages/ChatbotLive';
 import ServiceShopifySupport from './pages/ServiceShopifySupport';
 import ServiceHubspotCRM from './pages/ServiceHubspotCRM';
 import ServiceWhatsappSupport from './pages/ServiceWhatsappSupport';
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
 import { initAnalytics, trackPageView } from '@/lib/analytics';
 // Add page imports here
 
@@ -35,6 +37,8 @@ const AppRoutes = () => {
       <Route path="/automatisation-service-client-shopify" element={<ServiceShopifySupport />} />
       <Route path="/automatisation-crm-hubspot" element={<ServiceHubspotCRM />} />
       <Route path="/chatbot-whatsapp-service-client" element={<ServiceWhatsappSupport />} />
+      <Route path="/blog" element={<BlogIndex />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
