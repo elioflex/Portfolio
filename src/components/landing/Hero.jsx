@@ -10,9 +10,7 @@ export default function Hero() {
       className="relative pt-28 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-screen flex items-center"
       aria-label="Introduction"
       style={{
-        background: 'linear-gradient(135deg, hsl(220,20%,5%) 0%, hsl(225,40%,12%) 50%, hsl(220,20%,7%) 100%)',
-        backgroundSize: '400% 400%',
-        animation: 'gradientShift 10s ease infinite',
+        background: '#ffffff',
       }}
     >
       {/* Video background */}
@@ -25,8 +23,8 @@ export default function Hero() {
         poster="https://images.pexels.com/videos/36439665/pictures/preview-3.jpg"
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{
-          WebkitMaskImage: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)',
-          maskImage: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
+          maskImage: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
           WebkitMaskSize: '100% 100%',
           maskSize: '100% 100%',
           WebkitMaskRepeat: 'no-repeat',
@@ -37,10 +35,6 @@ export default function Hero() {
         <source src="https://videos.pexels.com/video-files/36439665/15452135_1280_720_60fps.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/52 z-10 pointer-events-none" />
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/85 z-10 pointer-events-none" />
       {/* Blue glow accent */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl z-10 pointer-events-none" />
 
