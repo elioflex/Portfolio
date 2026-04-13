@@ -24,6 +24,14 @@ export default function Hero() {
         preload="metadata"
         poster="https://images.pexels.com/videos/36439665/pictures/preview-3.jpg"
         className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{
+          WebkitMaskImage: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)',
+          maskImage: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)',
+          WebkitMaskSize: '100% 100%',
+          maskSize: '100% 100%',
+          WebkitMaskRepeat: 'no-repeat',
+          maskRepeat: 'no-repeat',
+        }}
       >
         <source src="https://videos.pexels.com/video-files/36439665/15452141_1920_1080_60fps.mp4" type="video/mp4" />
         <source src="https://videos.pexels.com/video-files/36439665/15452135_1280_720_60fps.mp4" type="video/mp4" />
@@ -33,13 +41,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-background/52 z-10 pointer-events-none" />
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/85 z-10 pointer-events-none" />
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(8,16,24,1) 0%, rgba(8,16,24,0) 50%, rgba(8,16,24,0) 100%)',
-        }}
-      />
       {/* Blue glow accent */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl z-10 pointer-events-none" />
 
