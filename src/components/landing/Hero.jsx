@@ -33,7 +33,13 @@ export default function Hero() {
       <div className="absolute inset-0 bg-background/52 z-10 pointer-events-none" />
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/85 z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/42 via-transparent to-transparent z-10 pointer-events-none" />
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(8,16,24,1) 0%, rgba(8,16,24,0) 50%, rgba(8,16,24,0) 100%)',
+        }}
+      />
       {/* Blue glow accent */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl z-10 pointer-events-none" />
 
