@@ -37,8 +37,8 @@ export default function Hero() {
       {/* Blue glow accent */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl z-10 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-        <div className="max-w-3xl relative">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        <div className="max-w-3xl relative text-left">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-x-4 -inset-y-6 sm:-inset-x-6 sm:-inset-y-8 rounded-3xl bg-background/8 backdrop-blur-[2px] border border-white/10"
@@ -67,7 +67,7 @@ export default function Hero() {
             </RevealWrapper>
 
             <RevealWrapper delay={0.3}>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-3 justify-start">
                 <div className="flex items-center gap-3 text-sm text-foreground/90">
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 border border-primary/20">
                     <Calendar className="w-4 h-4 text-primary" />
@@ -90,7 +90,7 @@ export default function Hero() {
             </RevealWrapper>
 
             <RevealWrapper delay={0.4}>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <div className="mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-start">
                 <Button
                   asChild
                   size="lg"
@@ -121,7 +121,7 @@ export default function Hero() {
             </RevealWrapper>
 
             <RevealWrapper delay={0.5}>
-              <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <div className="mt-12 flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <span>✓ +50 projets livrés</span>
                 <span className="hidden sm:inline text-border">|</span>
                 <span>✓ NDA disponible</span>
