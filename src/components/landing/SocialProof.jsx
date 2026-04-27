@@ -29,7 +29,7 @@ export default function SocialProof() {
   const allTools = [...TOOLS, ...TOOLS];
 
   return (
-    <section className="py-16 lg:py-24 border-y border-border bg-surface-elevated" aria-label="Preuves sociales">
+    <section className="py-20 lg:py-32 border-y border-border bg-surface-elevated" aria-label="Preuves sociales">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* KPI cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
