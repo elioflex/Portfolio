@@ -52,7 +52,7 @@ export default function Hero() {
         className="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-500 opacity-0"
         style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
       />
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-white/84 via-white/56 to-white/14" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-white/80 via-white/46 to-white/10" />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/8 via-transparent to-white/16" />
 
       {/* Blue glow accent */}
@@ -111,23 +111,15 @@ export default function Hero() {
                     href="/#methode"
                     onClick={() => trackEvent('cta_click', { placement: 'hero_secondary', cta_text: 'discover_method' })}
                   >
-                    Voir la méthode complète
+                    Découvrir la méthode
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </a>
                 </Button>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Diagnostic 30 min offert • Plan en 72h • Pilote en 2 à 6 semaines
-              </p>
-            </RevealWrapper>
-
-            <RevealWrapper delay={0.5}>
-              <div className="mt-6 flex flex-wrap items-center justify-start gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                <span>+50 projets livrés</span>
-                <span className="hidden sm:inline text-border">|</span>
-                <span>Intégrations n8n, CRM et Slack</span>
-                <span className="hidden sm:inline text-border">|</span>
-                <span>Accompagnement en français</span>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs sm:text-sm text-muted-foreground">
+                <span className="rounded-full border border-border/70 bg-white/60 px-3 py-1">Diagnostic 30 min offert</span>
+                <span className="rounded-full border border-border/70 bg-white/60 px-3 py-1">Plan d&apos;exécution en 72h</span>
+                <span className="rounded-full border border-border/70 bg-white/60 px-3 py-1">Déploiement en 2 à 6 semaines</span>
               </div>
             </RevealWrapper>
           </div>
