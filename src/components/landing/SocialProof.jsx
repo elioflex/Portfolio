@@ -55,7 +55,7 @@ export default function SocialProof() {
               "En 4 semaines, IdeaToAutomation a automatisé notre onboarding client. On a gagné 12h par semaine et réduit les erreurs de 90%."
             </p>
             <footer className="mt-4 text-sm text-muted-foreground">
-              — Directeur Opérations, SaaS B2B (série A)
+              — Directeur Opérations, Casanovalabs
             </footer>
           </blockquote>
         </RevealWrapper>

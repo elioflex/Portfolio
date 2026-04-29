@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ArrowRight, Rocket } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 import RevealWrapper from './RevealWrapper';
@@ -68,14 +68,13 @@ export default function Hero() {
           <div className="relative z-10">
             <RevealWrapper>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8 backdrop-blur-sm">
-                <Rocket className="w-3.5 h-3.5" />
-                Agence IA & n8n pour PME B2B
+                Agence IA & Automatisation
               </div>
             </RevealWrapper>
 
             <RevealWrapper delay={0.1}>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.02em] leading-[1.05] text-foreground max-w-[20ch]">
-                Automatisez vos opérations sans agrandir vos équipes.
+                Automatisez vos opérations sans agrandir vos équipes
               </h1>
             </RevealWrapper>
 
@@ -105,7 +104,7 @@ export default function Hero() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="rounded-full px-6 font-semibold text-sm border-border/70 bg-white/55 hover:bg-white/75 hover:border-primary/35"
+                  className="rounded-full px-6 font-semibold text-sm text-foreground hover:text-foreground border-border/70 bg-white/55 hover:bg-white/75 hover:border-primary/35"
                 >
                   <a
                     href="/#methode"
